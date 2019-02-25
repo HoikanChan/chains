@@ -1,0 +1,91 @@
+<template class="task-template">
+    <section id="app-setting-section" class="section app-section u-category-system">
+    <!-- <section id="app-ratinig-section" class="section app-section u-category-system"> -->
+        <div class="app-ratinig-box">
+            <div class="app-currency-title">
+                <span>牛先生</span>
+            </div>
+            <div class="app-rating-body">
+                <div>
+                    <div class="app-page-title rating-title">
+                        TA的打分 
+                        <span class="app-rating-all-score">总分：0分</span>
+                    </div>
+                    <div class="app-rating-ta-box">
+                        <ol>
+                            <li>
+                                <span>1.专业知识</span>
+                                <!-- <span><i></i></span> -->
+                                <div class="rating-score-progress">
+                                    <div class="rating-score-progress-bar" ></div>
+                                </div>
+                                <span>5分</span>
+                            </li>
+                            <li>
+                                <span>2.工作经验</span>
+                                <div class="rating-score-progress">
+                                    <div class="rating-score-progress-bar" ></div>
+                                </div>
+                                <span>5分</span>
+                            </li>
+                            <li>
+                                <span>3.仪表形象</span>
+                                <div class="rating-score-progress">
+                                    <div class="rating-score-progress-bar" ></div>
+                                </div>
+                                <span>5分</span>
+                            </li>
+                            <li>
+                                <span>4.表达能力</span>
+                                <div class="rating-score-progress">
+                                    <div class="rating-score-progress-bar" ></div>
+                                </div>
+                                <span>5分</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="app-rating-right-image">
+                    <!-- <img src=""> -->
+                    <span>一寸照</span>
+                </div>
+            </div>
+            <div class="app-rating-content">
+                <div class="app-page-title rating-title">对TA的评价</div>
+                <p class="app-rating-text">
+                    对待工作认真负责，待人真诚善于沟通，协调，有较强的组织能力和团队精神
+                </p>
+            </div>
+
+            <div class="app-rating-content">
+                <div class="app-page-title rating-title">个人简历</div>
+                <!-- <div class="app-rating-text flex-between"> -->
+                <div class="app-rating-text flex-wrap">
+                    <div class="app-rating-content-item">
+                        <span>姓名：</span>
+                        <span>牛三</span>
+                    </div>
+                    <div class="app-rating-content-item">
+                        <span>教育背景：</span>
+                        <span> 1920年6月   xxxxx华南理工学院</span>
+                    </div>
+                    <div class="app-rating-content-item">
+                        <span>姓名：</span>
+                        <span>牛三</span>
+                    </div>
+                    <div class="app-rating-content-item">
+                        <span>通讯地址：</span>
+                        <span>成都市双流区金华村2组</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            let bar = document.getElementsByClassName('rating-score-progress-bar');
+            $(".rating-score-progress-bar").width(160 * 0.5);
+            require('../renderer-process/rating/rating');
+        </script>
+
+    </section>
+</template>
