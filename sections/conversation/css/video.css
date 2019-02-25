@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+html,body{
+    height: 100%;
+}
+button,span,input,textarea{
+    -webkit-app-region: no-drag;
+}
+.app-head-box{
+    position: relative;
+    z-index: 500;
+}
+.app-head{
+    position: absolute;
+    text-align: right;
+    right: 10px;
+    top:5px;
+}
+.app-head>.app-head-console-item{
+    text-align: center;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+    color: 	#F8F8FF;
+}
+.app-head>.app-head-console-item:hover{
+    color: #4EEE94;
+}
+.app-head>.app-head-console-item:nth-child(2):hover{
+    background: rgba(238,44,44, 1);
+    color: #fff;
+}
+div{
+    height: 100%;
+    width: 100%;
+}
+video{
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+}
+.local-video{
+    width: 100px;
+    height: 150px;
+    position: fixed;
+    z-index: 100;
+}
+.other-video{
+    width: 100%;
+    height: 100%;
+}

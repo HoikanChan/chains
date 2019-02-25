@@ -1,0 +1,214 @@
+.app-hailfellow-list-box{
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+.app-hailfellow-list{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.app-hailfellow-list-item{
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+    padding: 0 5px 0 5px;
+    font-size: 15px;
+    font-weight: normal;
+}
+.app-hailfellow-child-user-list{
+    position: relative;
+    overflow-x: hidden;
+    max-height: 345px;
+}
+.app-hailfellow-list-item:hover,.app-hailfellow-child-user-list li:hover,
+.app-hailfellow-child-customer-list li:hover,.app-hailfellow-child-group-list:hover{
+    background: #f4f4f4;
+    cursor: pointer;
+}
+.app-hailfellow-list-item span{
+    float: right;
+}
+.app-hailfellow-child-list{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 20;
+}
+.app-hailfellow-child-name{
+    padding: 5px 0 0 5px;
+    font-size: 16px;
+    height: 25px;
+    line-height: 25px;
+}
+.app-hailfellow-child-icon>span{
+    float: right;
+    cursor: pointer;
+    padding: 0;
+    font-size: 18px;
+}
+.app-hailfellow-child-icon span:hover{
+    color: rgba(238,44,44, 1);
+}
+.app-hailfellow-child-department{
+    padding:  0 5px 0 10px;
+    height: 32px;
+    line-height: 31px;
+}
+.app-hailfellow-child-department>span{
+    float: right;
+    display: inline-block;
+}
+.app-hailfellow-user-list{
+
+}
+.app-hailfellow-user-item{
+    position: relative;
+    height: 32px;
+    line-height: 32px;
+    padding: 8px 10px 5px 60px;
+}
+.app-hailfellow-user-item>img{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 20px;
+    top: 8px;
+    border-radius: 100%;
+}
+.app-hailfellow-child-customer-name{
+    height: 25px;
+    line-height: 25px;
+    padding: 0 5px 0 5px;
+    font-size: 14px;
+    border: 1px solid #f4f4f4;
+}
+.app-hailfellow-child-customer-name>span{
+    float: right;
+}
+
+
+.app-hailfellow-box{
+    height: 100%;
+    background: #f4f4f4;
+}
+.app-hailfellow-head{
+    padding: 20px;
+    font-size: 17px;
+    font-weight: normal;
+	font-stretch: normal;
+}
+.app-hailfellow-middle,.app-hailfellow-footer{
+    position: relative;
+    width: 80%;
+    margin: 5px auto 5px auto;
+}
+.app-hailfellow-footer{
+    margin: 25px auto 5px auto;
+}
+.app-hailfellow-title{
+    font-size: 15px;
+    color: #08979d;
+    font-weight: bold;
+}
+.app-hailfellow-friendInfo{
+    margin-top: 10px;
+    -webkit-app-region: no-drag;
+}
+.app-hailfellow-friendInfo li:nth-child(3) .app-hailfellow-text{
+    padding: 5px 0 3px 0;
+}
+.app-hailfellow-text{
+    height:24px;
+    line-height:24px;
+    width:70px;
+    text-align:justify;
+    display:inline-block;
+    overflow:hidden;
+    vertical-align:middle;
+    padding: 5px 0 5px 0;
+    color: #959595;
+}
+.app-hailfellow-text>i{
+    display:inline-block;
+    width:100%;
+    height:0;
+}
+.app-hailfellow-introduce{
+    position: relative;
+    padding: 0 0 5px 10px;
+    width: 320px;
+    height: 70px;
+    overflow-x: hidden;
+}
+.app-hailfellow-friend-head{
+    position: absolute;
+    left: auto;
+    right: 55px;
+    top: 20px;
+    text-align: center;
+}
+.app-hailfellow-friend-head>img{
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+}
+.app-hailfellow-friend-head>p{
+    padding: 5px 0 5px 0;
+    font-size: 17px;
+    color: #282828;
+}
+.app-hailfellow-introduce>p{
+    width: 100%;
+    word-wrap:break-word;
+    word-break:break-all;
+}
+.app-hailfellow-datum{
+    padding-top: 10px;
+}
+.app-hailfellow-datum .app-hailfellow-text{
+    width: auto;
+}
+#app-hailfellow-edit{
+    vertical-align: middle;
+    padding-left: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+#app-hailfellow-edit:hover{
+    color: #08979d;
+}
+.app-hailfellow-buttons{
+    position: absolute;
+    bottom: 45px;
+    right: 30px;
+}
+.app-hailfellow-buttons li{
+    margin: 15px 0 15px 0;
+}
+.app-hailfellow-buttons li>button{
+    width: 175px;
+    height: 25px;
+    border: 0;
+    border-radius: 3px;
+    background: #08979d;
+    color: #fff;
+    cursor: pointer;
+}
+.app-hailfellow-buttons li>button:hover,.app-hailfellow-send-box button:hover{
+    background: rgba(8,151,157,0.8);
+}
+.app-hailfellow-send-box{
+    text-align: center;
+    padding-top: 15px;
+}
+.app-hailfellow-send-box button{
+    width: 325px;
+    height: 30px;
+    border: 0;
+    border-radius: 3px;
+    background: #08979d;
+    color: #fff;
+    cursor: pointer;
+}

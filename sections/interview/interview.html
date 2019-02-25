@@ -1,0 +1,87 @@
+<template class="task-template">
+    <section id="app-interview-section" class="section app-section u-category-system">
+        <div class="app-interview-box">
+            <div class="app-currency-title">
+                <span class="app-interview-username">张三</span>
+            </div>
+            <div class="app-interview-info-body">
+                <div class="app-interview-icon-box">
+                    <div><i class="icon iconfont icon-dianhua"></i></div>
+                    <span>发起视频面试</span>
+                </div>
+            </div>
+            <div class="app-interview-info-footer">
+                <div class="app-interview-info-title color2">
+                    个人简历
+                    <i id="resume-info" class="layui-icon layui-icon-tips" title="查看简历详情"></i>
+                    <span id="app-interview-score">评分</span>
+                </div>
+                <div class="layui-row">
+                    <ul class="app-interview-resume layui-col-xs6">
+                        <li><span class="app-interview-resume-title">姓名<i></i></span>:<span class="app-interview-resume-text app-interview-username">张三</span></li>
+                        <li><span class="app-interview-resume-title">应聘职位<i></i></span>:<span class="app-interview-resume-text app-interview-position">技术经理</span></li>
+                        <li><span class="app-interview-resume-title">出生年月<i></i></span>:<span class="app-interview-resume-text app-interview-birthday">1985年5月</span></li>
+                        <li><span class="app-interview-resume-title">最高学历<i></i></span>:<span class="app-interview-resume-text app-interview-education">本科</span></li>
+                        <li><span class="app-interview-resume-title">籍贯<i></i></span>:<span class="app-interview-resume-text app-interview-nativeplace">四川省成都市双流县</span></li>
+                        <li><span class="app-interview-resume-title">通讯地址<i></i></span>:<span class="app-interview-resume-text app-interview-address">四川省成都市双流县金华村</span></li>
+                    </ul>
+                    <ul class="app-interview-resume layui-col-xs6">
+                        <li>
+                            <span class="app-interview-resume-title">教育背景<i></i></span>:
+                            <div class="app-interview-resume-list app-interview-educationList">
+                                <!-- <p>2016年9月  四川大学计算机学院</p> -->
+                            </div>
+                        </li>
+                        <li>
+                            <span class="app-interview-resume-title">工作经历<i></i></span>:
+                            <div class="app-interview-resume-list app-interview-companyList">
+                                <!-- <p>2016年9月  xxx科技</p>
+                                <p>2016年9月  xxx科技</p> -->
+                            </div>
+                        </li>
+                        <li>
+                            <span class="app-interview-resume-title">证书<i></i></span>:
+                            <div class="app-interview-resume-list">
+                                <!-- <p>计算机等级证</p>
+                                <p>网络安全证...</p> -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-interview-score-box is-hidden">
+            <div class="app-interview-slider-box">
+                <div>
+                    <div class="app-interview-slider-name">1.专业知识<span id="app-interview-slider1">( 0 分)</span></div>
+                    <div id="slideTest1" class="app-interview-slider"></div>
+                </div>
+                <div>
+                    <div class="app-interview-slider-name">2.工作经验<span id="app-interview-slider2">( 0 分)</span></div>
+                    <div id="slideTest2" class="app-interview-slider"></div>
+                </div>
+                <div>
+                    <div class="app-interview-slider-name">3.仪表形象<span id="app-interview-slider3">( 0 分)</span></div>
+                    <div id="slideTest3" class="app-interview-slider"></div>
+                </div>
+                <div>
+                    <div class="app-interview-slider-name">4.表达能力<span id="app-interview-slider4">( 0 分)</span></div>
+                    <div id="slideTest4" class="app-interview-slider"></div>
+                </div>
+            </div>
+            <div class="app-interview-score-content">
+                <div class="app-interview-slider-name">对TA的评价</div>
+                <textarea rows="8"></textarea>
+            </div>
+            <div class="app-interview-score-sub">
+                <button class="layui-btn">提交</button>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            require('../renderer-process/interview/interview');
+        </script>
+
+    </section>
+</template>

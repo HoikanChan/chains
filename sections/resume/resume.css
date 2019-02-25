@@ -1,0 +1,173 @@
+html, body, h3, p {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+.split-small,
+.split-big{
+    width: 100%;
+    height: 1px;
+    background: #F8F8F8;
+    margin: 24px 0;
+}
+.split-big{
+    height: 3px;
+}
+
+.clear:after {
+    content: ' ';
+    display: block;
+    clear: both;
+}
+
+.w-1200 {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.preview .personal-information {
+    background: #08979D;
+    padding: 30px 50px;
+}
+
+.preview .personal-information .headImg {
+    width: 100px;
+    height: 130px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.preview .personal-information .headImg > img {
+    width: 100%;
+}
+
+.preview .personal-information .information {
+    margin-left: 130px;
+}
+
+.preview .personal-information .information > .resume-ID {
+    font-size: 14px;
+    color: #7AF4F9;
+    text-align: right;
+}
+
+.preview .personal-information .information .name {
+    font-size: 25px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.preview .personal-information .information .information-item {
+    margin-top: 10px;
+}
+
+.preview .personal-information .information .information-item span, .preview .personal-information .information .information-item p {
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.preview .personal-information .information .information-item i {
+    color: #7AF4F9;
+    margin-right: 8px;
+}
+
+.preview .personal-information .information .information-item.contact-info > span {
+    margin-right: 70px;
+}
+
+.preview .personal-information .information .information-item.other-info .operation {
+    width: 200px;
+    text-align: right;
+}
+
+.preview .personal-information .information .information-item.other-info .operation span {
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.preview .resume-content {
+    padding: 30px 30px 50px;
+    margin-bottom: 50px;
+    background: #fff;
+}
+
+.preview .resume-content .preview-item {
+    padding: 0 20px;
+}
+
+.preview .resume-content .preview-item h3 {
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.preview .resume-content .preview-item h3 > small {
+    color: #454545;
+}
+
+.preview .resume-content .preview-item .resume-base-info {
+    display: inline-block;
+    vertical-align: top;
+    width: 400px;
+}
+
+.preview .resume-content .preview-item .resume-base-info > p {
+    margin-top: 10px;
+    color: #454545;
+}
+
+.preview .resume-content .preview-item .resume-base-info > p > span {
+    margin-right: 30px;
+}
+
+.preview .resume-content .preview-item .emphasize {
+    color: #08979D !important;
+    font-weight: bold;
+}
+
+.preview .resume-content .preview-item .preview-item-list > .item-name {
+    color: #454545;
+    line-height: 25px;
+}
+
+.preview .resume-content .preview-item .preview-item-list > .item-name > span {
+    color: #919191;
+}
+
+.preview .resume-content .preview-item .preview-item-list > .item-name > span.emphasize {
+    margin-left: 30px;
+}
+
+.preview .resume-content .preview-item .preview-item-list .list-content {
+    padding-left: 100px;
+    position: relative;
+    margin-top: 5px;
+    color: #454545;
+    line-height: 25px;
+    min-height: 25px;
+}
+
+.preview .resume-content .preview-item .preview-item-list .list-content > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

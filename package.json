@@ -1,0 +1,56 @@
+{
+  "name": "appzc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "electron .": "npm start",
+    "package": "electron-packager . myClient --win --out ../myClient --arch=ia32 --app-version=0.0.1 --electron-version=4.0.3 --icon=./icon.ico"
+  },
+  "repository": "",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo",
+    "API"
+  ],
+  "build": {
+    "win": {
+      "icon": "./icon.ico",
+      "target": "nsis"
+    },
+    "asar": "true"
+  },
+  "author": "ZCQL",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "check-for-leaks": "^1.2.0",
+    "electron": "^4.0.3",
+    "devtron": "^1.4.0"
+  },
+  "standard": {
+    "env": {
+      "mocha": true
+    }
+  },
+  "dependencies": {
+    "electron-log": "^2.2.17",
+    "electron-settings": "^3.2.0",
+    "electron-shortcut-normalizer": "^1.0.0",
+    "electron-winstaller": "^2.7.0",
+    "glob": "^7.1.3",
+    "highlight.js": "^9.14.1",
+    "lowdb": "^1.0.0",
+    "mocha": "^5.2.0",
+    "mousetrap": "1.6.2",
+    "request": "^2.88.0",
+    "rimraf": "^2.6.3",
+    "signcode": "^1.0.0",
+    "spectron": "^5.0.0",
+    "standard": "^12.0.1",
+    "update-electron-app": "^1.3.0"
+  }
+}

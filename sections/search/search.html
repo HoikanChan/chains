@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="../../assets/css/search.css" />
+        <link rel="stylesheet" type="text/css" href="../../assets/icons/iconfont.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/icons/iconfont1.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/layui/css/layui.css">
+
+        <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
+        <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+        <script src="../../assets/layui/layui.all.js"></script>
+	</head>
+	<body  style="-webkit-app-region: drag;">
+        <div class="app-search-box">
+            <div class="app-search-head">
+                <div class="app-search-head-title">
+                    <span>添加/查找</span>
+                </div>
+                <div class="app-search-head-icon">
+                    <span id="se_setmin_btn" class="app-head-console-item" title="最小化"><i class="icon iconfont icon-guanbi4"></i></span>
+                    <span id="se_close_btn" class="app-head-console-item" title="关闭"><i class="icon iconfont icon-guanbi"></i></span>
+                </div>
+            </div>
+            <div class="app-search-tab-box">
+                <ul class="app-search-tab-title">
+                    <li data-id="1" class="app-search-this">群组</li>
+                    <li data-id="2" >客户/供应商</li>
+                </ul>
+                <div class="app-search-tab-content">
+                    <div class="app-search-addbox">
+                        <span class="icon iconfont icon-tianjiaqunzu"></span><br />
+                        <button id="add-group">新建群聊</button>
+                    </div>
+                    <div class="app-search-searchbox">
+                        <select id="customer-list">
+                            <option value="">公司名</option>
+                        </select>
+                        <input id="search-input"  placeholder="请输入群名" />
+                        <button id="search-btn">搜索</button>
+                    </div>
+                    <hr />
+                   
+                    <div class="app-search-result-title">
+                        <span>搜索结果</span>
+                        <button id="add-customer"><i class="layui-icon layui-icon-add-circle-fine"></i> 新增</button>
+                    </div>
+                    <div class="app-search-result-box layui-row">
+                        <div class="app-search-result-item layui-col-xs4">
+                            <img class="layui-circle" src="http://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                            <span>贤心</span>
+                            <p class="app-search-user-position">公司 市场部主管</p>
+                            <p><button>添加</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <script src="../../lib/utility/db.js"></script>
+        <script type="text/javascript">
+            require('../../renderer-process/search/search');
+            
+            const user = JSON.parse(db.get('user.info').value());
+            const Token = user.token;
+            const fileDomain = user.fileDomain;
+        </script>
+        <script src="../../lib/utility/utility.js"></script>
+        
+	</body>
+</html>

@@ -1,0 +1,69 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+button,span,i,input{
+    -webkit-app-region: no-drag;
+}
+.app-head-box{
+    background: #08979d;
+    height: 160px;
+}
+.app-head{
+    position: absolute;
+    text-align: right;
+    right: 10px;
+    top:5px;
+}
+.app-head>.app-head-console-item{
+    text-align: center;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+}
+.app-head>.app-head-console-item:hover{
+    color: #4EEE94;
+}
+.app-head>.app-head-console-item:nth-child(2):hover{
+    background: rgba(238,44,44, 1);
+    color: #fff;
+}
+.app-body-left-box{
+    text-align: center;
+    margin-top:35px;
+}
+.app-body-right-box{
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    left: 10px;
+}
+.app-body-right-box .app-input-icon{
+    font-size: 25px!important;
+}
+.app-body-right-box .layui-form-label{
+    width: 70px!important;
+}
+.app-body-right-box .layui-input-block{
+    margin-left: 70px!important;
+}
+.app-form-buttons{
+    text-align: center;
+}
+.app-form-login-btn{
+    width: 98%;
+    height: 35px;
+    background: #08979d;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+}
+.app-form-login-btn:hover{
+    opacity: .8;
+    filter: alpha(opacity=80);
+    color: #fff;
+}

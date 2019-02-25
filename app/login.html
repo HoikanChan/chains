@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="./app.css">
+    <link rel="stylesheet" type="text/css" href="../assets/icons/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../assets/layui/css/layui.css">
+</head>
+<body style="-webkit-app-region: drag;">
+    <div class="app-whole-box" id="container">
+        <div class="app-head-box" id="output">
+            <div class="app-head">
+                <span id="setmin_btn" class="app-head-console-item" title="最小化"><i class="icon iconfont icon-guanbi4"></i></span>
+                <span id="close_btn" class="app-head-console-item" title="关闭"><i class="icon iconfont icon-guanbi"></i></span>
+            </div>
+        </div>
+        <div class=" layui-col-xs5">
+            <div class="app-body-left-box">
+                <img src="../assets/images/logo.png" />
+            </div>
+        </div>
+        <div class=" layui-col-xs7">
+            <div class="app-body-right-box">
+                <form class="layui-form layui-form-pane" lay-filter="login-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">
+                            <i class="layui-icon app-input-icon layui-icon-username"></i>
+                        </label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" required="" lay-verify="required|username" placeholder="请输用户名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">
+                            <i class="layui-icon app-input-icon layui-icon-password"></i>
+                        </label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" required="" lay-verify="required|pass" lay-verType="alert" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="app-form-options layui-form-item">
+                        <div class="layui-col-xs6">
+                            <input type="checkbox" name="rememberMe" lay-filter="rememberMe" title="记住账号" lay-skin="primary" value="1"> 
+                        </div>
+                        <div class="layui-col-xs6" style="text-align:right;">
+                            <input type="checkbox" name="automatic" lay-filter="automatic" title="自动登录" lay-skin="primary" value="1"> 
+                        </div>
+                    </div>
+                    <div class="app-form-buttons">
+                        <button id="login-sub" type="form" lay-submit lay-filter="*" class="app-form-login-btn">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+    <script>if (typeof module === 'object') {window.jquery = window.jQuery = window.$ = module.exports;};</script>
+    <script src="../assets/layui/layui.all.js"></script>
+    <script src="../lib/utility/utility.js"></script>
+    <script src="../lib/utility/db.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

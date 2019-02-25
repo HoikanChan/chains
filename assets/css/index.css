@@ -1,0 +1,258 @@
+*{
+    font-family: "Microsoft YaHei";
+    -webkit-user-select: none; 
+    user-select: none;
+}
+*::-webkit-scrollbar{
+    width: 0;
+    z-index: 99;
+}
+*::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+*::-webkit-scrollbar-track {
+    border-radius: 0;
+}
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+button,span,input,textarea{
+    -webkit-app-region: no-drag;
+}
+textarea{
+    resize:none;
+}
+.is-hidden{
+    display: none;
+}
+.is-selected,.active{
+    color: #08979d;
+    background: #f4f4f4;
+}
+.app-head-box{
+    position: relative;
+    z-index: 500;
+}
+.app-head{
+    position: absolute;
+    text-align: right;
+    right: 10px;
+    top:5px;
+}
+.app-head>.app-head-console-item{
+    text-align: center;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+}
+.app-head>.app-head-console-item:hover{
+    color: #4EEE94;
+}
+.app-head>.app-head-console-item:nth-child(2):hover{
+    background: rgba(238,44,44, 1);
+    color: #fff;
+}
+.app-index-left-box{
+    width: 240px;
+    height: 100%;
+}
+.app-index-left-head{
+    width: 100%;
+    height: 140px;
+    background: #08979d;
+}
+.app-index-userInfo{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    overflow: hidden;
+    -webkit-app-region: no-drag;
+}
+.app-index-user-portrait{
+    width: 65px;
+    height: 65px;
+    float: left;
+}
+.app-index-user-portrait>img{
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+}
+.app-index-user-nickname{
+    float: left;
+    padding: 12px 5px 5px 15px;
+    color: #fff;
+}
+.app-index-user-position{
+    color: #08ced6;
+    padding-top: 5px;
+    font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+}
+.app-index-user-introduce{
+    position: absolute;
+    top: 110px;
+    left: 20px;
+    color: #fff;
+    width: 200px;
+    font-size: 13px;
+    -webkit-app-region: no-drag;
+}
+.app-index-user-introduce>p{
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+.app-index-left-body{
+    height: 100%;
+}
+.app-index-search{
+    width: 230px;
+    height: 25px;
+    line-height: 25px;
+    margin: 1px auto 5px auto;
+    background: #f4f4f4;
+    -webkit-app-region: no-drag;
+    border-radius: 5px;
+}
+.app-index-search>input{
+    border: 0;
+    width: 195px;
+    background: #f4f4f4;
+    padding-left: 10px;
+}
+.app-index-search>span{
+    cursor: pointer;
+}
+.app-index-search>span:hover{
+    color: #08979d; 
+}
+.app-index-menu-box{
+    width: 50px;
+    height: 100%;
+    float: left;
+    text-align: center;
+    -webkit-app-region: no-drag;
+}
+.app-menu-list>li{
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+.app-menu-list>li:hover{
+    color: #08979d;
+    background: #f4f4f4;
+}
+.app-menu-list>li>i{
+    font-size: 23px;
+}
+.app-index-bottom-menu{
+    position: absolute;
+    bottom: 0px;
+}
+.icon-guanbi2:hover{
+    color: red;
+}
+.app-index-change-list-box{
+    position: relative;
+    width: 190px;
+    height: calc(100% - 175px);
+    overflow-x: hidden;
+    -webkit-app-region: no-drag;
+}
+.app-index-change-list-box::-webkit-scrollbar{
+    display: none;
+}
+.app-index-change-list-box:hover::-webkit-scrollbar{
+    display: block;
+}
+.app-chats-list{
+    position: relative;
+}
+.app-chats-list-item{
+    position: relative;
+    height: 42px;
+    padding: 5px 15px 5px 60px;
+    cursor: pointer;
+    border-bottom: 1px solid #F5F5F5;
+}
+.app-chats-list-item:hover{
+    background: #f4f4f4;
+}
+.app-chats-list-item img{
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+}
+.app-chats-list-item span{
+    display: inline-block;
+    margin-top: 4px;
+}
+.app-chats-list-item p{
+    display: block;
+    line-height: 18px;
+    font-size: 12px;
+    color: #999;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.js-content{
+    position: absolute;
+    left: 240px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+section{
+    width: calc(100% - 240px);
+    height: 100%;
+    overflow: hidden;
+}
+.app-section{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  /* transform: translateX(-20px);
+  transition: visibility 0s .12s linear , opacity .12s ease-in, transform .12s ease-in; */
+}
+.app-section.is-shown {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    /* transform: translateX(0);
+    transition: visibility 0s 0s linear , opacity .36s ease-out, transform .36s ease-out; */
+}
+.app-currency-title{
+    padding: 15px;
+    font-size: 19px;
+}
+.app-page-title{
+    font-size: 15px;
+    color:#08979d;
+}
+
+.color1{
+    color:#959595;
+}
+.color2{
+    color:#08979d;
+}

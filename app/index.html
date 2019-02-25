@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+  <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+  <script src="../assets/layui/layui.all.js"></script>
+  <!-- css start -->
+  <link rel="stylesheet" type="text/css" href="../lib/lib/emoji/css/jquery.emoji.css">
+  <link rel="stylesheet" type="text/css" href="../assets/icons/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="../assets/icons/iconfont1.css">
+  <link rel="stylesheet" type="text/css" href="../assets/layui/css/layui.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/index.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/chat.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/hailfellow.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/interview.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/setting.css">
+  <!-- css end -->
+
+  <link rel="import" href="../sections/chat/chat.html">
+  <link rel="import" href="../sections/hailfellow/hailfellow.html">
+  <link rel="import" href="../sections/interview/interview.html">
+  <link rel="import" href="../sections/setting/setting.html">
+
+</head>
+<body style="-webkit-app-region: drag;">
+  <div class="app-head-box">
+    <div class="app-head">
+        <span id="ne_setmin_btn" class="app-head-console-item" title="最小化"><i class="icon iconfont icon-guanbi4"></i></span>
+        <span id="ne_close_btn" class="app-head-console-item" title="关闭"><i class="icon iconfont icon-guanbi"></i></span>
+    </div>
+  </div>
+  <div class="app-index-left-box">
+    <div class="app-index-left-head">
+        <div class="app-index-userInfo">
+            <div class="app-index-user-portrait">
+                <img src="../assets/images/head.jpg">
+            </div>
+            <div class="app-index-user-nickname">
+                <h2 class="app-index-user-nickname-text">测试</h2>
+                <p class="app-index-user-position">市场部经理</p>
+            </div>
+        </div>
+        <div class="app-index-user-introduce">
+            <p title="主要负责协助市场总监制定公司的销售">主要负责协助市场总监制定公司的销售</p>
+        </div>
+    </div>
+    <div class="app-index-left-body">
+        <div class="app-index-search-box">
+            <div class="app-index-search">
+                <input />
+                <span><i class="layui-icon layui-icon-search"></i></span>
+            </div>
+        </div>
+        <div class="app-index-menu-box">
+            <div class="app-index-top-menu">
+                <ul class="app-menu-list">
+                    <li data-section="chats-list" id="chat-button" class="nav-button is-selected"><i  class="icon iconfont icon-xiaoxi"></i></li>
+                    <li data-section="hailfellow-list" id="hailfellow-button" class="nav-button"><i class="icon iconfont icon-linkman-contacts_ico"></i></li>
+                    <li data-section="interview-list" id="interview-button" class="nav-button"><i class="icon iconfont icon-shebeizhuangtai"></i></li>
+                </ul>
+            </div>
+            <div class="app-index-bottom-menu">
+                <ul class="app-menu-list">
+                    <li data-section="app-addFriend" id="add-friend-button" class="nav-button"><i class="icon iconfont icon-jia"></i></li>
+                    <li data-section="app-setting" id="setting-button" class="nav-button"><i class="icon iconfont icon-icon_shezhi"></i></li>
+                    <li data-section="app-logout" id="app-logout" class="nav-button"><i class="icon iconfont icon-guanbi2"></i></li>
+                </ul>
+            </div>
+        </div>
+        <div class="app-index-change-list-box">
+            <ul data-section="app-chat" id="chats-list" class="app-chats-list is-show">
+                <!-- <li class="app-chats-list-item">
+                    <span class="layui-badge app-chats-Tips">99+</span>
+                    <img class="layui-circle" src="http://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                    <span>贤心</span>
+                    <span class="app-chats-last-time">11:20</span>
+                    <p class="app-chats-item-text">这些都是测试数据，实际使用请严格按照该格式返回</p>
+                </li> -->
+            </ul>
+            <div id="hailfellow-list" class="app-hailfellow-list-box is-hidden">
+                <ul  class="app-hailfellow-list">
+                    <li data-status='1'  class="app-hailfellow-list-item">群聊<span><i class="icon iconfont icon-fangkuai"></i></span></li>
+                    <li data-status='2' class="app-hailfellow-list-item">客户<span><i class="icon iconfont icon-fangkuai"></i></span></li>
+                    <li data-status='3' class="app-hailfellow-list-item">供应商<span><i class="icon iconfont icon-fangkuai"></i></span></li>
+                    <li data-status='4' class="app-hailfellow-list-item">同事<span><i class="icon iconfont icon-fangkuai"></i></span></li>
+                </ul>
+                <ul data-section="app-hailfellow" id="hailfellow-child-list" class="app-hailfellow-child-list is-hidden">
+                    <li class="app-hailfellow-child-icon"><span id="app-hailfellow-close"><i class="icon iconfont icon-guanbi1"></i></span></li>
+                    <li class="app-hailfellow-child-name"></li>
+                    <ul class="app-hailfellow-child-user-list is-hidden">
+                        <!-- <li class="app-hailfellow-child-department">
+                            研发部<span><i class="icon iconfont icon-xiangxiazhanhang"></i></span>
+                        </li>
+                        <ul class="app-hailfellow-user-list">
+                            <li class="app-hailfellow-user-item">
+                                <img class="layui-circle" src="../assets/images/head.jpg">
+                                <span>张三</span>
+                            </li>
+                        </ul> -->
+                    </ul>
+                    <ul class="app-hailfellow-child-customer-list is-hidden">
+                        <!-- <li class="app-hailfellow-child-customer-name">真才企链<span><i class="icon iconfont icon-fangkuai"></i></span></li>
+                        <ul class="app-hailfellow-child-customer-childlist">
+                            <li class="app-hailfellow-child-department">
+                                研发部<span><i class="icon iconfont icon-xiangxiazhanhang"></i></span>
+                            </li>
+                            <ul class="app-hailfellow-user-list">
+                                <li class="app-hailfellow-user-item">
+                                    <img class="layui-circle" src="../assets/images/head.jpg">
+                                    <span>张三</span>
+                                </li>
+                            </ul>
+                        </ul> -->
+                    </ul>
+                    <ul class="app-hailfellow-child-group-list is-hidden">
+                        <li class="app-hailfellow-user-item">
+                            <img class="layui-circle" src="../assets/images/head.jpg">
+                            <span>群聊</span>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+            <ul data-section="app-interview" id="interview-list" class="app-interview-list is-hidden">
+                <li><span class="app-interview-list-title">未面试<i class="icon iconfont icon-xiangxiazhanhang app-interview-icon"></i></span></li>
+                <ul class="app-interview-user-list app-not-interview">
+                    <li class="app-interview-user-item">
+                        <img class="layui-circle" src="http://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                        <span>张三</span>
+                        <p>预约时间：</p>
+                        <p>2019-02-13 10:30:00</p>
+                    </li>
+                </ul>
+                <li><span class="app-interview-list-title">已面试<i class="icon iconfont icon-xiangxiazhanhang app-interview-icon"></i></span></li>
+                <ul class="app-interview-user-list app-already-interview">
+                    <li class="app-interview-user-item">
+                        <img class="layui-circle" src="http://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                        <span>张三</span>
+                        <p>面试时间：</p>
+                        <p>2019-02-13 10:30:00</p>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+  </div>
+  <main class="content js-content"></main>
+
+  <!-- js start -->
+  <script src="../lib/utility/db.js"></script>
+  <script src="../lib/utility/utility.js"></script>
+  <script src="../lib/utility/entry.js"></script>
+  <script src="../lib/lib/emoji/highlight.pack.js"></script>
+  <script src="../lib/lib/jquery.emoji.js"></script>
+  <script src="../assets/js/index.js"></script>
+  <script>
+      require('../assets/js/imports');
+      require('../assets/js/nav');
+      require('../assets/js/menu');
+  </script>
+  <!-- js end -->
+</body>
+</html>

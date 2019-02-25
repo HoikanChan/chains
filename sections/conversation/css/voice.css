@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+html,body{
+    height: 100%;
+}
+button,span,input,textarea{
+    -webkit-app-region: no-drag;
+}
+.app-head-box{
+    position: relative;
+}
+.app-head{
+    position: absolute;
+    text-align: right;
+    right: 10px;
+    top:5px;
+    z-index: 500;
+}
+.app-head>.app-head-console-item{
+    text-align: center;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    cursor: pointer;
+    color: 	#F8F8FF;
+}
+.app-head>.app-head-console-item:hover{
+    color: #4EEE94;
+}
+.app-head>.app-head-console-item:nth-child(2):hover{
+    background: rgba(238,44,44, 1);
+    color: #fff;
+}
+.app-vocie-body-img{
+    margin-top: 45%;
+    text-align: center;
+}
+.app-voice-body-console{
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+    width: 70%;
+    margin: 30px auto 0 auto;
+}
+.app-voice-body-console div{
+    border-radius: 100%;
+    cursor: pointer;
+}
+.app-voice-body-console i{
+    font-size: 25px;
+}
+.app-voice-body-console p{
+    font-size: 14px;
+}
+#time{
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    height: 60px;
+}
+.spinner {
+    height: 60px;
+    text-align: center;
+    font-size: 10px;
+}
+   
+.spinner > div {
+   background-color: #67CF22;
+   height: 100%;
+   width: 6px;
+   display: inline-block;
+    
+   -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+   animation: stretchdelay 1.2s infinite ease-in-out;
+}
+   
+.spinner .rect2 {
+   -webkit-animation-delay: -1.1s;
+   animation-delay: -1.1s;
+}
+   
+.spinner .rect3 {
+   -webkit-animation-delay: -1.0s;
+   animation-delay: -1.0s;
+}
+   
+.spinner .rect4 {
+   -webkit-animation-delay: -0.9s;
+   animation-delay: -0.9s;
+}
+   
+.spinner .rect5 {
+   -webkit-animation-delay: -0.8s;
+   animation-delay: -0.8s;
+}
+   
+@-webkit-keyframes stretchdelay {
+   0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+   20% { -webkit-transform: scaleY(1.0) }
+}
+   
+@keyframes stretchdelay {
+   0%, 40%, 100% {
+     transform: scaleY(0.4);
+     -webkit-transform: scaleY(0.4);
+}  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+   }
+}

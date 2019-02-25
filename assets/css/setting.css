@@ -1,0 +1,79 @@
+#app-setting{
+    background: #f4f4f4;
+}
+.app-setting-body,.app-setting-footer{
+    width: 90%;
+    margin: 10px auto 10px auto;
+    overflow: hidden;
+}
+.app-setting-transverse{
+    display: inline-block;
+    width: 84%;
+    height: 2px;
+    background: #08979d;
+    vertical-align: middle;
+}
+.app-setting-from{
+    overflow: hidden;
+    margin-top: 15px;
+    -webkit-app-region: no-drag;
+}
+.app-setting-form-item{
+    overflow: hidden;
+}
+.app-setting-form-label{
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    font-weight: 400;
+    line-height: 20px;
+    width: 60px;
+    text-align: left;
+}
+.app-setting-input-block{
+    position: relative;
+    float: left;
+    width: 70%;
+}
+.app-setting-from-input,.app-setting-from-textarea{
+    border: 0;
+    width: 100%;
+    height: 22px;
+    padding: 5px;
+}
+.app-setting-from-textarea{
+    height: 60px;
+}
+.app-setting-head-portrait{
+    text-align: center;
+    padding-top: 20px;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+.app-setting-head-portrait img{
+    width: 110px;
+    height: 110px;
+}
+.app-setting-head-portrait p{
+    padding-top: 10px;
+}
+.app-setting-sub-box{
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.app-setting-sub-box button{
+    width: 80%;
+    border: 0;
+    height: 28px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #08979d;
+}
+.app-setting-sub-box button:hover{
+    background: rgba(8,151,157, 0.8);
+}
+.app-setting-psd{
+    width: 35%;
+    margin-right: 15px;
+}

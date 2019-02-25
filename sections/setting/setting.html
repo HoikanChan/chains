@@ -1,0 +1,91 @@
+<template class="task-template">
+        <section id="app-setting-section" class="section app-section u-category-system">
+            <div class="app-setting-box">
+                <div class="app-currency-title">
+                    <span>设置</span>
+                </div>
+                <div class="app-setting-body">
+                    <div class="app-page-title">
+                        个人信息 
+                        <span class="app-setting-transverse"></span>
+                        <span><i class="icon iconfont icon-xiangxiazhanhang"></i></span>
+                    </div>
+                    <div class="layui-row">
+                        <form class="app-setting-from layui-col-xs7" action="">
+                            <div class="app-setting-form-item">
+                                <label class="app-setting-form-label">职位</label>
+                                <div class="app-setting-input-block">
+                                <input type="text" name="title" id="app-setting-position" readonly="readonly" disabled="disabled" value="市场部经理" autocomplete="off" class="app-setting-from-input">
+                                </div>
+                            </div>
+                            <div class="app-setting-form-item">
+                                <label class="app-setting-form-label">昵称</label>
+                                <div class="app-setting-input-block">
+                                <input type="text" name="title" id="app-setting-nickname" placeholder="请输入昵称" autocomplete="off" class="app-setting-from-input">
+                                </div>
+                            </div>
+                            <div class="app-setting-form-item">
+                                <label class="app-setting-form-label">电话</label>
+                                <div class="app-setting-input-block">
+                                <input type="text" name="title" id="app-setting-phone" placeholder="请输入联系电话" autocomplete="off" class="app-setting-from-input">
+                                </div>
+                            </div>
+                            <div class="app-setting-form-item app-setting-form-text">
+                                <label class="app-setting-form-label">职责简介</label>
+                                <div class="app-setting-input-block">
+                                <textarea name="desc" placeholder="请输入职责简介" id="app-setting-introduce" class="app-setting-from-textarea" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="app-setting-header" class="app-setting-head-portrait layui-col-xs5">
+                            <img src="../assets/images/head.jpg" class="layui-circle" ondragstart="return false;" />
+                            <p>点击更换头像</p>
+                        </div>
+                        <div style="display:none;">
+                            <input id="app-setting-header-input" type="file" />
+                        </div>
+                    </div>
+                    <div class="app-setting-sub-box">
+                        <button id="app-setting-update-btn">修改并保存</button>
+                    </div>
+                </div>
+                <div class="app-setting-footer">
+                    <div class="app-page-title">
+                        密码设置 
+                        <span class="app-setting-transverse"></span>
+                        <span><i class="icon iconfont icon-xiangxiazhanhang"></i></span>
+                    </div>
+                    <form class="app-setting-from" action="">
+                        <div class="app-setting-form-item">
+                            <label class="app-setting-form-label">原密码</label>
+                            <div class="app-setting-input-block app-setting-psd">
+                            <input type="password" name="title" placeholder="请输入原密码" autocomplete="off" class="app-setting-from-input">
+                            </div>
+                        </div>
+                        <div class="app-setting-form-item">
+                            <label class="app-setting-form-label">新密码</label>
+                            <div class="app-setting-input-block app-setting-psd">
+                            <input type="password" name="title" placeholder="请输入新密码" autocomplete="off" class="app-setting-from-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">提示:"请输入6-12位字符(字母+数字)"</div>
+                        </div>
+                        <div class="app-setting-form-item">
+                            <label class="app-setting-form-label">确认密码</label>
+                            <div class="app-setting-input-block app-setting-psd">
+                            <input type="password" name="title" placeholder="请输入确认密码" autocomplete="off" class="app-setting-from-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">提示:"请跟新密码保持一致"</div>
+                        </div>
+                    </form>
+                    <div class="app-setting-sub-box">
+                        <button>修改并保存</button>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                require('../renderer-process/setting/setting');
+            </script>
+        </section>
+    </template>
+    
