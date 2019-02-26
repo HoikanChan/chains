@@ -22,7 +22,7 @@
     max-height: 345px;
 }
 .app-hailfellow-list-item:hover,.app-hailfellow-child-user-list li:hover,
-.app-hailfellow-child-customer-list li:hover,.app-hailfellow-child-group-list:hover{
+.app-hailfellow-child-customer-list li:hover{
     background: #f4f4f4;
     cursor: pointer;
 }
@@ -210,5 +210,9 @@
     border-radius: 3px;
     background: #08979d;
     color: #fff;
+    cursor: pointer;
+}
+.app-hailfellow-child-group-list .app-hailfellow-user-item:hover{
+    background: #f4f4f4;
     cursor: pointer;
 }

@@ -154,7 +154,7 @@
     color: #959595;
 }
 .app-chat-friend-datum p:nth-child(2){
-    font-size: 17px;
+    font-size: 14px;
     padding-top: 5px;
     color: #000;
 }
@@ -244,4 +244,20 @@
     top:3px;
     left: 5px;
     z-index: 10;
+}
+.app-chat-groupList-list{
+    position: relative;
+}
+.app-chat-groupList-list .app-chat-groupList-item{
+    float: left;
+    text-align: center;
+}
+.app-chat-groupList-item img{
+    width: 35px;
+    height: 35px;
+    padding: 5px; 
+    border-radius: 100%;
+}
+.app-chat-groupList-item p{
+    font-size: 12px;
 }

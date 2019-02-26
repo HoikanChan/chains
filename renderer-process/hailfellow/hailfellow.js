@@ -11,6 +11,7 @@ hailfellow.event = ()=>{
         switch(status){
             case '1':
                 str = '群聊';
+                hailfellow.loadGroup();
                 break;
             case '2':
                 str = '客户';
@@ -52,12 +53,27 @@ hailfellow.event = ()=>{
         $(this).next('.app-hailfellow-user-list').slideToggle();
     });
 
-    $('.app-hailfellow-child-list').on('click','.app-hailfellow-user-item',function(event){
+    $('.app-hailfellow-child-user-list,.app-hailfellow-child-customer-list').on('click','.app-hailfellow-user-item',function(event){
         utility.handleSectionTriggerShow(event.delegateTarget);
         var id = $(this).attr('data-id');
         var orgId = $(this).attr('data-org');
         var grouping = $(this).parent().attr('data-name');
         hailfellow.loadUserInfo(id,orgId,grouping);
+    })
+
+    $('.app-hailfellow-child-group-list').on('click','.app-hailfellow-user-item',function(event){
+        hideAllSectionsAndDeselectButtons();
+
+		let id = $(this).attr('data-id');
+		let name = $(this).attr('data-name');
+		let picUrl = '../assets/images/group.png';
+
+		addSess(webim.SESSION_TYPE.GROUP,id,name,picUrl,'','HEAD');
+		onSelSess(webim.SESSION_TYPE.GROUP,id,name);
+
+       $('#chat-button').click();
+       let sectionId = 'app-chat-section';
+       document.getElementById(sectionId).classList.add('is-shown');
     })
 
     /**
@@ -71,16 +87,41 @@ hailfellow.event = ()=>{
 		let name = $(this).attr('data-name');
 		let picUrl = $(this).attr('data-pic');
 
-		addSess(webim.SESSION_TYPE.C2C,id,name,picUrl,'','','HEAD');
+		addSess(webim.SESSION_TYPE.C2C,id,name,picUrl,'','HEAD');
 		onSelSess(webim.SESSION_TYPE.C2C,id,name);
 
        $('#chat-button').click();
        let sectionId = 'app-chat-section';
        document.getElementById(sectionId).classList.add('is-shown');
-
 	});
 
 }
+
+hailfellow.loadGroup = ()=>{
+    $('.app-hailfellow-child-group-list').removeClass('is-hidden');
+    $('.app-hailfellow-child-group-list').empty();
+    getMyGroup(function(res){
+        var $li = $('<li>'),$img = $('<img>'),$span = $('<span>');
+
+        $.each(res.GroupIdList,(i,item)=>{
+            if(item.Type == 'ChatRoom'){
+                return true;
+            }
+            var $li1 = $li.clone().addClass('app-hailfellow-user-item').attr({
+                'data-id':item.GroupId,
+                'data-name':item.Name
+            });
+            var $img1 = $img.clone().addClass('layui-circle').attr('src','../assets/images/group.png');
+            var $span1 = $span.clone().text(item.Name);
+
+            $li1.append($img1).append($span1);
+            $('.app-hailfellow-child-group-list').append($li1);
+        })
+
+    });
+
+};
+
 
 hailfellow.loadUserInfo = (id,orgId,grouping)=>{
 
@@ -89,7 +130,10 @@ hailfellow.loadUserInfo = (id,orgId,grouping)=>{
     utility.currencyAjax('post','user/info2?'+str,undefined,function(res){
         if(res.code === '000'){
             var data = res.data;
-            var picUrl = data.picUrl ? fileDomain + data.picUrl: '../assets/images/head.jpg';
+            var  picUrl = fileDomain + data.picUrl;
+            if(data.picUrl == null || data.picUrl == ''){
+                picUrl = (data.sex == '女')?'../assets/images/6.png':'../assets/images/7.png';
+            }
             $('.app-hailfellow-friend-head').find('img').attr('src',picUrl);
             $.each(data,(i,item)=>{
                 if(item == null){
@@ -106,7 +150,6 @@ hailfellow.loadUserInfo = (id,orgId,grouping)=>{
             $('#app-hailfellow-email-text').html(data.email);
 
             $('#app-hailfellow-send-btn').attr({'data-id':id,'data-name':data.realName,'data-pic':picUrl});
-
         }else{
             console.log(res);
         }
@@ -127,7 +170,10 @@ hailfellow.load = ()=>{
                 var $ul1 = $ul.clone().addClass('app-hailfellow-user-list').attr('data-name',item.deptName).css('display','none');
                 $.each(item.users,(k,user)=>{
                     var $li2 = $li.clone().addClass('app-hailfellow-user-item').attr('data-id',user.userId);
-                    var picUrl = user.picUrl ? fileDomain + user.picUrl: '../assets/images/head.jpg';
+                    var  picUrl = fileDomain + user.picUrl;
+                    if(user.picUrl == null || user.picUrl == ''){
+                        picUrl = (user.userSex == '女')?'../assets/images/6.png':'../assets/images/7.png';
+                    }
                     var $img1 = $img.clone().addClass('layui-circle').attr('src',picUrl);
                     var $span1 = $span.clone().text(user.realName);
 

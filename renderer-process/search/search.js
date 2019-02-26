@@ -3,6 +3,11 @@ var search = {};
 
 search.status = 1;
 search.orgId = 0;
+search.index = '';
+
+ipc.on('synchronous-webim',(event,webims)=>{
+    webim.SetCTX(webims);
+});
 
 search.load = ()=>{
 
@@ -74,8 +79,84 @@ search.load = ()=>{
 			}else{
 			}
 		})
-		
-	});
+    });
+    
+    $('#add-group').click(function(){
+        search.loadFriends();
+    });
+
+    $('body').on('click','#app-seach-check-users .app-search-friend-item',function(){
+        var status = $(this).attr('data-status');
+        var id = $(this).attr('data-id');
+        if(status == '1'){
+            var html = $(this).html();
+            $(this).attr('data-status','2');
+            $(this).find('i').removeClass('layui-icon-circle').addClass('layui-icon-circle-dot').css('color','#08979d');
+            $('#app-seach-checked-users').append('<li id="app-seach-checked-user-'+id+'" data-id="'+id+'" class="app-search-friend-item">'+html.replace('layui-icon-circle','layui-icon-close-fill')+'</li>');
+        }else{
+            $(this).attr('data-status','1');
+            $(this).find('i').removeClass('layui-icon-circle-dot').addClass('layui-icon-circle').css('color','#000');
+            $('#app-seach-checked-users #app-seach-checked-user-' + id).remove();
+        }
+
+    });
+
+    $('body').on('click','#app-seach-checked-users .app-search-friend-icon',function(){
+        var id = $(this).parents('.app-search-friend-item').attr('data-id');
+        $(this).parents('.app-search-friend-item').remove();
+        $('#app-seach-check-user-'+id).find('i').removeClass('layui-icon-circle-dot').addClass('layui-icon-circle').css('color','#000');
+        $('#app-seach-check-user-'+id).attr('data-status','1');
+    });
+
+    $('body').on('click','.app-search-friend-cancel',function(){
+        layer.close(search.index);
+    });
+
+
+    $('body').on('click','#app-search-createdGroup',function(){
+        search.created();
+    });
+
+}
+
+search.created = ()=>{
+    var member_list = [];
+    var name = '';
+    $('#app-seach-checked-users').find('.app-search-friend-item').each(function(){
+        member_list.push($(this).attr('data-id'));
+        name += $(this).find('.app-search-friend-name').text() + ',';
+    });
+
+    if(member_list.length == 0){
+        layer.msg('请选择添加群好友');
+        return;
+    }
+
+    if (webim.Tool.trimStr(name).length > 8) {
+        name  = name.substr(0,8) + '...';
+    }
+
+    var cg_id = Math.floor(Math.random()*(5000-1000+1)+1000);
+    var groupType = "Private";
+    var options = {
+        'GroupId': cg_id,
+        'Owner_Account': user.im.identifier,
+        'Type': groupType,
+        'Name': name,
+        'Notification': '',
+        'Introduction': '',
+        'MemberList': member_list
+    };
+    webim.createGroup(
+        options,
+        function(resp) {
+            layer.close(search.index);
+            layer.msg('创建群成功');
+        },
+        function(err) {
+            alert(err.ErrorInfo);
+        }
+    );
 
 }
 
@@ -193,11 +274,59 @@ search.addCustomer = (options)=>{
             return false;
         });
 
-
     });
 
 }
 
+search.loadFriends = ()=>{
 
+    var friend = db.get('chats.list').value();
+    var list = '';
+    var $li = $('<li>'),$img = $('<img>'),$span = $('<span>');
+    $.each(friend,(i,item)=>{
+        if(item.userId != user.im.identifier){
+            var $li1 = $li.clone().addClass('app-search-friend-item').attr({
+                "data-status":'1',
+                "data-id":item.userId,
+                "id":"app-seach-check-user-"+item.userId,
+            });
+            var  picUrl = fileDomain + item.picUrl;
+            if(item.picUrl == null || item.picUrl == ''){
+                picUrl = (item.sex == '女')?'../../assets/images/6.png':'../../assets/images/7.png';
+            }
+            var $img1 = $img.clone().addClass('layui-circle').attr('src',picUrl);
+            var $span1 = $span.clone().addClass('app-search-friend-name').text(item.realName);
+            $li1.append($img1).append($span1).append('<span class="app-search-friend-icon"><i class="layui-icon layui-icon-circle"></i></span>');
+            list += $li1.prop("outerHTML");
+        }
+    });
+
+    var html = `<div class="check-box layui-form layui-low">
+            <div class="layui-col-xs6">
+                <div class="app-search-friend-title">好友列表</div>
+                <ul id="app-seach-check-users" class="app-search-friend-list">
+                    `+list+`
+                </ul>
+            </div>
+            <div class="layui-col-xs6">
+                <div class="app-search-friend-title">选择好友</div>
+                <ul id="app-seach-checked-users" class="app-search-friend-list">
+                </ul>
+            </div>
+            <div class="app-search-friend-console layui-col-xs12">
+                <button id="app-search-createdGroup" class="layui-btn layui-btn-sm" >确定</button>
+                <button class="layui-btn layui-btn-primary layui-btn-sm app-search-friend-cancel">取消</button>
+            </div>
+        </div>`;
+
+    search.index = layer.open({
+        type: 1,
+        title:'请勾选需要添加的联系人',
+        skin: 'layui-layer-rim', //加上边框
+        area: ['460px', '440px'], //宽高
+        content: html
+    });
+
+}
 
 search.load();

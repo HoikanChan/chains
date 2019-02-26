@@ -40,12 +40,12 @@
                         <button id="search-btn">搜索</button>
                     </div>
                     <hr />
-                   
                     <div class="app-search-result-title">
                         <span>搜索结果</span>
                         <button id="add-customer"><i class="layui-icon layui-icon-add-circle-fine"></i> 新增</button>
                     </div>
-                    <div class="app-search-result-box layui-row">
+                    
+                    <div class="app-search-result-box layui-row" style="display:none;">
                         <div class="app-search-result-item layui-col-xs4">
                             <img class="layui-circle" src="http://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
                             <span>贤心</span>
@@ -57,14 +57,15 @@
             </div>    
         </div>
         <script src="../../lib/utility/db.js"></script>
+        <script src="../../lib/sdk/webim.js"></script>
+        <script src="../../lib/IM/group/group_manager.js"></script>
         <script type="text/javascript">
-            require('../../renderer-process/search/search');
-            
             const user = JSON.parse(db.get('user.info').value());
             const Token = user.token;
             const fileDomain = user.fileDomain;
         </script>
         <script src="../../lib/utility/utility.js"></script>
+        <script src="../../renderer-process/search/search.js"></script>
         
 	</body>
 </html>

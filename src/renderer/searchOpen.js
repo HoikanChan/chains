@@ -15,7 +15,7 @@ let option = {
     icon: __dirname + '/icon.ico',
 };
 let searchwin;
-ipcMain.on('search-open',(event)=>
+ipcMain.on('search-open',(event,webim)=>
 {
   searchwin = new BrowserWindow(option)
 
@@ -23,6 +23,10 @@ ipcMain.on('search-open',(event)=>
      searchwin.show();
   });
   searchwin.setMenu(null);
+
+  searchwin.once('show',function(){
+    searchwin.webContents.send('synchronous-webim',webim);
+ })
 
   searchwin.loadURL(url.format({
     pathname: path.join(__dirname, '../../sections/search/search.html'),

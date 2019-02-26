@@ -1,14 +1,18 @@
 const settings = require('electron-settings');
 
 $('.app-menu-list').on('click','li',function(){
-    hideAllUlAndDeselectButtons();
-    $(this).addClass('is-selected');
     let listName = $(this).attr('data-section');
-    ListShowMain(listName);
+    if(listName == 'app-addFriend'){
+        ipcRenderer.send('search-open',webim.ctx);
+    }else{
+        ListShowMain(listName);
+        $(this).addClass('is-selected');
+    }
+
 })
 
 function ListShowMain(idNmae){
-
+    hideAllUlAndDeselectButtons();
     switch (idNmae) {
         case 'chats-list':
             chatsList(idNmae,showList);
@@ -26,9 +30,7 @@ function ListShowMain(idNmae){
             let sectionId = `app-setting-section`;
             document.getElementById(sectionId).classList.add('is-shown')
             break;
-        case 'app-addFriend':
-            ipcRenderer.send('search-open');
-            break;
+        
     }
 
 }
