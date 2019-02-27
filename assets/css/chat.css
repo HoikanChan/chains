@@ -247,6 +247,9 @@
 }
 .app-chat-groupList-list{
     position: relative;
+    overflow-x: hidden;
+    height: 215px;
+    -webkit-app-region: no-drag;
 }
 .app-chat-groupList-list .app-chat-groupList-item{
     float: left;

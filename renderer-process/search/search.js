@@ -122,9 +122,11 @@ search.load = ()=>{
 search.created = ()=>{
     var member_list = [];
     var name = '';
+    var images = [];
     $('#app-seach-checked-users').find('.app-search-friend-item').each(function(){
         member_list.push($(this).attr('data-id'));
         name += $(this).find('.app-search-friend-name').text() + ',';
+        images.push($(this).find('img').attr('src'));
     });
 
     if(member_list.length == 0){
@@ -135,28 +137,31 @@ search.created = ()=>{
     if (webim.Tool.trimStr(name).length > 8) {
         name  = name.substr(0,8) + '...';
     }
-
-    var cg_id = Math.floor(Math.random()*(5000-1000+1)+1000);
-    var groupType = "Private";
-    var options = {
-        'GroupId': cg_id,
-        'Owner_Account': user.im.identifier,
-        'Type': groupType,
-        'Name': name,
-        'Notification': '',
-        'Introduction': '',
-        'MemberList': member_list
-    };
-    webim.createGroup(
-        options,
-        function(resp) {
-            layer.close(search.index);
-            layer.msg('创建群成功');
-        },
-        function(err) {
-            alert(err.ErrorInfo);
-        }
-    );
+    name = name.substring(0,name.length-1);
+    canvas2d(images,function(imgurl){
+        var cg_id = Math.floor(Math.random()*(5000-1000+1)+1000);
+        var groupType = "Private";
+        var options = {
+            'GroupId': cg_id,
+            'FaceUrl':imgurl.data.fileUrl,
+            'Owner_Account': user.im.identifier,
+            'Type': groupType,
+            'Name': name,
+            'Notification': '',
+            'Introduction': '',
+            'MemberList': member_list
+        };
+        webim.createGroup(
+            options,
+            function(resp) {
+                layer.close(search.index);
+                layer.msg('创建群成功');
+            },
+            function(err) {
+                alert(err.ErrorInfo);
+            }
+        );
+    });
 
 }
 

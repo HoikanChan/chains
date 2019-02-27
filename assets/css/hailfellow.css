@@ -216,3 +216,22 @@
     background: #f4f4f4;
     cursor: pointer;
 }
+.app-hailfellow-child-group-list{
+    position: relative;
+    height: 346px;
+    overflow-x: hidden;
+}
+.app-hailfellow-contextMenu{
+    display: none;
+    position:absolute; 
+    z-index:90; 
+    border:1px solid #AEAEAE; 
+    padding:2px;
+    width:80px;
+    border-radius:5px;
+    background: #fff;
+}
+.app-hailfellow-contextMenu li{
+    padding: 5px;
+    cursor: pointer;
+}

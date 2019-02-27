@@ -1,9 +1,10 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, globalShortcut} = require('electron');
 const ipc = require('electron').ipcMain
 const glob = require("glob");
 const path = require('path');
 const url = require('url');
+const ShortcutCapture =  require('shortcut-capture');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -24,6 +25,11 @@ function createWindow (status = false) {
     backgroundColor:"#fff",
     frame: false
   });
+
+  const shortcutCapture = new ShortcutCapture({
+    isUseClipboard:true
+  })
+  globalShortcut.register('ctrl+shift+l', () => shortcutCapture.shortcutCapture())
 
   mainWindow.once('show',function(){
     if(status == true){
@@ -135,6 +141,9 @@ ipc.on('download', (event, args) => {
 });
 
 function loadModule () {
+
+  
+
   const files = glob.sync(path.join(__dirname, '../renderer/*.js'));
   files.forEach((file) => { require(file) })
 }

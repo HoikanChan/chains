@@ -66,7 +66,7 @@ hailfellow.event = ()=>{
 
 		let id = $(this).attr('data-id');
 		let name = $(this).attr('data-name');
-		let picUrl = '../assets/images/group.png';
+		let picUrl = $(this).attr('data-src');
 
 		addSess(webim.SESSION_TYPE.GROUP,id,name,picUrl,'','HEAD');
 		onSelSess(webim.SESSION_TYPE.GROUP,id,name);
@@ -107,11 +107,13 @@ hailfellow.loadGroup = ()=>{
             if(item.Type == 'ChatRoom'){
                 return true;
             }
+            var FaceUrl = (item.FaceUrl)? fileDomain + item.FaceUrl:'../assets/images/group.jpg';
             var $li1 = $li.clone().addClass('app-hailfellow-user-item').attr({
                 'data-id':item.GroupId,
-                'data-name':item.Name
+                'data-name':item.Name,
+                'data-src': FaceUrl
             });
-            var $img1 = $img.clone().addClass('layui-circle').attr('src','../assets/images/group.png');
+            var $img1 = $img.clone().addClass('layui-circle').attr('src',FaceUrl);
             var $span1 = $span.clone().text(item.Name);
 
             $li1.append($img1).append($span1);
