@@ -140,7 +140,7 @@ search.created = ()=>{
     name = name.substring(0,name.length-1);
     canvas2d(images,function(imgurl){
         var cg_id = Math.floor(Math.random()*(5000-1000+1)+1000);
-        var groupType = "Private";
+        var groupType = "Public";
         var options = {
             'GroupId': cg_id,
             'FaceUrl':imgurl.data.fileUrl,

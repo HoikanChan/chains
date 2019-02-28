@@ -9,6 +9,10 @@ $('.app-menu-list').on('click','li',function(){
         $(this).addClass('is-selected');
     }
 
+    if(listName == 'chats-list'){
+        
+    }
+
 })
 
 function ListShowMain(idNmae){
@@ -30,7 +34,6 @@ function ListShowMain(idNmae){
             let sectionId = `app-setting-section`;
             document.getElementById(sectionId).classList.add('is-shown')
             break;
-        
     }
 
 }
@@ -38,6 +41,12 @@ function ListShowMain(idNmae){
 function showList(idNmae){
     $('#'+idNmae).removeClass('is-hidden');
     $('#'+idNmae).addClass('is-show');
+    if(idNmae == 'chats-list'){
+        if(selToID != null){
+            let sectionId = 'app-chat-section';
+            document.getElementById(sectionId).classList.add('is-shown');
+        }
+    }
 }
 
 function hideAllUlAndDeselectButtons(){

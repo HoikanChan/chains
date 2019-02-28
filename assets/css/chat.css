@@ -264,3 +264,65 @@
 .app-chat-groupList-item p{
     font-size: 12px;
 }
+.app-chat-groupList-console{
+    text-align: center;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    -webkit-app-region: no-drag;
+}
+.app-chat-groupList-console li{
+    cursor: pointer;
+}
+.app-chat-groupList-console li:hover{
+    background: #fcfcfc;
+    color: #08979d;
+}
+.app-chat-groupList-console i{
+    font-size: 20px;
+}
+.app-chat-friend-title{
+    padding: 5px;
+    text-align: center;
+    background: #EBEBEB;
+}
+.app-chat-friend-list{
+    position: relative;
+    overflow-x: hidden;
+    height: 335px;
+}
+.app-chat-friend-item{
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    padding: 5px 5px 5px 60px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+.app-chat-friend-item:hover{
+    background: #FAFAFA;
+}
+.app-chat-friend-item>img{
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    width: 38px;
+    height: 38px;
+}
+.app-chat-friend-item .app-chat-friend-name{
+    display: inline-block;
+    width: 55%;
+    height: 50px;
+    line-height: 50px;
+}
+.app-chat-friend-item .app-chat-friend-icon>i{
+    font-size: 20px;
+}
+.app-chat-friend-console{
+    text-align: right;
+    padding-right: 10px;
+}
+.app-chat-friend-cancel:hover{
+    background: #fff;
+}
