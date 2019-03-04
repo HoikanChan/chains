@@ -16,7 +16,7 @@
     font-size: 15px;
     font-weight: normal;
 }
-.app-hailfellow-child-user-list{
+.app-hailfellow-child-user-list,.app-hailfellow-child-customer-list{
     position: relative;
     overflow-x: hidden;
     max-height: 345px;
@@ -145,7 +145,7 @@
 .app-hailfellow-friend-head{
     position: absolute;
     left: auto;
-    right: 55px;
+    right: 0;
     top: 20px;
     text-align: center;
 }
@@ -182,7 +182,7 @@
 .app-hailfellow-buttons{
     position: absolute;
     bottom: 45px;
-    right: 30px;
+    right: 0;
 }
 .app-hailfellow-buttons li{
     margin: 15px 0 15px 0;
@@ -234,4 +234,58 @@
 .app-hailfellow-contextMenu li{
     padding: 5px;
     cursor: pointer;
+}
+.app-hailfellow-menu-list{
+    overflow: hidden;
+    text-align: center;
+}
+.app-hailfellow-menu-list li{
+    float: left;
+    width: 33%;
+    height: 35px;
+    line-height: 35px;
+    cursor: pointer;
+    border-bottom: 1px solid #C5C5C5; 
+}
+.app-hailfellow-menu-list li:hover{
+    color: #08979d;
+}
+.app-hailfellow-menu-list>.active{
+    color: #08979d;
+    background: #fff;
+    border-bottom: 1px solid #08979d; 
+}
+.app-hailfellow-child-customer-console,.app-hailfellow-child-group-console{
+    height: 30px;
+    line-height: 30px;
+    margin-top: 5px;
+}
+.app-hailfellow-child-customer-console-btn,
+.app-hailfellow-child-group-console-btn{
+    display: inline-block;
+    width: 55px;
+    height: 27px;
+    text-align: center;
+    cursor: pointer;
+    margin: 5px 0 0 3px;
+    border: 1px solid #C5C5C5;
+}
+.app-hailfellow-child-customer-console>.active,
+.app-hailfellow-child-group-console>.active{
+    background: #08979d;
+    color: #fff;
+    border: 0;
+}
+.app-hailfellow-child-customer-console>.active:hover,
+.app-hailfellow-child-group-console>.active:hover{
+    color: #fff;
+}
+.app-hailfellow-child-addUser{
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+}
+.app-hailfellow-child-customer-console>span:hover,
+.app-hailfellow-child-group-console>span:hover{
+    color: #08979d;
 }

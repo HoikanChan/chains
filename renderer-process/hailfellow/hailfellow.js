@@ -2,44 +2,38 @@ var hailfellow = {};
 
 hailfellow.event = ()=>{
     //显示
-    $('.app-hailfellow-list-item').click(function(){
-        $('.app-hailfellow-child-list').removeClass('fadeOutDownBig is-hidden');
-        $('.app-hailfellow-child-list').addClass('animated fadeInUp');
-        
-        let status = $(this).attr('data-status');
-        let str = '';
-        switch(status){
+    $('.app-hailfellow-menu-list li').click(function(){
+        $(this).parent().find('.active').removeClass('active');
+        $(this).addClass('active');
+        var id = $(this).attr('data-id');
+
+        switch(id){
             case '1':
-                str = '群聊';
-                hailfellow.loadGroup();
+                $('.app-hailfellow-child-customer-list').addClass('is-hidden');
+                $('.app-hailfellow-child-group-list').addClass('is-hidden');
+                hailfellow.load();
                 break;
-            case '2':
-                str = '客户';
+                case '2':
+                $('.app-hailfellow-child-group-list').addClass('is-hidden');
+                $('.app-hailfellow-child-user-list').addClass('is-hidden');
                 hailfellow.loadCust();
                 break;
-            case '3':
-                str = '供应商';
-                hailfellow.loadCust(2);
+                case '3':
+                $('.app-hailfellow-child-customer-list').addClass('is-hidden');
+                $('.app-hailfellow-child-user-list').addClass('is-hidden');
+                hailfellow.loadGroup();
                 break;
-            case '4':
-                str = '同事';
-                hailfellow.load();
-        }
-
-        $('.app-hailfellow-child-name').text(str);
+            }
+            
+        $('.app-hailfellow-child-list').removeClass('is-hidden');
     });
 
-    //隐藏
-    $('#app-hailfellow-close').click(function(){
-        $('.app-hailfellow-child-list').removeClass('fadeInUp');
-        $('.app-hailfellow-child-list').addClass('fadeOutDownBig');
-        setTimeout(function(){
-            $('.app-hailfellow-child-list').addClass('is-hidden');
-        },100);
-        $('.app-hailfellow-child-customer-list').addClass('is-hidden');
-        $('.app-hailfellow-child-user-list').addClass('is-hidden');
-        $('.app-hailfellow-child-group-list').addClass('is-hidden');
-    });
+    $('.app-hailfellow-child-customer-console').on('click','.app-hailfellow-child-customer-console-btn',function(){
+        $(this).parent().find('.active').removeClass('active');
+        $(this).addClass('active');
+        let id = $(this).attr('data-id');
+        hailfellow.loadCust(id);
+    })
 
     $('.app-hailfellow-child-user-list').on('click','.app-hailfellow-child-department',function(){
         $(this).next('.app-hailfellow-user-list').slideToggle();
@@ -95,11 +89,15 @@ hailfellow.event = ()=>{
        document.getElementById(sectionId).classList.add('is-shown');
 	});
 
+    $('.app-hailfellow-child-addUser').click(function(){
+        ipcRenderer.send('search-open',webim.ctx);
+    });
+
 }
 
 hailfellow.loadGroup = ()=>{
     $('.app-hailfellow-child-group-list').removeClass('is-hidden');
-    $('.app-hailfellow-child-group-list').empty();
+    $('.app-hailfellow-child-group-list .app-hailfellow-user-item').remove();
     getMyGroup(function(res){
         var $li = $('<li>'),$img = $('<img>'),$span = $('<span>');
 
@@ -123,7 +121,6 @@ hailfellow.loadGroup = ()=>{
     });
 
 };
-
 
 hailfellow.loadUserInfo = (id,orgId,grouping)=>{
 
@@ -194,7 +191,7 @@ hailfellow.load = ()=>{
 
 hailfellow.loadCust = (type = 1)=>{
 	$('.app-hailfellow-child-customer-list').removeClass('is-hidden');
-    $('.app-hailfellow-child-customer-list').empty();
+    $('.app-hailfellow-child-customer-list').find('.app-hailfellow-child-customer-name,.app-hailfellow-child-customer-childlist').remove('');
 	utility.currencyGetAjax('user/custs/'+type,undefined,function(res){
 
 		if(res.code === "000"){
@@ -228,5 +225,5 @@ hailfellow.loadCust = (type = 1)=>{
 }
 
 
-
+hailfellow.load();
 hailfellow.event();

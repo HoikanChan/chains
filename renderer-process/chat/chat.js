@@ -65,10 +65,10 @@ chat.event = ()=>{
     });
 
     $('#app-chat-group-quit').click(function(){
-      var id = $(this).attr('data-id');
+      var status = $(this).attr('data-status');
 
       var str = '';
-      if(id == '1'){
+      if(status == '1'){
         str = '退出';
       }else{
         str = '解散';
@@ -77,7 +77,7 @@ chat.event = ()=>{
       layer.confirm('是否确认'+str+'该群', {
         btn: ['确定','取消'] //按钮
       }, function(){
-        // if(id == '1'){
+        if(id == '1'){
           webim.quitGroup({'GroupId': selToID},function(resp){
             layer.msg(str+'成功');
             $('#sessDiv_'+ escapeJquery(selToID)).remove();
@@ -87,17 +87,17 @@ chat.event = ()=>{
           },function(e){
             console.log(e);
           });
-        // }else{
-          // webim.destroyGroup({'GroupId': selToID},function(resp){
-          //   layer.msg('群解散成功');
-          //   $('#sessDiv_'+ escapeJquery(selToID)).remove();
-          //   selToID = null;
-          //   let sectionId = 'app-chat-section';
-          //   document.getElementById(sectionId).classList.remove('is-shown');
-          // },function(e){
-          //   console.log(e);
-          // });
-        // }
+        }else{
+          webim.destroyGroup({'GroupId': selToID},function(resp){
+            layer.msg('群'+str+'成功');
+            $('#sessDiv_'+ escapeJquery(selToID)).remove();
+            selToID = null;
+            let sectionId = 'app-chat-section';
+            document.getElementById(sectionId).classList.remove('is-shown');
+          },function(e){
+            console.log(e);
+          });
+        }
       }, function(){
       });
 

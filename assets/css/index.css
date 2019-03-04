@@ -29,7 +29,10 @@ textarea{
 .is-hidden{
     display: none;
 }
-.is-selected,.active{
+.is-selected{
+    color: #08979d;
+}
+.active{
     color: #08979d;
     background: #f4f4f4;
 }
@@ -135,21 +138,21 @@ textarea{
     color: #08979d; 
 }
 .app-index-menu-box{
-    width: 50px;
+    width: 45px;
     height: 100%;
     float: left;
     text-align: center;
     -webkit-app-region: no-drag;
+    background: #f4f4f4;
 }
 .app-menu-list>li{
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
     cursor: pointer;
 }
 .app-menu-list>li:hover{
     color: #08979d;
-    background: #f4f4f4;
 }
 .app-menu-list>li>i{
     font-size: 23px;
@@ -163,8 +166,7 @@ textarea{
 }
 .app-index-change-list-box{
     position: relative;
-    width: 190px;
-    height: calc(100% - 175px);
+    height: calc(100% - 140px);
     overflow-x: hidden;
     -webkit-app-region: no-drag;
 }
@@ -186,6 +188,16 @@ textarea{
 }
 .app-chats-list-item:hover{
     background: #f4f4f4;
+}
+.app-chats-list-item:hover .app-chats-delChat{
+    display: block;
+}
+.app-chats-list-item .app-chats-delChat{
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: -6px;
+    color: #A9A9A9;
 }
 .app-chats-list-item img{
     position: absolute;

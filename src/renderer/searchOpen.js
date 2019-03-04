@@ -17,6 +17,12 @@ let option = {
 let searchwin;
 ipcMain.on('search-open',(event,webim)=>
 {
+
+  if(searchwin != null){
+    searchwin.focus()
+    return;
+  }
+
   searchwin = new BrowserWindow(option)
 
   searchwin.once('ready-to-show', () => {

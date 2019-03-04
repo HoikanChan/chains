@@ -3,7 +3,7 @@ const settings = require('electron-settings');
 $('.app-menu-list').on('click','li',function(){
     let listName = $(this).attr('data-section');
     if(listName == 'app-addFriend'){
-        ipcRenderer.send('search-open',webim.ctx);
+        
     }else{
         ListShowMain(listName);
         $(this).addClass('is-selected');

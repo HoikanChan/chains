@@ -28,6 +28,7 @@
     height: 380px;
     overflow-x: hidden;
     -webkit-app-region: no-drag;
+    padding-bottom: 5px;
 }
 .app-chat-left-center::-webkit-scrollbar{
     display: none;
@@ -58,7 +59,7 @@
     word-wrap: break-word;
     word-break: break-all;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 3px;
     text-align: left;
     max-width: 240px;
 }
@@ -83,6 +84,10 @@
     height: 45px;
     border-radius: 100%;
 }
+.self-message p{
+    background: #08979D;
+    color: #fff;
+}
 .app-chat-left-footer{
     position: relative;
     height: calc(100% - 420px);
@@ -106,7 +111,7 @@
     font-size:21px;
 }
 .app-chat-dialog{
-    height: calc(100% - 50px);
+    height: calc(100% - 55px);
     margin: 0 10px 0 10px;
     overflow-y:auto;
     overflow-x:hidden;
@@ -125,6 +130,7 @@
     border-radius: 3px;
     cursor: pointer;
     background: #F0F8FF;
+    box-shadow: 1px 1px 1px #888888;
 }
 .app-chat-send-btn:hover{
     background: #08979d;
@@ -136,18 +142,18 @@
 .app-chat-right-body{
     width: 150px;
     position: absolute;
-    left: 460px;
+    right: 0;
     top: 0;
     height: 100%;
-    background-color: #f5f6f8;
+    background-color: #fff;
 }
 .app-chat-friend-datum{
     text-align: center;
     -webkit-app-region: no-drag;
 }
 .app-chat-friend-datum img{
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     margin-top: 50px;
 }
 .app-chat-friend-datum{
