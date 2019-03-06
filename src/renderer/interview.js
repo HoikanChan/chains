@@ -11,6 +11,10 @@ let option = {
 let resumewin;
 ipcMain.on('interviewer-complete',(event,complete)=>
 {
+  if(resumewin != null){
+    resumewin.webContents.send('synchronization',complete);
+    return;
+  }
   option.title = complete.username+"的个人简历";
   resumewin = new BrowserWindow(option)
 
@@ -29,6 +33,5 @@ ipcMain.on('interviewer-complete',(event,complete)=>
     protocol: 'file:'
   }));
 
-  resumewin.webContents.openDevTools();
   resumewin.on('closed',()=>{resumewin = null})
 })

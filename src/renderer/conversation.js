@@ -16,6 +16,7 @@ let option = {
 let newwin;
 ipcMain.on('add',(event,webim,selToID)=>
 {
+  inspect()
   newwin = new BrowserWindow(option)
 
   newwin.once('show',function(){
@@ -39,6 +40,7 @@ ipcMain.on('add',(event,webim,selToID)=>
 
 ipcMain.on('join',(event,RoomID)=>
 {
+   inspect()
    newwin = new BrowserWindow(option)
 
    newwin.once('show',function(){
@@ -61,6 +63,7 @@ ipcMain.on('join',(event,RoomID)=>
 
 ipcMain.on('voice-add',(event,webim,selToID)=>
 {
+   inspect()
    newwin = new BrowserWindow(option)
 
    newwin.once('show',function(){
@@ -84,6 +87,7 @@ ipcMain.on('voice-add',(event,webim,selToID)=>
 
 ipcMain.on('voice-join',(event,RoomID)=>
 {
+   inspect()
    newwin = new BrowserWindow(option)
 
    newwin.once('show',function(){
@@ -104,6 +108,13 @@ ipcMain.on('voice-join',(event,RoomID)=>
    newwin.on('closed',()=>{newwin = null});
 });
 
+
+function inspect(){
+   if(newwin != null){
+      newwin.focus();
+      return;
+   }
+}
 
 //最小化
 ipcMain.on('nw_min', e=> newwin.minimize());

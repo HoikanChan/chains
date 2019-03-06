@@ -71,7 +71,7 @@ function SatrtTime() {
 };
 
 function createAudioElement( id, isLocal ){
-    console.log(id);
+    SatrtTime();
     var audioNode=document.createElement("audio");
     audioNode.id = id;
     audioNode.autoplay = 'true';
@@ -81,28 +81,6 @@ function createAudioElement( id, isLocal ){
     audioNode.controls = 'true';
     document.querySelector("#remote-video-wrap").appendChild(audioNode);
     return audioNode;
-}
-
-var context = new AudioContext();
-
-function addBGM() {
-    document.getElementById("bgm").play();
-    RTC.stopRTC({},function(){
-        gotStream(function(stream){
-            var microphone = context.createMediaStreamSource(stream);
-            var backgroundMusic = context.createMediaElementSource(document.getElementById("bgm"));
-            var analyser = context.createAnalyser();
-            var mixedOutput = context.createMediaStreamDestination();
-            microphone.connect(analyser);
-            analyser.connect(mixedOutput);
-            backgroundMusic.connect(mixedOutput);
-            RTC.startRTC({
-                stream: mixedOutput.stream,
-                role: 'user'
-            });
-        })
-    })
-
 }
 
 function getComputerAudio( callback ){
@@ -186,6 +164,7 @@ function onLocalStreamAdd(info) {
 function onRemoteStreamUpdate( info ) {
     if (info.stream && info.stream.active === true)
     {
+        //SatrtTime();
         RTC.startRTC({
             stream: info,
             role: 'user'
@@ -196,7 +175,6 @@ function onRemoteStreamUpdate( info ) {
             audio = createAudioElement(id);
         }
         audio.srcObject = info.stream;
-        SatrtTime();
     } else{
         console.log('欢迎用户'+ info.userId+ '加入房间');
     }
@@ -228,22 +206,23 @@ function gotStream( succ ){
 
 function initRTC(opts){
     // 初始化
-    RTC = new WebRTCAPI({
-        "debug":{
-            log:true
-        },
+    window.RTC = new WebRTCAPI({
         "userId": opts.userId,
         "userSig": opts.userSig,
         "sdkAppId": opts.sdkappid,
     });
-
     RTC.createRoom({
         roomid : opts.roomid * 1,
         privMap: 255,
         recordId: $("#recordId").val() || null,
         pureAudioPushMod: $("#pureAudioPushMod").val(),
     },function(){
-        gotStream();
+        gotStream(function(stream){
+            RTC.startRTC({
+                stream: stream,
+                role: 'user'
+            });
+        })
     });
 
     // 远端流新增/更新

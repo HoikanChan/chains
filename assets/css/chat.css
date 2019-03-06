@@ -65,7 +65,7 @@
 }
 .app-chat-left-center-item p>img{
     position: relative;
-    width: auto;
+    width: 240px;
     height: auto;
     top: 0;
     left: 0;
@@ -96,6 +96,7 @@
 }
 .app-chat-console{
     padding-top: 5px;
+    height: 22px;
     overflow: hidden;
     -webkit-app-region: no-drag;
 }
@@ -111,7 +112,7 @@
     font-size:21px;
 }
 .app-chat-dialog{
-    height: calc(100% - 55px);
+    height: calc(100% - 58px);
     margin: 0 10px 0 10px;
     overflow-y:auto;
     overflow-x:hidden;
@@ -126,11 +127,10 @@
 .app-chat-send-btn{
     border: 0;
     width: 55px;
-    height: 20px;
-    border-radius: 3px;
+    border-radius: 2px;
     cursor: pointer;
     background: #F0F8FF;
-    box-shadow: 1px 1px 1px #888888;
+    border: 1px solid #D6D6D6;
 }
 .app-chat-send-btn:hover{
     background: #08979d;
@@ -152,25 +152,16 @@
     -webkit-app-region: no-drag;
 }
 .app-chat-friend-datum img{
-    width: 75px;
-    height: 75px;
+    width: 61px;
+    height: 61px;
     margin-top: 50px;
 }
 .app-chat-friend-datum{
     color: #959595;
 }
 .app-chat-friend-datum p:nth-child(2){
-    font-size: 14px;
-    padding-top: 5px;
-    color: #000;
-}
-.app-chat-friend-datum p:nth-child(3){
-    font-size: 12px;
-    padding-top: 5px;
-}
-.app-chat-friend-datum p:nth-child(4){
     position: relative;
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
     padding: 5px 10px 10px 10px;
     line-height: 15px;
@@ -181,7 +172,8 @@
     overflow-x: hidden;
 }
 .app-chat-dialog-box{
-    padding-top: 20px;
+    position: relative;
+    height: calc(100% - 413px);
 }
 .app-chat-dialog-seach{
     width: 130px;
@@ -274,7 +266,6 @@
     text-align: center;
     position: relative;
     height: 40px;
-    line-height: 40px;
     -webkit-app-region: no-drag;
 }
 .app-chat-groupList-console li{
@@ -331,4 +322,108 @@
 }
 .app-chat-friend-cancel:hover{
     background: #fff;
+}
+.app-chat-friend-datum-title{
+    margin-top: 20px;
+    color: #333;
+}
+.app-chat-friend-datum-title>i{
+    color: #08979D;
+}
+.app-chat-friend-datum-item{
+    border-bottom: 1px solid #959595;
+    width: 80%;
+    margin: auto;
+    line-height: 40px;
+}
+.app-chat-friend-datum-item>i{
+    float: left;
+    padding-left: 5px;
+}
+.app-chat-friend-datum-item>span{
+    display: inline-block;
+    width: 76%;
+    padding-left: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 12px;
+}
+.app-chat-dialog-list-btn{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    -webkit-app-region: no-drag;
+}
+.app-chat-dialog-list-btn li{
+    cursor: pointer;
+}
+.app-chat-dialog-list-btn li>i{
+    font-size: 18px;
+}
+.app-chat-dialog-list-btn li:hover{
+    color: #08979D;
+}
+.app-chat-right-group-info{
+    width: 100%;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    -webkit-app-region: no-drag;
+}
+.app-chat-right-group-info-head>img{
+    width: 65px;
+    border-radius: 100%;
+}
+.app-chat-right-group-info-item{
+    padding: 5px 0 5px 0;
+}
+.app-chat-right-group-info-item>span{
+    font-size: 12px;
+    color: #BEBEBE;
+    padding-bottom: 3px;
+}
+.app-chat-right-group-info-item>p{
+    font-size: 13px;
+    padding-left: 5px;
+    width: 80%;
+    border-bottom: 1px solid #C9C9C9;
+}
+.app-chat-right-group-edit-name{
+    width: 80%;
+}
+.app-chat-left-center-group-Nick{
+    display: inline-block;
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+.app-chat-left-center-system-msg-box{
+    width: 250px;
+    padding: 5px;
+    margin: 5px auto 5px auto;
+    background: rgba(51,51,51,0.7);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+}
+.app-chat-groupList-console-name{
+    display: inline-block;
+    font-size: 11px;
+}
+.app-chat-search-group-user{
+    width: 90%;
+    border: 1px solid #D6D6D6;
+    margin: 5px auto 5px auto;
+    line-height: 25px;
+}
+.app-chat-search-group-user>input{
+    width: 80%;
+    border: 0;
+    padding-left: 5px;
+    font-size: 12px;
+}
+.emoji_icon{
+    width: 24px!important;
+    height: 24px!important;
 }

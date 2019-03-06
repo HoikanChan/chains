@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, globalShortcut} = require('electron');
+const {app, BrowserWindow, globalShortcut, clipboard, nativeImage} = require('electron');
 const ipc = require('electron').ipcMain
 const glob = require("glob");
 const path = require('path');
@@ -25,11 +25,6 @@ function createWindow (status = false) {
     backgroundColor:"#fff",
     frame: false
   });
-
-  const shortcutCapture = new ShortcutCapture({
-    isUseClipboard:true
-  })
-  globalShortcut.register('ctrl+shift+l', () => shortcutCapture.shortcutCapture())
 
   mainWindow.once('show',function(){
     if(status == true){
@@ -100,6 +95,16 @@ ipc.on('login',()=>
     frame: false
   });
 
+  const shortcutCapture = new ShortcutCapture({
+    isUseClipboard:true
+  });
+
+  globalShortcut.register('ctrl+shift+z', () => shortcutCapture.shortcutCapture());
+
+  shortcutCapture.on('capture', ({dataURL, bounds}) => 
+    clipboard.writeImage(nativeImage.createFromDataURL(dataURL))
+  )
+
   newWindow.once('ready-to-show', () => {
     mainWindow.close();
     newWindow.show();
@@ -129,6 +134,14 @@ ipc.on('login',()=>
 
 ipc.on('logout',(event, msg)=>{
   createWindow(true);
+  shortcutCapture.shortcutCapture();
+});
+
+ipc.on('screenshot',(event, msg)=>{
+  const shortcutCapture = new ShortcutCapture({
+    isUseClipboard:true
+  });
+  shortcutCapture.shortcutCapture();
 });
 
 let downloadpath;//下载路径
@@ -141,9 +154,6 @@ ipc.on('download', (event, args) => {
 });
 
 function loadModule () {
-
-  
-
   const files = glob.sync(path.join(__dirname, '../renderer/*.js'));
   files.forEach((file) => { require(file) })
 }

@@ -76,6 +76,30 @@ function UploadFile(file,info,callback){
 function Update(info){
     utility.currencyAjax('put','user/update',JSON.stringify(info),function(res){
         if(res.code === '000'){
+            var profile_item  = [
+                {
+                    "Tag": "Tag_Profile_IM_Nick",
+                    "Value": info['realName']
+                }
+            ];
+            if(info['picUrl']){
+                profile_item.push({
+                    "Tag": "Tag_Profile_IM_Image",
+                    "Value": info['picUrl']
+                });
+            }
+            var options = {
+                'ProfileItem': profile_item
+            };
+            webim.setProfilePortrait(
+                options,
+                function (resp) {
+                    loginInfo.identifierNick = info['realName'];
+                },
+                function (err) {
+                    alert(err.ErrorInfo);
+                }
+            );
             index.load();
         }
     });

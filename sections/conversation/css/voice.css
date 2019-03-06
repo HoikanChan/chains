@@ -6,11 +6,12 @@
 html,body{
     height: 100%;
 }
-button,span,input,textarea{
+button,span,input,textarea,i,audio{
     -webkit-app-region: no-drag;
 }
 .app-head-box{
     position: relative;
+    height: 100%;
 }
 .app-head{
     position: absolute;
@@ -18,6 +19,9 @@ button,span,input,textarea{
     right: 10px;
     top:5px;
     z-index: 500;
+}
+.app-vocie-body-box{
+    -webkit-app-region: no-drag;
 }
 .app-head>.app-head-console-item{
     text-align: center;

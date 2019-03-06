@@ -130,7 +130,7 @@ function initRTC(opts){
             pstnPhoneNumber:  $("#pstnPhoneNumber").val()
         });
     },function( error ){
-        console.error("init error", error)
+        console.log("init error", error)
     });
 
     // 远端流新增/更新

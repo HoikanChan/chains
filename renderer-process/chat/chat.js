@@ -1,3 +1,5 @@
+const {clipboard,shell} = require('electron');
+
 var chat = {};
 
 chat.index = '';
@@ -9,15 +11,44 @@ chat.event = ()=>{
 
     $('#send-message').click(function(){
        var msg = $('#send_msg_text').text();
+       var files = [];
+       $('#send_msg_text').find('img').not(".emoji_icon").each(function(i){
+          files.push(dataURLtoFile($(this).attr('src')));
+       });
        if(msg){
          onSendMsg();
        }
+       if(files.length > 0){
+        $.each(files,(i,item)=>{
+            var filesize = item.size;
+            if(checkPic(item,filesize,"2")){
+              uploadPic(item,1);
+            }
+        });
+        files = [];
+    }
     });
 
     $('#send_msg_text').keydown(function(event){
       var inputTxt = $(this);
       if (event && event.keyCode == 13 && !(event.ctrlKey)) {
-          onSendMsg();
+         var msg = $('#send_msg_text').text();
+         var files = [];
+         $('#send_msg_text').find('img').not(".emoji_icon").each(function(i){
+            files.push(dataURLtoFile($(this).attr('src')));
+         });
+         if(msg){
+           onSendMsg();
+         }
+         if(files.length > 0){
+          $.each(files,(i,item)=>{
+              var filesize = item.size;
+              if(checkPic(item,filesize,"2")){
+                uploadPic(item,1);
+              }
+          });
+          files = [];
+        }
           event.preventDefault();
           return false;
       }
@@ -26,6 +57,18 @@ chat.event = ()=>{
         inputTxt.html(inputTxt.html() + '<br>');
         return false;
       }
+
+      if(event.ctrlKey && event.keyCode  == 86) {   
+        let base64_image = clipboard.readImage().toDataURL();
+        let copy_text = clipboard.readText();
+        if(!clipboard.readImage().isEmpty()){
+          $(this).append($('<img>').css({"width":130,"height":60}).attr('src',base64_image));
+        }else{
+          $(this).append(copy_text);
+        }
+        return false;  
+      }
+
     });
 
     $('#check-file').click(function(){
@@ -138,6 +181,56 @@ chat.event = ()=>{
       chat.created();
     });
 
+    $('#app-chat-sendMail').click(function(){
+      utility.currencyGetAjax('email/loginToAlmailUrl',undefined,function(res){
+        if(res.code == '000'){
+          shell.openExternal(res.data);
+        }
+      });
+    });
+
+    $('.app-chat-right-group-info-item').on('click','.app-chat-right-group-name',function(){
+      let group_name = $(this).text();
+      var $input = $('<input>').addClass('app-chat-right-group-edit-name').attr('data-name',group_name).val(group_name);
+      $(this).parents('.app-chat-right-group-info-item').append($input);
+      $input.focus();
+      $(this).remove();
+    });
+
+    $('.app-chat-right-group-info-item').on('blur','.app-chat-right-group-edit-name',function(){
+      let old_group_name = $(this).attr('data-name');
+      let group_name = $(this).val();
+      $(this).parents('.app-chat-right-group-info-item').append('<p class="app-chat-right-group-name">'+group_name+'</p>');
+      $(this).remove();
+      if(old_group_name == group_name){
+        return false;
+      }
+      var options = {
+        'GroupId': selToID,
+        'Name': group_name,
+      };
+
+      webim.modifyGroupBaseInfo(
+        options,
+        function (resp) {
+          $('.app-chat-right-group-info-item').find('.app-chat-right-group-name').text(group_name);
+        },
+        function (err) {
+          console.log(err);
+        }
+      );
+
+    });
+
+    $('#app-chat-search-group-user-input').bind('input propertychange', function(){
+        // let name = $(this).val();
+
+        // var list = db.get('group.userList.'+selToID).find({'realName':name}).value();
+    })
+
+    $('#app-screenshot').click(function(){
+      ipcRenderer.send('screenshot');
+    });
 }
 
 chat.event();
@@ -224,3 +317,15 @@ chat.created = ()=>{
 
 }
 
+function dataURLtoFile(dataurl, filename) {
+  var arr = dataurl.split(',');
+  var mime = arr[0].match(/:(.*?);/)[1];
+  var bstr = atob(arr[1]);
+  var n = bstr.length; 
+  var u8arr = new Uint8Array(n);
+  while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  //转换成file对象
+  return new File([u8arr], filename, {type:mime});
+}

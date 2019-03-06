@@ -20,14 +20,15 @@
             </div>
             <div class="app-chat-left-footer">
                 <ul class="app-chat-console">
-                    <li id="check-file">
+                    <li title="文件选择" id="check-file">
                         <i class="icon iconfont icon-wenjian"></i>
                     </li>
                     <input id="upload_file" type="file" name="pic" />
-                    <li id="expression_btn"><i id="app-expression" class="icon iconfont icon-biaoqing"></i></li>
+                    <li title="表情" id="expression_btn"><i id="app-expression" class="icon iconfont icon-biaoqing"></i></li>
+                    <li title="截屏" id="screenshot"><i id="app-screenshot" class="icon iconfont icon-jieping"></i></li>
                     <ul class="app-chat-console-communication">
-                        <!-- <li id="app-voice"><i class="icon iconfont icon-group48" style="font-size:18px;"></i></li> -->
-                        <li id="app-video"><i class="icon iconfont icon-shexiangji"></i></li>
+                        <li title="语音通话" id="app-voice"><i class="icon iconfont icon-dianhua-" style="font-size:18px;"></i></li>
+                        <li title="视频通话" id="app-video"><i class="icon iconfont icon-shexiangtou"></i></li>
                     </ul>
                 </ul>
                 <div id="send_msg_text" class="app-chat-dialog" contenteditable="true">
@@ -38,54 +39,78 @@
                 </div>
             </div>
         </div>
-        <div class="app-chat-right-body">
+        <div class="app-chat-right-body app-chat-right-c2c-body">
             <div class="app-chat-friend-datum">
                 <img src="../assets/images/head.jpg" class="layui-circle" />
-                <p class="app-chat-friend-datum-name">张三</p>
-                <p class="app-chat-friend-datum-position">市场总监助理</p>
-                <p class="app-chat-friend-datum-introduce">主要负责协助市场总监制定公司的销售战略，全面负责公司产品的业务拓展</p>
+                <div>
+                    <p class="app-chat-friend-datum-title"><i class="icon iconfont icon-jieshao1"></i> 基本信息</p>
+                    <div class="app-chat-friend-datum-item"><i class="icon iconfont icon-zhanghaoquanxianguanli"></i><span class="app-chat-friend-datum-name"></span></div>
+                    <div class="app-chat-friend-datum-item"><i class="icon iconfont icon-bumen"></i><span class="app-chat-friend-datum-position"></span></div>
+                    <div class="app-chat-friend-datum-item"><i class="icon iconfont icon-dianhua-"></i><span class="app-chat-friend-datum-dianhua"></span></div>
+                </div>
+                <div class="app-chat-friend-introduce-box">
+                    <p class="app-chat-friend-datum-title"><i class="icon iconfont icon-jieshao"></i> 个人简介</p>
+                    <p class="app-chat-friend-datum-introduce"></p>
+                </div>
             </div>
-            <div class="app-chat-dialog-box" style="display:none;">
-                <div class="app-chat-dialog-seach">
+            <div class="app-chat-dialog-box">
+                <!-- <div class="app-chat-dialog-seach">
                     <input placeholder="搜索日期" />
                     <span><i class="layui-icon layui-icon-search"></i></span>
                 </div>
                 <ul class="app-chat-dialog-list">
-                    <!-- <li class="app-chat-dialog-item">
-                        <p class="app-chat-time">2019-2-11 <span class="app-chat-hour">12:00</span></p>
-                        <p class="app-chat-dialog-text">123456</p>
-                    </li>
                     <li class="app-chat-dialog-item">
                         <p class="app-chat-time">2019-2-11 <span class="app-chat-hour">12:00</span></p>
                         <p class="app-chat-dialog-text">123456</p>
                     </li>
-                    <li class="app-chat-dialog-item">
-                        <p class="app-chat-time">2019-2-11 <span class="app-chat-hour">12:00</span></p>
-                        <p class="app-chat-dialog-text">123456</p>
-                    </li> -->
+                </ul> -->
+                <ul class="app-chat-dialog-list-btn layui-low">
+                    <li title="用户信息" class="layui-col-xs4"><i class="icon iconfont icon-xinxi2"></i></li>
+                    <li title="聊天记录" class="layui-col-xs4"><i class="icon iconfont icon-liaotianjilu"></i></li>
+                    <li id="app-chat-sendMail" title="邮件发送" class="layui-col-xs4"><i class="icon iconfont icon-duanxinyoujianfasongguanli"></i></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="app-chat-right-body app-chat-right-group-body" style="display:none;">
+            <div class="app-chat-right-group-info">
+                <div class="app-chat-right-group-info-head" style="text-align: center;margin-bottom: 5px;">
+                    <img src="../assets/images/head.jpg" />
+                </div>
+                <ul class="app-chat-right-group-info-list">
+                    <li class="app-chat-right-group-info-item">
+                        <span>群名:</span>
+                        <p class="app-chat-right-group-name">群名称</p>
+                    </li>
+                    <li class="app-chat-right-group-info-item">
+                        <span>群公告:</span>
+                        <p class="app-chat-right-group-notice">暂无群公告</p>
+                    </li>
                 </ul>
             </div>
             <div class="app-chat-groupList-box">
                 <div class="app-chat-groupList-console-box">
                     <ul class="app-chat-groupList-console layui-low">
-                        <li id="app-chat-group-adduser" class="layui-col-xs6" title="添加群成员"><i class="icon iconfont icon-follow"></i></li>
-                        <li id="app-chat-group-quit" data-status="1" class="layui-col-xs6" title="退出该群"><i class="icon iconfont icon-qiehuanzuhu"></i></li>
+                        <li id="app-chat-group-adduser" class="layui-col-xs6" title="添加群成员">
+                            <i class="icon iconfont icon-add-friends_icon"></i><br>
+                            <span class="app-chat-groupList-console-name">添加群成员</span>
+                        </li>
+                        <li id="app-chat-group-quit" data-status="1" class="layui-col-xs6" title="退出该群">
+                            <i class="icon iconfont icon-qiehuanzuhu"></i><br>
+                            <span class="app-chat-groupList-console-name">退出该群</span>
+                        </li>
                     </ul>
                 </div>
-                <p style="padding-bottom:5px;">群成员:</p>
+                <p style="padding:10px 0 5px 5px;">群成员:</p>
+                <div class="app-chat-search-group-user">
+                    <input id="app-chat-search-group-user-input" placeholder="搜索" />
+                    <i class="icon iconfont icon-sousuo"></i>
+                </div>
                 <ul class="app-chat-groupList-list layui-low">
-                    <li class="app-chat-groupList-item layui-col-xs4">
+                    <!-- <li class="app-chat-groupList-item layui-col-xs4">
                         <img src="../assets/images/7.png" />
                         <p>张三</p>
-                    </li>
-                    <li class="app-chat-groupList-item layui-col-xs4">
-                        <img src="../assets/images/7.png" />
-                        <p>张三</p>
-                    </li>
-                    <li class="app-chat-groupList-item layui-col-xs4">
-                        <img src="../assets/images/7.png" />
-                        <p>张三</p>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

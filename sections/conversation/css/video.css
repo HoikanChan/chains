@@ -11,13 +11,14 @@ button,span,input,textarea{
 }
 .app-head-box{
     position: relative;
-    z-index: 500;
+    z-index: 1500;
 }
 .app-head{
     position: absolute;
     text-align: right;
     right: 10px;
     top:5px;
+    z-index: 1500;
 }
 .app-head>.app-head-console-item{
     text-align: center;
