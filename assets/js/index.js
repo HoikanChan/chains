@@ -20,6 +20,9 @@ $('<audio id="chatAudio" muted><source src="../assets/mp3/notify.ogg" type="audi
 
 index.load = ()=>{
 
+    $('body').on('dragstart','img',function(){return false;}); 
+    $('body').on("contextmenu",'img',function(){return false;});
+
     utility.currencyGetAjax('user/selectAllContacts',undefined,function(res){
         var arr = {};
         $.each(res.data,(i,item)=>{

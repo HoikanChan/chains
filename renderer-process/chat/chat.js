@@ -7,18 +7,22 @@ chat.index = '';
 chat.init = ()=>{
 }
 
+ipcRenderer.on('shortcut',(event,dataURL)=>{
+  $('#send_msg_text').append($('<img>').css({"width":130,"height":60}).attr('src',dataURL));
+});
+
 chat.event = ()=>{
 
     $('#send-message').click(function(){
        var msg = $('#send_msg_text').text();
        var files = [];
-       $('#send_msg_text').find('img').not(".emoji_icon").each(function(i){
+       $('#send_msg_text').find('img').not(".emoji_icon,.file_image").each(function(i){
           files.push(dataURLtoFile($(this).attr('src')));
        });
        if(msg){
          onSendMsg();
        }
-       if(files.length > 0){
+      if(files.length > 0){
         $.each(files,(i,item)=>{
             var filesize = item.size;
             if(checkPic(item,filesize,"2")){
@@ -26,7 +30,18 @@ chat.event = ()=>{
             }
         });
         files = [];
-    }
+      }
+      if(formData.formData){
+        $.each(formData.formData,(i,item)=>{
+            var filesize = item[0].size;
+            if(checkPic(item[0],filesize,'1')){
+                uploadPic(item[0],1);
+            }else{
+                uploadFile(item[0],1);
+            }
+        });
+        formData = [];
+      }
     });
 
     $('#send_msg_text').keydown(function(event){
@@ -34,7 +49,7 @@ chat.event = ()=>{
       if (event && event.keyCode == 13 && !(event.ctrlKey)) {
          var msg = $('#send_msg_text').text();
          var files = [];
-         $('#send_msg_text').find('img').not(".emoji_icon").each(function(i){
+         $('#send_msg_text').find('img').not(".emoji_icon,.file_image").each(function(i){
             files.push(dataURLtoFile($(this).attr('src')));
          });
          if(msg){
@@ -48,7 +63,18 @@ chat.event = ()=>{
               }
           });
           files = [];
-        }
+          }
+          if(formData.formData){
+            $.each(formData.formData,(i,item)=>{
+                var filesize = item[0].size;
+                if(checkPic(item[0],filesize,'1')){
+                    uploadPic(item[0],1);
+                }else{
+                    uploadFile(item[0],1);
+                }
+            });
+            formData = [];
+          }
           event.preventDefault();
           return false;
       }

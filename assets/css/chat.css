@@ -62,6 +62,7 @@
     border-radius: 3px;
     text-align: left;
     max-width: 240px;
+    user-select: text;
 }
 .app-chat-left-center-item p>img{
     position: relative;

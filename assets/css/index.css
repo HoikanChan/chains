@@ -20,7 +20,7 @@ html,body{
     height: 100%;
     overflow: hidden;
 }
-button,span,input,textarea{
+button,span,input,textarea,a{
     -webkit-app-region: no-drag;
 }
 textarea{

@@ -134,7 +134,6 @@ ipc.on('login',()=>
 
 ipc.on('logout',(event, msg)=>{
   createWindow(true);
-  shortcutCapture.shortcutCapture();
 });
 
 ipc.on('screenshot',(event, msg)=>{
@@ -142,6 +141,10 @@ ipc.on('screenshot',(event, msg)=>{
     isUseClipboard:true
   });
   shortcutCapture.shortcutCapture();
+
+  shortcutCapture.on('capture', ({dataURL, bounds}) => 
+    newWindow.webContents.send('shortcut',dataURL)
+  )
 });
 
 let downloadpath;//下载路径

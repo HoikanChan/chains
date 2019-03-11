@@ -2,17 +2,8 @@ const settings = require('electron-settings');
 
 $('.app-menu-list').on('click','li',function(){
     let listName = $(this).attr('data-section');
-    if(listName == 'app-addFriend'){
-        
-    }else{
-        ListShowMain(listName);
-        $(this).addClass('is-selected');
-    }
-
-    if(listName == 'chats-list'){
-        
-    }
-
+    ListShowMain(listName);
+    $(this).addClass('is-selected');
 })
 
 function ListShowMain(idNmae){
