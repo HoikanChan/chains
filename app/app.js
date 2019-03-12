@@ -46,6 +46,8 @@ layui.use(['form'], function(){
           }else{
             layer.msg(res.message, {icon: 10});
           }
+        },(err)=>{
+          layer.msg('网络错误', {icon: 10});
         })
 
         return false;

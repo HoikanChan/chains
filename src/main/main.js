@@ -5,14 +5,16 @@ const glob = require("glob");
 const path = require('path');
 const url = require('url');
 const ShortcutCapture =  require('shortcut-capture');
+const request = require('request');
+
+const appVersion = require('../../package.json').version;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
-let newWindow;
+let mainWindow,newWindow,downloadWin;
 
 function createWindow (status = false) {
-  // Create the browser window.
+  
   mainWindow = new BrowserWindow({
     width: 650, 
     height: 450,
@@ -50,7 +52,9 @@ function createWindow (status = false) {
   mainWindow.setMenu(null);
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-  require('devtron').install()
+  require('devtron').install();
+
+  webContents = mainWindow.webContents;
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -120,17 +124,11 @@ ipc.on('login',()=>
   // Open the DevTools.
   newWindow.webContents.openDevTools();
 
-  // Emitted when the window is closed.
   newWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    // window.localStorage.clear();
     newWindow = null;
   });
 
 });
-
 
 ipc.on('logout',(event, msg)=>{
   createWindow(true);
@@ -163,7 +161,70 @@ function loadModule () {
 
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 // 调用方发生事件.
-app.on('ready', createWindow)
+app.on('ready', ()=>{
+  request.get({
+      url:'http://company.zqyzk.com/api/v1/versions/getLastVersion?type=0',
+      json: true
+  },function(error, response, body){
+    if(body && body.code === "000"){
+      let data = body.data;
+      let version = appVersion.split('.');
+			let new_version = data.version.split('.');
+      if (version[0] < new_version[0] || version[1] < new_version[1] || version[2] < new_version[2]) {
+				downloadWindow(data);
+      }else{
+        createWindow();
+      }
+    }
+  });
+})
+
+function downloadWindow(data){
+  downloadWin = new BrowserWindow({
+    width: 500, 
+    height: 400,
+    minWidth: 500,
+    minHeight: 400,
+    maxWidth: 500,
+    maxHeight: 400,
+    show: false,
+    title:"真才企链（test-base 0.0.1）",
+    backgroundColor:"#fff",
+    frame: false
+  });
+
+  downloadWin.once('show',function(){
+      downloadWin.webContents.send('download-data',data);
+  })
+
+  downloadWin.once('ready-to-show', () => {
+    downloadWin.show();
+  });
+
+  // and load the index.html of the app.
+  downloadWin.loadURL(url.format({
+    pathname: path.join(__dirname, '../../app/download.html'),
+    protocol: 'file:'
+  }));
+
+  downloadWin.setMenu(null);
+  // Open the DevTools.
+  downloadWin.webContents.openDevTools();
+
+  downloadWin.on('closed', function () {
+    downloadWin = null;
+  });
+
+};
+
+ipc.on('download-quit',function(){
+  app.quit();
+});
+
+let sil = app.requestSingleInstanceLock();
+if (!sil) {
+    app.quit();
+}
 
 //关闭所有窗口后退出.
 app.on('window-all-closed', function () {

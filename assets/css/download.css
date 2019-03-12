@@ -1,0 +1,18 @@
+*{
+    font-family: "Microsoft YaHei";
+    -webkit-user-select: none; 
+    user-select: none;
+}
+.app-download-bottom{
+    margin: 15px;
+}
+.app-download-progress-box{
+    width: 95%;
+    margin: auto;
+}
+.app-download-update-string{
+    position: relative;
+    height: 160px;
+    padding: 5px 0 10px 10px;
+    overflow-x: hidden;
+}

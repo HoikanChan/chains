@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./app.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/download.css">
+    <link rel="stylesheet" type="text/css" href="../assets/icons/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../assets/layui/css/layui.css">
+</head>
+<body style="-webkit-app-region: drag;">
+    <div class="app-whole-box" id="container">
+        <div class="app-head-box" id="output">
+        </div>
+        <div id="app-download-wrap">
+            <div class="app-login-wrap-head">
+                <img src="../assets/images/top.png" alt="">
+            </div>
+            <div class="app-download-bottom">
+                <div class="app-download-bottom-content-box">
+                    <h2>应用更新</h2>
+                    <div class="app-download-update-string">更新说明</div>
+                </div>
+                <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="download">
+                    <div class="layui-progress-bar layui-bg-green" lay-percent="0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+    <script>if (typeof module === 'object') {window.jquery = window.jQuery = window.$ = module.exports;};</script>
+    <script src="../assets/layui/layui.all.js"></script>
+    <script src="../lib/utility/db.js"></script>
+    <script src="../lib/utility/update.js"></script>
+</body>
+</html>
