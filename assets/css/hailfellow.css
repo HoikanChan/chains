@@ -19,7 +19,7 @@
 .app-hailfellow-child-user-list,.app-hailfellow-child-customer-list{
     position: relative;
     overflow-x: hidden;
-    max-height: 345px;
+    max-height: 423px;
 }
 .app-hailfellow-list-item:hover,.app-hailfellow-child-user-list li:hover,
 .app-hailfellow-child-customer-list li:hover{

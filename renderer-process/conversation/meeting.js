@@ -99,6 +99,7 @@ function onRemoteStreamRemove( info ) {
     if( videoNode ){
         videoNode.srcObject = null;
         document.getElementById(info.videoId).parentElement.removeChild(videoNode);
+        $('#'+info.videoId).parents('.app-meeting-console-personnel-item').remove();
     }
 }
 

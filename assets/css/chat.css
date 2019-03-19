@@ -451,10 +451,10 @@
     position: absolute;
     background: #fff;
     right: 15px;
-    bottom: 155px;
+    bottom: 165px;
     padding: 5px;
     z-index: 20;
-    box-shadow: 0 0 1px #000;
+    border: 1px solid #e8e8e8;
 }
 .app-conversation-list li{
     padding: 5px;

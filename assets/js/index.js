@@ -1,14 +1,14 @@
-
 var index = {};
 const {ipcRenderer:ipc} = require('electron');
+const Mianwindow = remote.getCurrentWindow();
 
-$('#ne_setmin_btn').click(function(){
-    ipc.send('ne_min');
-});
-$('#ne_close_btn').click(function(){
-    ipc.send('ne_close');
-    ipc.send('nw_close');
-});
+// $('#ne_setmin_btn').click(function(){
+//     ipc.send('ne_min');
+// });
+// $('#ne_close_btn').click(function(){
+//     ipc.send('ne_close');
+//     ipc.send('nw_close');
+// });
 
 $(document).ready(function(){
     $(document).bind("contextmenu",function(e){
@@ -45,6 +45,14 @@ index.load = ()=>{
 
     $(document).on('click','.layui-layer-close,input,.app-chat-float p,i',function(event){
         event.stopPropagation();
+    });
+
+    $(document).on('click','#ne_setmin_btn',function(){
+        Mianwindow.minimize();
+    });
+    
+    $(document).on('click','#ne_close_btn',function(){
+        Mianwindow.destroy();
     });
 
     $('.app-index-company-list').on('click','li',function(){

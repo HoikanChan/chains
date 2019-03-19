@@ -61,10 +61,8 @@ textarea{
     display: inline-block;
     width: 30px;
     height: 20px;
-    line-height: 18px;
+    line-height: 20px;
     cursor: pointer;
-}
-.app-head>.app-head-console-item>i{
     font-size: 10px;
     font-weight: bold;
 }
@@ -279,6 +277,9 @@ textarea{
     white-space: nowrap;
     text-overflow: ellipsis;
     padding-top: 2px;
+}
+.js-menu-content{
+    height: 100%;
 }
 .js-content{
     position: absolute;

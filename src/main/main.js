@@ -72,11 +72,6 @@ ipc.on('min', e=> mainWindow.minimize());
 //关闭
 ipc.on('close', e=> mainWindow.close());
 
-//最小化
-ipc.on('ne_min', e=> newWindow.minimize());
-//关闭
-ipc.on('ne_close', e=> newWindow.close());
-
 ipc.on('reduction',()=>
 {
   mainWindow.setSize(650,450);
