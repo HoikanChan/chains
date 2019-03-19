@@ -20,11 +20,21 @@ html,body{
     height: 100%;
     overflow: hidden;
 }
-button,span,input,textarea,a{
+button,span,input,textarea,a,li{
     -webkit-app-region: no-drag;
 }
 textarea{
     resize:none;
+}
+.app-index-shade{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    display: none;
+    -webkit-app-region: no-drag;
 }
 .is-hidden{
     display: none;
@@ -43,19 +53,24 @@ textarea{
 .app-head{
     position: absolute;
     text-align: right;
-    right: 10px;
-    top:5px;
+    right: 2px;
+    top:0;
 }
 .app-head>.app-head-console-item{
     text-align: center;
     display: inline-block;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
+    width: 30px;
+    height: 20px;
+    line-height: 18px;
     cursor: pointer;
+}
+.app-head>.app-head-console-item>i{
+    font-size: 10px;
+    font-weight: bold;
 }
 .app-head>.app-head-console-item:hover{
     color: #4EEE94;
+    background: #F5F5F5;
 }
 .app-head>.app-head-console-item:nth-child(2):hover{
     background: rgba(238,44,44, 1);
@@ -70,27 +85,71 @@ textarea{
     height: 140px;
     background: #08979d;
 }
+.app-index-company-box{
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    color: #fff;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 3px;
+    -webkit-app-region: no-drag;
+}
+.app-index-company-box:hover{
+    background: rgba(255,255,255,0.2);
+}
+.app-index-company-list{
+    position: absolute;
+    top: 127px;
+    left: 30px;
+    background: #fff;
+    padding: 5px;
+    z-index: 20;
+    border-radius: 5px;
+    font-size: 12px;
+    box-shadow: 1px 1px 6px #333;
+}
+.app-index-company-list:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: #fff;
+    position: absolute;
+    left: 90px;
+    bottom: 100%;
+}
+.app-index-company-list>li{
+    padding: 5px;
+    cursor: pointer;
+}
+.app-index-company-list>li:hover{
+    background: #F5F5F5;
+}
 .app-index-userInfo{
     position: absolute;
     left: 20px;
-    top: 20px;
+    top: 30px;;
     overflow: hidden;
     -webkit-app-region: no-drag;
 }
 .app-index-user-portrait{
-    width: 65px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
     float: left;
 }
 .app-index-user-portrait>img{
-    height: 65px;
-    width: 65px;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
 }
 .app-index-user-nickname{
     float: left;
-    padding: 12px 5px 5px 15px;
+    padding: 10px 5px 5px 15px;
     color: #fff;
+}
+.app-index-user-nickname-text{
+    font-size: 16px;
 }
 .app-index-user-position{
     color: #08ced6;
@@ -214,11 +273,12 @@ textarea{
 .app-chats-list-item p{
     display: block;
     line-height: 18px;
-    font-size: 12px;
+    font-size: 11px;
     color: #999;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    padding-top: 2px;
 }
 .js-content{
     position: absolute;
@@ -227,6 +287,7 @@ textarea{
     width: 100%;
     height: 100%;
     overflow: hidden;
+    border-left: 1px solid #E3E3E3;
 }
 section{
     width: calc(100% - 240px);
@@ -243,6 +304,7 @@ section{
   pointer-events: none;
   visibility: hidden;
   opacity: 0;
+  width: 100%;
   /* transform: translateX(-20px);
   transition: visibility 0s .12s linear , opacity .12s ease-in, transform .12s ease-in; */
 }

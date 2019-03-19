@@ -112,20 +112,21 @@ search.load = ()=>{
         layer.close(search.index);
     });
 
-
     $('body').on('click','#app-search-createdGroup',function(){
-        search.created();
+        layer.prompt(
+            {title: '请输入群组名称', formType: 3}, 
+            function(name, index){
+                search.created(name, index);
+          });
     });
 
 }
 
-search.created = ()=>{
+search.created = (name, index)=>{
     var member_list = [];
-    var name = '';
     var images = [];
     $('#app-seach-checked-users').find('.app-search-friend-item').each(function(){
         member_list.push($(this).attr('data-id'));
-        name += $(this).find('.app-search-friend-name').text() + ',';
         images.push($(this).find('img').attr('src'));
     });
 
@@ -135,9 +136,9 @@ search.created = ()=>{
     }
 
     if (webim.Tool.trimStr(name).length > 8) {
-        name  = name.substr(0,8) + '...';
+        name  = name.substr(0,8);
     }
-    name = name.substring(0,name.length-1);
+
     canvas2d(images,function(imgurl){
         var cg_id = Math.floor(Math.random()*(5000-1000+1)+1000);
         var groupType = "Public";
@@ -154,6 +155,7 @@ search.created = ()=>{
         webim.createGroup(
             options,
             function(resp) {
+                layer.close(index);
                 layer.close(search.index);
                 layer.msg('创建群成功');
             },

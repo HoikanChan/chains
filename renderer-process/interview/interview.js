@@ -24,7 +24,7 @@ interview.event = ()=>{
       ipcRenderer.send('interviewer-complete',interview.userData);
     });
 
-    interview.load();
+    // interview.load();
 }
 
 interview.loadData = (id)=>{
@@ -104,10 +104,7 @@ interview.load = ()=>{
     });
   };
 
-
 }
-
-
 
 layui.use(['slider'], function(){
   var slider = layui.slider;

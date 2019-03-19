@@ -87,12 +87,12 @@ loadModule();
 ipc.on('login',()=>
 {
   newWindow = new BrowserWindow({
-    width: 850, 
-    height: 550,
-    minWidth: 850,
-    minHeight: 550,
-    maxWidth: 850,
-    maxHeight: 550,
+    width: 900, 
+    height: 600,
+    minWidth: 900,
+    minHeight: 600,
+    maxWidth: 900,
+    maxHeight: 600,
     show: false,
     title:"真才企链（test-base 0.0.1）",
     backgroundColor:"#fff",
@@ -104,10 +104,6 @@ ipc.on('login',()=>
   });
 
   globalShortcut.register('ctrl+shift+z', () => shortcutCapture.shortcutCapture());
-
-  shortcutCapture.on('capture', ({dataURL, bounds}) => 
-    clipboard.writeImage(nativeImage.createFromDataURL(dataURL))
-  )
 
   newWindow.once('ready-to-show', () => {
     mainWindow.close();
@@ -176,6 +172,8 @@ app.on('ready', ()=>{
         createWindow();
       }
     }
+  },function(){
+    createWindow();
   });
 })
 

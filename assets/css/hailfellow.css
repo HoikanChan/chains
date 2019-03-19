@@ -80,17 +80,19 @@
 .app-hailfellow-child-customer-name{
     height: 25px;
     line-height: 25px;
-    padding: 0 5px 0 5px;
+    padding: 0 5px 0 6px;
     font-size: 14px;
-    border: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f4f4f4;
 }
 .app-hailfellow-child-customer-name>span{
     float: right;
+    display: inline-block;
 }
 
 
 .app-hailfellow-box{
     height: 100%;
+    width: calc(100% - 240px);
     background: #f4f4f4;
 }
 .app-hailfellow-head{
@@ -267,8 +269,9 @@
     height: 27px;
     text-align: center;
     cursor: pointer;
-    margin: 5px 0 0 3px;
+    margin-left: 3px;
     border: 1px solid #C5C5C5;
+    border-bottom: 0;
 }
 .app-hailfellow-child-customer-console>.active,
 .app-hailfellow-child-group-console>.active{

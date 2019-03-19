@@ -2,8 +2,16 @@ const settings = require('electron-settings');
 
 $('.app-menu-list').on('click','li',function(){
     let listName = $(this).attr('data-section');
-    ListShowMain(listName);
-    $(this).addClass('is-selected');
+    if(listName == 'open-Mail'){
+        utility.currencyGetAjax('email/loginToAlmailUrl',undefined,function(res){
+            if(res.code == '000'){
+                shell.openExternal(res.data);
+            }
+        });
+    }else{
+        ListShowMain(listName);
+        $(this).addClass('is-selected');
+    }
 })
 
 function ListShowMain(idNmae){

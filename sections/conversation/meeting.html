@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../assets/icons/iconfont.css">
+        <link rel="stylesheet" type="text/css" href="./css/meeting.css">
+	</head>
+	<body style="-webkit-app-region: drag;background: #fff;">
+        <div class="app-metting-container">
+            <div class="app-metting-head">
+                <span>视频会议</span>
+                <div class="app-metting-head-console">
+                    <span id="nw_setmin_btn" class="app-head-console-item" title="最小化"><i class="icon iconfont icon-zuixiaohua"></i></span>
+                    <span id="nw_close_btn" class="app-head-console-item" title="关闭"><i class="icon iconfont icon-guanbi1"></i></span>
+                </div>
+            </div>
+            <div id="remote-video-wrap" class="app-meeting-video-container">
+
+            </div>
+            <div class="app-meeting-video-console">
+                <ul id="remote-video-console-list" class="app-meeting-console-personnel-list">
+                    <!-- <li class="app-meeting-console-personnel-item">
+                        <span class='app-meeting-video-identification'>我</span>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
+        <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+        <script src="../../lib/utility/db.js"></script>
+        <script src="../../lib/sdk/WebRTCAPI.min.js"></script>
+        <script src="../../lib/sdk/webim.js" ></script>
+        <script src="../../renderer-process/conversation/meeting.js" ></script>
+	</body>
+</html>

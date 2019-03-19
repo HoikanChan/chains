@@ -31,6 +31,29 @@ index.load = ()=>{
         });
     });
 
+    $('.app-index-company-box').click(function(event){
+        $('.app-index-company-list').show();
+        event.stopPropagation();
+    });
+
+    $(document).click(function(){
+        $('.app-chat-right-body').hide();
+        $('.app-index-company-list').hide();
+        $('.app-conversation-list').remove();
+        $('#send_msg_text').focus();
+    });
+
+    $(document).on('click','.layui-layer-close,input,.app-chat-float p,i',function(event){
+        event.stopPropagation();
+    });
+
+    $('.app-index-company-list').on('click','li',function(){
+        let company_text = $(this).text();
+        $('.app-index-company-box').text(company_text);
+        $('.app-index-company-list').hide();
+        $('.app-index-shade').hide();
+    });
+
     utility.currencyAjax('post','user/info2?userId='+im.identifier,undefined,function(res){
         var userInfo = res.data;
         $('.app-index-user-nickname-text').text(userInfo.realName);
@@ -53,4 +76,20 @@ index.load = ()=>{
 
 }
 
+index.loadCompany = ()=>{
+    $('.app-index-company-list').empty();
+    let html = '';
+    $.each(organs,(i,item)=>{
+        if(i == 0){
+            $('.app-index-company-box').text(item.organName);
+        }
+        html += `<li data-id='`+item.organId+`'>`+item.organName+`</li>`
+    });
+    $('.app-index-company-list').append(html);
+}
+
 index.load();
+index.loadCompany();
+
+
+

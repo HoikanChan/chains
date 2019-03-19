@@ -16,7 +16,10 @@ let option = {
 let newwin;
 ipcMain.on('add',(event,webim,selToID)=>
 {
-  inspect()
+   if(newwin != null){
+      newwin.focus();
+      return;
+   }
   newwin = new BrowserWindow(option)
 
   newwin.once('show',function(){
@@ -40,7 +43,10 @@ ipcMain.on('add',(event,webim,selToID)=>
 
 ipcMain.on('join',(event,RoomID)=>
 {
-   inspect()
+   if(newwin != null){
+      newwin.focus();
+      return;
+   }
    newwin = new BrowserWindow(option)
 
    newwin.once('show',function(){
@@ -63,7 +69,10 @@ ipcMain.on('join',(event,RoomID)=>
 
 ipcMain.on('voice-add',(event,webim,selToID)=>
 {
-   inspect()
+   if(newwin != null){
+      newwin.focus();
+      return;
+   }
    newwin = new BrowserWindow(option)
 
    newwin.once('show',function(){
@@ -87,7 +96,10 @@ ipcMain.on('voice-add',(event,webim,selToID)=>
 
 ipcMain.on('voice-join',(event,RoomID)=>
 {
-   inspect()
+   if(newwin != null){
+      newwin.focus();
+      return;
+   }
    newwin = new BrowserWindow(option)
 
    newwin.once('show',function(){
@@ -108,13 +120,78 @@ ipcMain.on('voice-join',(event,RoomID)=>
    newwin.on('closed',()=>{newwin = null});
 });
 
+ipcMain.on('GroupMeeting',(event,webim,members)=>
+{
 
-function inspect(){
    if(newwin != null){
       newwin.focus();
       return;
    }
-}
+
+   option['width'] = 800;
+   option['height'] = 600;
+   option['maxWidth'] = 800;
+   option['maxHeight'] = 600;
+   option['minWidth'] = 800;
+   option['minHeight'] = 600;
+
+   newwin = new BrowserWindow(option);
+
+   newwin.once('show',function(){
+      newwin.webContents.send('synchronous-webim', webim, members);
+   })
+
+   newwin.once('ready-to-show', () => {
+      newwin.show();
+   });
+   newwin.setMenu(null);
+
+   newwin.loadURL(url.format({
+      pathname: path.join(__dirname, '../../sections/conversation/meeting.html'),
+      protocol: 'file:'
+   }));
+
+   newwin.webContents.openDevTools();
+   newwin.on('closed',()=>{newwin = null});
+});
+
+
+
+ipcMain.on('meeting-join',(event,RoomID)=>
+{
+
+   if(newwin != null){
+      newwin.focus();
+      return;
+   }
+
+   option['width'] = 800;
+   option['height'] = 600;
+   option['maxWidth'] = 800;
+   option['maxHeight'] = 600;
+   option['minWidth'] = 800;
+   option['minHeight'] = 600;
+
+   newwin = new BrowserWindow(option);
+
+   newwin.once('show',function(){
+      newwin.webContents.send('synchronous-join', RoomID);
+   })
+
+   newwin.once('ready-to-show', () => {
+      newwin.show();
+   });
+   newwin.setMenu(null);
+
+   newwin.loadURL(url.format({
+      pathname: path.join(__dirname, '../../sections/conversation/meeting.html'),
+      protocol: 'file:'
+   }));
+
+   newwin.webContents.openDevTools();
+   newwin.on('closed',()=>{newwin = null});
+});
+
 
 //最小化
 ipcMain.on('nw_min', e=> newwin.minimize());

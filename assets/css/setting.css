@@ -1,6 +1,9 @@
 #app-setting{
     background: #f4f4f4;
 }
+.app-setting-box{
+    width: calc(100% - 240px);
+}
 .app-setting-body,.app-setting-footer{
     width: 90%;
     margin: 10px auto 10px auto;
