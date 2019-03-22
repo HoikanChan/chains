@@ -54,6 +54,12 @@
 .app-interview-box{
     height: 100%;
 }
+
+.app-interview-introduction-box{
+    height: 100%;
+    margin: 30px;
+}
+
 .app-interview-info-body{
     width: 90%;
     height: 260px;

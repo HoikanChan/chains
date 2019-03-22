@@ -17,7 +17,7 @@ interview.event = ()=>{
 
     $('.app-not-interview').on('click','.app-interview-user-item',function(){
       var id = $(this).attr('data-id');
-      interview.loadData(id);
+      //interview.loadData(id);
     });
 
     $('#resume-info').click(function(){

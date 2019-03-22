@@ -43,7 +43,7 @@ index.load = ()=>{
         $('#send_msg_text').focus();
     });
 
-    $(document).on('click','.layui-layer-close,input,.app-chat-float p,i',function(event){
+    $(document).on('click','.layui-layer-close,input,.app-chat-float p,.app-chat-console-communication',function(event){
         event.stopPropagation();
     });
 

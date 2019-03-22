@@ -1,57 +1,36 @@
 <template class="task-template">
     <section id="app-interview-section" class="section app-section u-category-system">
-        <div class="app-interview-box">
-            <div class="app-currency-title">
-                <span class="app-interview-username">张三</span>
+
+        <div class="app-interview-introduction-box">
+            <div class="app-interview-introduction-title">基本信息</div>
+            <div class="app-interview-introduction-basic-name">
+                <span>左大强</span>
+                <span>面试职位：系统架构师</span>
             </div>
-            <div class="app-interview-info-body">
-                <div class="app-interview-icon-box">
-                    <div><i class="icon iconfont icon-dianhua"></i></div>
-                    <span>发起视频面试</span>
-                </div>
+            <div class="app-interview-introduction-basic-info">
+                <p>男 / 30岁 / 北京 / 本科 / 5年工作经验</p>
+                <p>毕业学校：广东深圳大学</p>
+                <p>专业：计算机应用技术</p>
             </div>
-            <div class="app-interview-info-footer">
-                <div class="app-interview-info-title color2">
-                    个人简历
-                    <i id="resume-info" class="layui-icon layui-icon-tips" title="查看简历详情"></i>
-                    <span id="app-interview-score">评分</span>
-                </div>
-                <div class="layui-row">
-                    <ul class="app-interview-resume layui-col-xs6">
-                        <li><span class="app-interview-resume-title">姓名<i></i></span>:<span class="app-interview-resume-text app-interview-username">张三</span></li>
-                        <li><span class="app-interview-resume-title">应聘职位<i></i></span>:<span class="app-interview-resume-text app-interview-position">技术经理</span></li>
-                        <li><span class="app-interview-resume-title">出生年月<i></i></span>:<span class="app-interview-resume-text app-interview-birthday">1985年5月</span></li>
-                        <li><span class="app-interview-resume-title">最高学历<i></i></span>:<span class="app-interview-resume-text app-interview-education">本科</span></li>
-                        <li><span class="app-interview-resume-title">籍贯<i></i></span>:<span class="app-interview-resume-text app-interview-nativeplace">四川省成都市双流县</span></li>
-                        <li><span class="app-interview-resume-title">通讯地址<i></i></span>:<span class="app-interview-resume-text app-interview-address">四川省成都市双流县金华村</span></li>
-                    </ul>
-                    <ul class="app-interview-resume layui-col-xs6">
-                        <li>
-                            <span class="app-interview-resume-title">教育背景<i></i></span>:
-                            <div class="app-interview-resume-list app-interview-educationList">
-                                <!-- <p>2016年9月  四川大学计算机学院</p> -->
-                            </div>
-                        </li>
-                        <li>
-                            <span class="app-interview-resume-title">工作经历<i></i></span>:
-                            <div class="app-interview-resume-list app-interview-companyList">
-                                <!-- <p>2016年9月  xxx科技</p>
-                                <p>2016年9月  xxx科技</p> -->
-                            </div>
-                        </li>
-                        <li>
-                            <span class="app-interview-resume-title">证书<i></i></span>:
-                            <div class="app-interview-resume-list">
-                                <!-- <p>计算机等级证</p>
-                                <p>网络安全证...</p> -->
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+
+            <div class="app-interview-introduction-work-experience">
+                <div class="app-interview-introduction-title">基本信息</div>
+                <ul class="layui-timeline">
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">.</i>
+                        <div class="layui-timeline-content layui-text">
+                            <p>
+                                2017/10 - 2018 / 02                UI设计师主管	
+                                <br>亮金网络公司
+                                <br>互联网 / 电子商务 | 50-150人 | 民营公司
+                            </p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <div class="app-interview-score-box is-hidden">
+        <div class="app-interview-score-box">
             <div class="app-interview-slider-box">
                 <div>
                     <div class="app-interview-slider-name">1.专业知识<span id="app-interview-slider1">( 0 分)</span></div>

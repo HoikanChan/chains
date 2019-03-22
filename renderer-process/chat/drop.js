@@ -45,43 +45,7 @@ areas.addEventListener('drop', function(e) {
 }, false);
 
 areas.addEventListener('keydown', function(e) {
-    if(event.keyCode == 8){
-        if(formData){
-            window.setTimeout(() => {
-                var image_num = $('#send_msg_text').find('img').length;
-                if(image_num < formData.length){
-                    formData.pop();
-                }
-            },500);
-        }
-    }
-
-    if(event.keyCode ==13){
-        var msg = $('#send_msg_text').text();
-        if(msg){
-          onSendMsg();
-        }
-        if(formData){
-            $.each(formData,(i,item)=>{
-                var filesize = item[0].size;
-                if(checkPic(item[0],filesize,1)){
-                    uploadPic(item[0],1);
-                }else{
-                    uploadFile(item[0],1);
-                }
-            });
-            formData = [];
-        }
-    }
-
-    if(e.ctrltKey && e.keyCode == 67) {
-        console.log("c");
-    }
-
-    if(e.ctrltKey && e.keyCode == 86) {
-        console.log("v");
-    }
-
+    
 
 });
 
@@ -102,7 +66,6 @@ areas.addEventListener("paste", function (e) {
         ua.match(/Macintosh/i) && Number(ua.match(/Chrome\/(\d{2})/i)[1]) < 49){
         return;
     }
-    
     
     for(var i = 0; i < cbd.items.length; i++) {
         var item = cbd.items[i];
@@ -165,6 +128,9 @@ function filterFile(suffix) {
         case 'ppt':
             icon += 'ppt.png';
             break;
+        case 'pdf':
+            icon += 'pdf.png';
+            break;
         default:
             // 普通图片处理
             icon = 'other';
@@ -178,7 +144,7 @@ function filterFile(suffix) {
  * @param {Object} suffix 文件后缀
  */
 function filterImg(suffix) {
-    var icon = '../../images/img/';
+    var icon = '../assets/images/file_icon/';
     switch(suffix) {
         case 'bmp':
         case 'jpg':
@@ -224,14 +190,14 @@ function encapsulation(fileName, showFileIcon) {
     var ctx = c.getContext("2d");
     var img = new Image();
     img.onload = function() {
-        ctx.drawImage(img, 0, 0, 120, 120, 0, 0, 50, 50);
+        ctx.drawImage(img, 0, 0, 150, 150, 15, 15, 40, 40);
         ctx.save();
-        ctx.font = "12px Microsoft YaHei";
+        ctx.font = "normal 12px arial,sans-serif";
         var texts = textHandle(fileName, ctx);
         ctx.textAlign = texts[1];
         var fleft = (texts[1] == 'center') ? (c.width / 2) : 0;
-        ctx.fillText(texts[0], fleft, 63, 55);
-        var imgs = "<img data-type='file-type-img' class='file_image' src='" + c.toDataURL('image/png') + "' />";
+        ctx.fillText(texts[0], fleft, 65, 65);
+        var imgs = "<img data-type='file-type-img' class='file_image' data-name='"+fileName+"' src='" + c.toDataURL('image/png') + "' />";
         show('#send_msg_text', imgs);
     }
     img.src = showFileIcon;

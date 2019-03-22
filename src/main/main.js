@@ -52,7 +52,6 @@ function createWindow (status = false) {
   mainWindow.setMenu(null);
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-  require('devtron').install();
 
   webContents = mainWindow.webContents;
 

@@ -35,6 +35,17 @@ chat.event = ()=>{
         return false;
       }
 
+      if(event.keyCode == 8){
+        if(formData.formData){
+            setTimeout(function(){
+              var image_num = $('#send_msg_text').find('.file_image').length;
+              if(image_num < formData.formData.length){
+                  formData.formData.pop();
+              }
+            },10);
+        }
+      }
+
       if(event.ctrlKey && event.keyCode  == 86) {   
         let base64_image = clipboard.readImage().toDataURL();
         let copy_text = clipboard.readText();
@@ -65,19 +76,6 @@ chat.event = ()=>{
       }
     });
 
-    $("#send_msg_text").emoji({//消息表情
-      button: "#app-expression",
-      showTab: false,
-      animation: 'fade',
-      icons: [{
-          name: "QQ表情",
-          path: "../assets/images/qq/",
-          maxNum: 90,
-          file: ".png",
-          placeholder: "#qq_{alias}#"
-      }]
-    });
-
     $('body').on('click','#app-video',function(event){//视频通话
       event.stopPropagation();
       $('.app-conversation-list').remove();
@@ -92,6 +90,19 @@ chat.event = ()=>{
 
     $('#app-meeting').click(function(){
       chat.Choicepersonnel();
+    });
+
+    $("#send_msg_text").emoji({//消息表情
+        button: "#app-expression",
+        showTab: false,
+        animation: 'fade',
+        icons: [{
+            name: "QQ表情",
+            path: "../assets/images/qq/",
+            maxNum: 90,
+            file: ".png",
+            placeholder: "#qq_{alias}#"
+        }]
     });
 
     $('#app-chat-group-quit').click(function(){//解散\退出群组
