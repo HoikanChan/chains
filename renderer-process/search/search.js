@@ -114,8 +114,11 @@ search.load = ()=>{
 
     $('body').on('click','#app-search-createdGroup',function(){
         layer.prompt(
-            {title: '请输入群组名称', formType: 3}, 
+            {title: '请输入群组名称', formType: 3},
             function(name, index){
+                if (webim.Tool.trimStr(name).length > 8) {
+                    name  = name.substr(0,8);
+                }
                 search.created(name, index);
           });
     });

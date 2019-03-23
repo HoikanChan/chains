@@ -2,7 +2,7 @@
     background: #f4f4f4;
 }
 .app-setting-box{
-    width: calc(100% - 240px);
+    width: 100%;
 }
 .app-setting-body,.app-setting-footer{
     width: 90%;

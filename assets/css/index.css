@@ -285,7 +285,7 @@ textarea{
     position: absolute;
     left: 240px;
     top: 0;
-    width: 100%;
+    width: calc(100% - 240px);
     height: 100%;
     overflow: hidden;
     border-left: 1px solid #E3E3E3;

@@ -92,7 +92,7 @@
 
 .app-hailfellow-box{
     height: 100%;
-    width: calc(100% - 240px);
+    width: 100%;
     background: #f4f4f4;
 }
 .app-hailfellow-head{

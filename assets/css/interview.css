@@ -4,18 +4,24 @@
 .app-interview-list{
     -webkit-app-region: no-drag;
 }
+/* list */
+
 .app-interview-list-title{
     display: inline-block;
-    background: #FCFCFC;
+    background: #e8e8e8;
     width: 100%;
     height: 25px;
     line-height: 25px;
-    padding-left: 5px;
+    padding: 5px;
     cursor: pointer;
-    overflow: hidden;
+    border-bottom: 1px solid #F4F4F4;
 }
 .app-interview-list-title:hover{
     color: #08979d;
+}
+.app-interview-list-title>i{
+    float: right;
+    padding-right:15px;
 }
 .app-interview-user-item{
     position: relative;
@@ -47,86 +53,96 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.app-interview-icon{
-    float: right;
-    padding-right: 15px;
-}
-.app-interview-box{
-    height: 100%;
-}
+/* list end */
 
+/* introduction */
 .app-interview-introduction-box{
+    padding: 30px;
     height: 100%;
-    margin: 30px;
+    background: #f4f4f4;
+    overflow: hidden;
 }
-
-.app-interview-info-body{
-    width: 90%;
-    height: 260px;
-    background: #cbe1e2;
-    margin:  5px auto 10px auto;
-    text-align: center;
-}
-.app-interview-icon-box{
-    padding-top: 100px;
-    line-height: 30px;
-    color: #08979d;
-}
-.app-interview-icon-box i{
-    font-size: 35px;
-    cursor: pointer;
-}
-.app-interview-icon-box span{
+.app-interview-introduction-title{
     font-size: 14px;
-}
-.app-interview-info-footer{
-    width: 90%;
-    margin:  5px auto 10px auto;
-    -webkit-app-region: no-drag;
-}
-.app-interview-info-title{
-    font-size: 15px;
-}
-.app-interview-resume .app-interview-resume-title{
-    height:24px;
-    line-height:24px;
-    width:70px;
-    text-align:justify;
-    display:inline-block;
-    overflow:hidden;
-    vertical-align:middle;
-    padding: 5px 0 4px 0;
     color: #959595;
 }
-.app-interview-resume .app-interview-resume-title>i{
-    display:inline-block;
-    width:100%;
-    height:0;
+.app-interview-left-box{
+    width: 65%;
+    height: 550px;
+    float: left;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-app-region: no-drag;
 }
-.app-interview-resume-text{
+.app-interview-introduction-basic-name-box{
+    margin: 15px 0 15px 0;
+}
+.app-interview-introduction-basic-name{
+    font-size: 18px;
+}
+.app-interview-introduction-basic-position{
+    color: #08979d;
     padding-left: 5px;
 }
-#resume-info{
-    cursor: pointer;
+.app-interview-introduction-basic-info{
+    color: #535353;
+    font-size: 14px;
+    line-height: 30px;
 }
-#app-interview-score{
-    float: right;
-    cursor: pointer;
-}
-.app-interview-score-box{
-    -webkit-app-region: no-drag;
-    width: 80%;
-    margin: 50px auto 10px auto;
-}
-.app-interview-slider-name{
-    padding: 10px 0 10px 0; 
-}
-.app-interview-score-content{
+.app-interview-introduction-work-experience{
     margin-top: 25px;
 }
-.app-interview-score-content textarea{
-    width: 100%;
+.app-interview-introduction-timeline{
+    padding-top: 10px;
 }
-.app-interview-score-sub{
-    text-align: right;
+.app-interview-introduction-timeline p{
+    font-size: 13px;
 }
+.app-interview-introduction-timeline i{
+    font-size: 13px;
+    width: auto;
+    height: auto;
+    line-height: 1;
+    left: 0;
+}
+.app-interview-right-box{
+    width: 35%;
+    float: right;
+    height: 100%;
+}
+.app-interview-console-box{
+    position: fixed;
+    right: 30px;
+}
+.app-interview-right-icon{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 100%;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 21px;
+    margin-top: 10px;
+}
+.app-interview-conversation button{
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    border: 0;
+    color: #fff;
+    margin-top: 45px;
+    background: #08979d;
+    cursor: pointer;
+}
+.app-interview-evaluate{
+    margin-top: 15px;
+}
+.app-interview-evaluate-content{
+    font-size: 14px;
+    padding-top: 5px;
+    color: #535353;
+}
+/* introduction end */
+
