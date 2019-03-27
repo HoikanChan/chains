@@ -26,6 +26,48 @@ setting.event = ()=>{
 
     })
 
+    $('#app-setting-sub-password').click(function(){
+        let old_psd = $('#old_psd').val();
+        let new_psd = $('#new_psd').val();
+        let confirm_psd = $('#confirm_psd').val();
+
+        let new_password = new_psd.match(/^[\S]{6,12}$/);
+        let confirm_password = confirm_psd.match(/^[\S]{6,12}$/);
+        
+        if(!new_password){
+            layer.msg('新密码格式错误，请输入6-12位字符');
+            return false;
+        }
+
+        if(!confirm_password){
+            layer.msg('确认密码格式错误，请输入6-12位字符');
+            return false;
+        }
+
+        if(new_psd !== confirm_psd){
+            layer.msg('两次输入密码不一致');
+            return false;
+        }
+
+        let obj = {
+            oldPwd:old_psd,
+            newPwd:new_psd,
+            newPwd2:confirm_psd
+        }
+
+        utility.currencyAjax('post','user/resetPwd',JSON.stringify(obj),function(res){
+            if(res.code == '000'){
+                layer.msg('修改成功');
+                $('#old_psd').val('');
+                $('#new_psd').val('');
+                $('#confirm_psd').val('');
+            }else{
+                layer.msg(res.message);
+            }
+        });
+
+    });
+
 }
 
 setting.event();

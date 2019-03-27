@@ -128,13 +128,6 @@ ipcMain.on('GroupMeeting',(event,webim,members)=>
       return;
    }
 
-   option['width'] = 800;
-   option['height'] = 600;
-   option['maxWidth'] = 800;
-   option['maxHeight'] = 600;
-   option['minWidth'] = 800;
-   option['minHeight'] = 600;
-
    newwin = new BrowserWindow(option);
 
    newwin.once('show',function(){
@@ -142,6 +135,9 @@ ipcMain.on('GroupMeeting',(event,webim,members)=>
    })
 
    newwin.once('ready-to-show', () => {
+      newwin.setMaximumSize(800,600);
+      newwin.setMinimumSize(800,600);
+      newwin.setSize(800,600);
       newwin.show();
    });
    newwin.setMenu(null);

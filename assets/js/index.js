@@ -63,23 +63,25 @@ index.load = ()=>{
     });
 
     utility.currencyAjax('post','user/info2?userId='+im.identifier,undefined,function(res){
-        var userInfo = res.data;
-        $('.app-index-user-nickname-text').text(userInfo.realName);
-        $('.app-index-user-position').text(userInfo.position);
-        var introduce = (userInfo.introduce != null)?userInfo.introduce:'未设置';
-        $('.app-index-user-introduce').html('<p>'+introduce+'</p>');
-        var  picUrl = fileDomain + userInfo.picUrl;
-        if(userInfo.picUrl == null || userInfo.picUrl == ''){
-            picUrl = (userInfo.sex == '女')?'../assets/images/6.png':'../assets/images/7.png';
+        if(res.code === '000'){
+            var userInfo = res.data;
+            $('.app-index-user-nickname-text').text(userInfo.realName);
+            $('.app-index-user-position').text(userInfo.position);
+            var introduce = (userInfo.introduce != null)?userInfo.introduce:'未设置';
+            $('.app-index-user-introduce').html('<p>'+introduce+'</p>');
+            var  picUrl = fileDomain + userInfo.picUrl;
+            if(userInfo.picUrl == null || userInfo.picUrl == ''){
+                picUrl = (userInfo.sex == '女')?'../assets/images/6.png':'../assets/images/7.png';
+            }
+            userInfo.picUrl = picUrl;
+            $('.app-index-user-portrait img').attr('src',picUrl);
+            $('#app-setting-position').val(userInfo.position);
+            $('#app-setting-nickname').val(userInfo.realName);
+            $('#app-setting-phone').val(userInfo.phone);
+            $('#app-setting-introduce').val(introduce);
+            $('#app-setting-header').find('img').attr('src',picUrl);
+            db.set('user.details',res.data).write();
         }
-        userInfo.picUrl = picUrl;
-        $('.app-index-user-portrait img').attr('src',picUrl);
-        $('#app-setting-position').val(userInfo.position);
-        $('#app-setting-nickname').val(userInfo.realName);
-        $('#app-setting-phone').val(userInfo.phone);
-        $('#app-setting-introduce').val(introduce);
-        $('#app-setting-header').find('img').attr('src',picUrl);
-        db.set('user.details',res.data).write();
     });
 
 }

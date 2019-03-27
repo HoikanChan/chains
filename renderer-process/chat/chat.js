@@ -156,7 +156,7 @@ chat.event = ()=>{
         // let name = $(this).val();
     })
 
-    $('#app-screenshot').click(function(){//截图窗口
+    $('#app-screenshot').click(function(e){//截图窗口
       ipcRenderer.send('screenshot');
     });
 
@@ -199,8 +199,7 @@ chat.event = ()=>{
 
     $("#send_msg_text").mousedown(function(e){//鼠标事件
       if(e.which == 3){  // 1 = 鼠标左键 left; 2 = 鼠标中键; 3 = 鼠标右键
-          var x = e.originalEvent.x || e.originalEvent.layerX || 0;
-          var y = e.originalEvent.y || e.originalEvent.layerY || 0;
+          ipcRenderer.send('show-context-menu');
       }
     })
     
@@ -239,13 +238,23 @@ chat.event = ()=>{
 chat.event();
 
 chat.sendMsg = ()=>{//聊天消息发送
-  var msg = $('#send_msg_text').text();
+      var msg = $('#send_msg_text').html();
+      $('#send_msg_text .emoji_icon').each(function(i,item){
+        let code = $(item).attr('data-code');
+
+        let emoji_str = $(item).prop("outerHTML");
+        let rep_str = escapeJquery(emoji_str);
+        var reger=new RegExp(rep_str,"gm"); 
+
+        msg = msg.replace(reger,code);
+      });
+      console.log(msg);
        var files = [];
        $('#send_msg_text').find('img').not(".emoji_icon,.file_image").each(function(i){
           files.push(dataURLtoFile($(this).attr('src')));
        });
        if(msg){//文字消息
-         onSendMsg();
+         onSendMsg(msg);
        }
       if(files.length > 0){//图片文件
         $.each(files,(i,item)=>{
