@@ -4,15 +4,15 @@
     user-select: none;
 }
 *::-webkit-scrollbar{
-    width: 0;
-    z-index: 99;
+    width: 3px;
 }
 *::-webkit-scrollbar-thumb{
-    border-radius: 10px;
+    border-radius: 5px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #C1C1C1;
 }
 *::-webkit-scrollbar-track {
-    border-radius: 0;
+    border-radius: 5px;
 }
 html,body{
     margin: 0;
@@ -227,12 +227,6 @@ textarea{
     overflow-x: hidden;
     -webkit-app-region: no-drag;
 }
-.app-index-change-list-box::-webkit-scrollbar{
-    display: none;
-}
-.app-index-change-list-box:hover::-webkit-scrollbar{
-    display: block;
-}
 .app-chats-list{
     position: relative;
 }
@@ -244,7 +238,7 @@ textarea{
     border-bottom: 1px solid #F5F5F5;
 }
 .app-chats-list-item:hover{
-    background: #f4f4f4;
+    background: rgba(244,244,244,0.7);
 }
 .app-chats-list-item:hover .app-chats-delChat{
     display: block;
@@ -289,6 +283,7 @@ textarea{
     height: 100%;
     overflow: hidden;
     border-left: 1px solid #E3E3E3;
+    background: url(../images/ban.png) no-repeat center;
 }
 section{
     width: calc(100% - 260px);
