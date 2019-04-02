@@ -25,6 +25,8 @@ ipcMain.on('login',()=>{
     });
   
     globalShortcut.register('ctrl+shift+z', () => shortcutCapture.shortcutCapture());
+    globalShortcut.register('f12', () =>  $indexWin.openDevTools());
+
   
     $indexWin.once('ready-to-show', () => {
       mainWindow.mainWindow.close();
