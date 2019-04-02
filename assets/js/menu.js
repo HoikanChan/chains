@@ -44,13 +44,50 @@ function ListShowMain(idNmae){
             $('.app-setting-options-list').on("click",'.app-setting-option-item',function(){
                 const moduleId =  $(this).attr('id')
                 layer.closeAll()
-                ipcRenderer.send(`${moduleId}-open`, {userId: im.identifier,organs: organs[0]});
+
+                layer.open({
+                    type: 1,
+                    title: false,
+                    offset:['10%','20%'],
+                    skin: 'app-setting-modals-box', //样式类名
+                    shade: [0.1, '#fff'],
+                    closeBtn: 0, //不显示关闭按钮
+                    anim: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    content: $(`#app-setting-${moduleId}-box`).html()
+                });
+                setting.event();
+                if(moduleId == "userInfo"){
+                    initUserInfoModal();
+                }
+                // ipcRenderer.send(`${moduleId}-open`, {webimCtx: webim.ctx, userId: im.identifier,organs: organs[0]});
             })
             break;
     }
 
 }
+function initUserInfoModal() {
+    utility.currencyAjax('post','user/info2?userId='+im.identifier,undefined,function(res){
+        if(res.code === '000'){
+            var userInfo = res.data;
+            var  picUrl = fileDomain + userInfo.picUrl;
+            if(userInfo.picUrl == null || userInfo.picUrl == ''){
+                picUrl = (userInfo.sex == '女')?'../../assets/images/6.png':'../../assets/images/7.png';
+            }
+            userInfo.picUrl = picUrl;
+            $(`.app-setting-modals-box .app-setting-sex[title="${userInfo.sex}"]`).prop("checked","checked")
 
+            $('.app-setting-modals-box .app-index-user-portrait img').attr('src',picUrl);
+            $('.app-setting-modals-box #app-setting-nickname').val(userInfo.realName);
+            
+            $('.app-setting-modals-box #app-setting-position').text(userInfo.position);
+            $('.app-setting-modals-box #app-setting-company').text(organs[0].organName);
+            $('.app-setting-modals-box #app-setting-dept').text(userInfo.depts[0].deptName);
+            $('.app-setting-modals-box #app-setting-phone').text(userInfo.phone);
+            $('.app-setting-modals-box #app-setting-header').find('img').attr('src',picUrl);
+        }
+    });
+}
 function showList(idNmae){
     $('#'+idNmae).removeClass('is-hidden');
     $('#'+idNmae).addClass('is-show');

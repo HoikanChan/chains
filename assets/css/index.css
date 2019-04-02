@@ -234,6 +234,17 @@ textarea{
 .app-setting-options-box .app-setting-option-item:hover{
     background:#D4EDEE;
 }
+
+.app-setting-modals-box{
+    background: #fff;
+    left: 12px;
+    top: -136px;
+    border-radius: 5px;
+    width: 480px !important;
+    text-align: center;
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+    
+}
 /* menu > 个人设置 css */
 
 .app-index-bottom-menu{

@@ -1,87 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/css/setting.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/icons/iconfont.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/icons/iconfont1.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/layui/css/layui.css"
-    />
-
-    <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
-    <script>
-      if (typeof module === 'object') {
-        window.jQuery = window.$ = module.exports;
-      }
-    </script>
-    <script src="../../assets/layui/layui.all.js"></script>
-  </head>
-  <body>
+<template class="modal-template">
+  <div id="app-setting-resetPsw-box">
     <div class="app-setting-box">
       <div class="app-setting-body">
-          <div class="app-setting-footer">
-              <div class="app-setting-head">
-                  <div class="app-setting-head-title">
-                    <span>密码设置</span>
-                  </div>
-                  <div class="app-setting-head-icon">
-                    <span id="se_close_btn" class="app-head-console-item" title="关闭"
-                      ><i class="icon iconfont icon-guanbi1"></i
-                    ></span>
-                  </div>
-                </div>
-              <form class="app-setting-from app-setting-psw-from" action="">
-                  <div class="app-setting-form-item">
-                      <label class="app-setting-form-label">原密码</label>
-                      <div class="app-setting-input-block app-setting-psd">
-                      <input type="password" name="title" id="old_psd"  placeholder="" autocomplete="off" class="app-setting-from-input">
-                      </div>
-                  </div>
-                  <div class="app-setting-form-item">
-                      <label class="app-setting-form-label">新密码</label>
-                      <div class="app-setting-input-block app-setting-psd">
-                      <input type="password" name="title" id="new_psd" placeholder="" autocomplete="off" class="app-setting-from-input">
-                      </div>
-                      <div class="layui-form-mid layui-word-aux">（请输入6-12位字符）</div>
-                  </div>
-                  <div class="app-setting-form-item">
-                      <label class="app-setting-form-label">确认密码</label>
-                      <div class="app-setting-input-block app-setting-psd">
-                      <input type="password" name="title" id="confirm_psd" placeholder="" autocomplete="off" class="app-setting-from-input">
-                      </div>
-                      <div class="layui-form-mid layui-word-aux">（请输入同上面一致的密码）</div>
-                  </div>
-              </form>
-              <div class="app-setting-sub-box">
-                  <button id="app-setting-sub-password">修改并保存</button>
-              </div>
+        <div class="app-setting-footer">
+          <div class="app-setting-head">
+            <div class="app-setting-head-title">
+              <span>密码设置</span>
+            </div>
+            <div class="app-setting-head-icon">
+              <span id="se_close_btn" class="app-head-console-item" title="关闭"
+                ><i class="icon iconfont icon-guanbi1"></i
+              ></span>
+            </div>
           </div>
+          <form class="app-setting-from app-setting-psw-from" action="">
+            <div class="app-setting-form-item">
+              <label class="app-setting-form-label">原密码</label>
+              <div class="app-setting-input-block app-setting-psd">
+                <input
+                  type="password"
+                  name="title"
+                  id="old_psd"
+                  placeholder=""
+                  autocomplete="off"
+                  class="app-setting-from-input"
+                />
+              </div>
+            </div>
+            <div class="app-setting-form-item">
+              <label class="app-setting-form-label">新密码</label>
+              <div class="app-setting-input-block app-setting-psd">
+                <input
+                  type="password"
+                  name="title"
+                  id="new_psd"
+                  placeholder=""
+                  autocomplete="off"
+                  class="app-setting-from-input"
+                />
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                （请输入6-12位字符）
+              </div>
+            </div>
+            <div class="app-setting-form-item">
+              <label class="app-setting-form-label">确认密码</label>
+              <div class="app-setting-input-block app-setting-psd">
+                <input
+                  type="password"
+                  name="title"
+                  id="confirm_psd"
+                  placeholder=""
+                  autocomplete="off"
+                  class="app-setting-from-input"
+                />
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                （请输入同上面一致的密码）
+              </div>
+            </div>
+          </form>
+          <div class="app-setting-sub-box">
+            <button id="app-setting-sub-password">修改并保存</button>
+          </div>
+        </div>
       </div>
     </div>
-    <script src="../../lib/utility/db.js"></script>
-    <script src="../../lib/sdk/webim.js"></script>
-    <script src="../../lib/IM/group/group_manager.js"></script>
-    <script type="text/javascript">
-      const user = JSON.parse(db.get('user.info').value());
-      const Token = user.token;
-      const fileDomain = user.fileDomain;
-    </script>
-    <script src="../../lib/utility/utility.js"></script>
-    <script src="../../renderer-process/setting/setting.js"></script>
-  </body>
-</html>
+  </div>
+</template>
