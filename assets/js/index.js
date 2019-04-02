@@ -61,7 +61,7 @@ index.load = ()=>{
         $('.app-index-company-list').hide();
         $('.app-index-shade').hide();
     });
-
+   
     utility.currencyAjax('post','user/info2?userId='+im.identifier,undefined,function(res){
         if(res.code === '000'){
             var userInfo = res.data;

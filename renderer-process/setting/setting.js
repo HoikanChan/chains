@@ -1,22 +1,55 @@
+const {ipcRenderer:ipc} = require('electron');
 var setting = {};
 
-setting.event = ()=>{
+ipc.on('synchronous-webim',(event,{userId, organs})=>{
+    utility.currencyAjax('post','user/info2?userId='+userId,undefined,function(res){
+        if(res.code === '000'){
+            var userInfo = res.data;
+            $('.app-index-user-nickname-text').text(userInfo.realName);
+            var introduce = (userInfo.introduce != null)?userInfo.introduce:'未设置';
+            $('.app-index-user-introduce').html('<p>'+introduce+'</p>');
+            var  picUrl = fileDomain + userInfo.picUrl;
+            if(userInfo.picUrl == null || userInfo.picUrl == ''){
+                picUrl = (userInfo.sex == '女')?'../../assets/images/6.png':'../../assets/images/7.png';
+            }
+            userInfo.picUrl = picUrl;
+            $(`.app-setting-sex[title="${userInfo.sex}"]`).prop("checked","checked")
 
+            $('.app-index-user-portrait img').attr('src',picUrl);
+            $('#app-setting-nickname').val(userInfo.realName);
+            
+            $('#app-setting-position').text(userInfo.position);
+            $('#app-setting-company').text(organs.organName);
+            $('#app-setting-dept').text(userInfo.depts[0].deptName);
+            $('#app-setting-phone').text(userInfo.phone);
+            $('#app-setting-introduce').val(introduce);
+            $('#app-setting-header').find('img').attr('src',picUrl);
+        }
+    });
+});
+
+setting.event = ()=>{
+    $('#se_close_btn').click(function(){
+        ipc.send($('.app-setting-head-title').text().trim() === '个人信息'?'userInfowin_close':'resetPswWin_close');
+    });
     $('#app-setting-header').click(function(){
         $('#app-setting-header-input').click();
     })
-
+    $('#enable-nickname-edit').click(function(){
+        $('#app-setting-nickname').prop('disabled',false)
+        $('#app-setting-nickname').focus();
+    })
     $('#app-setting-header-input').change(function(e){
         selectImg($(this)[0]);
     });
-
+    // 提交个人信息
     $('#app-setting-update-btn').click(function(){
         var File = $('#app-setting-header-input')[0];
         var form = {};
 
         form['realName'] = $('#app-setting-nickname').val();
-        form['userPhone'] = $('#app-setting-phone').val();
-        form['introduce'] = $('#app-setting-introduce').val();
+        form['sex'] = $('.app-setting-sex:checked').val() === '男' ? 1 : 0;
+        // form['introduce'] = $('#app-setting-introduce').val();
 
         if(File.files[0]){
             UploadFile(File,form,Update);
@@ -25,7 +58,7 @@ setting.event = ()=>{
         }
 
     })
-
+    // 提交修改密码
     $('#app-setting-sub-password').click(function(){
         let old_psd = $('#old_psd').val();
         let new_psd = $('#new_psd').val();
