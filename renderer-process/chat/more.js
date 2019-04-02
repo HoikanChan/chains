@@ -81,7 +81,11 @@ more.event = ()=>{
           layer.prompt(
             {title: '请输入群组名称', formType: 3}, 
             function(name, index){
-              more.created(name,index);
+                if (webim.Tool.trimStr(name).length > 8) {
+                    layer.msg('群名称长度不可超过8位')
+                }else{
+                    more.created(name, index);
+                }
           });
         }
       });

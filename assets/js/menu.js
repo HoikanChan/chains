@@ -30,8 +30,9 @@ function ListShowMain(idNmae){
             ipcRenderer.send('logout');
             break;
         case 'app-setting':
-            let sectionId = `app-setting-section`;
-            document.getElementById(sectionId).classList.add('is-shown')
+            // let sectionId = `app-setting-section`;
+            // document.getElementById(sectionId).classList.add('is-shown')
+            
             break;
     }
 

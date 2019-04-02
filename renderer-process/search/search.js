@@ -117,9 +117,10 @@ search.load = ()=>{
             {title: '请输入群组名称', formType: 3},
             function(name, index){
                 if (webim.Tool.trimStr(name).length > 8) {
-                    name  = name.substr(0,8);
+                    layer.msg('群名称长度不可超过8位')
+                }else{
+                    search.created(name, index);
                 }
-                search.created(name, index);
           });
     });
 

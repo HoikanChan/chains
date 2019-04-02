@@ -25,7 +25,7 @@
 }
 .app-chat-left-center{
     position: relative;
-    height: 390px;
+    height: calc(100% - 205px);
     overflow-x: hidden;
     -webkit-app-region: no-drag;
     padding-bottom: 5px;
@@ -92,7 +92,7 @@
 }
 .app-chat-left-footer{
     position: relative;
-    height: calc(100% - 446px);
+    height: 145px;
     background: #EDEDED;
     -webkit-app-region: no-drag;
     border-top: 1px solid #E3E3E3;

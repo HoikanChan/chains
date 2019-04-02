@@ -3,12 +3,12 @@ const path = require('path');
 const url = require('url');
 
 let option = {
-    width: 300, 
-    height: 450,
-    maxWidth:300,
-    maxHeight:450,
-    minWidth:300,
-    minHeight:450,
+    width: 350, 
+    height: 500,
+    maxWidth:350,
+    maxHeight:500,
+    minWidth:350,
+    minHeight:500,
     show: false,
     backgroundColor:'#000',
     frame: false
@@ -122,7 +122,6 @@ ipcMain.on('voice-join',(event,RoomID)=>
 
 ipcMain.on('GroupMeeting',(event,webim,members)=>
 {
-
    if(newwin != null){
       newwin.focus();
       return;

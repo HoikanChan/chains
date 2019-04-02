@@ -1,14 +1,15 @@
 const {ipcRenderer:ipc} = require('electron');
+const Mianwindow = remote.getCurrentWindow();
 
 var rememberMe = false;
 var automatic = false;
 var login = false;
 
 $('#setmin_btn').click(function(){
-    ipc.send('min');
+    Mianwindow.minimize();
 });
 $('#close_btn').click(function(){
-    ipc.send('close');
+    Mianwindow.destroy();
 });
 
 layui.use(['form'], function(){

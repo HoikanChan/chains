@@ -75,7 +75,7 @@ textarea{
     color: #fff;
 }
 .app-index-left-box{
-    width: 240px;
+    width: 260px;
     height: 100%;
 }
 .app-index-left-head{
@@ -283,15 +283,15 @@ textarea{
 }
 .js-content{
     position: absolute;
-    left: 240px;
+    left: 260px;
     top: 0;
-    width: calc(100% - 240px);
+    width: calc(100% - 260px);
     height: 100%;
     overflow: hidden;
     border-left: 1px solid #E3E3E3;
 }
 section{
-    width: calc(100% - 240px);
+    width: calc(100% - 260px);
     height: 100%;
     overflow: hidden;
 }

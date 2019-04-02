@@ -1,5 +1,4 @@
-const electron = require('electron');   
-const {ipcRenderer} = electron;
+const {ipcRenderer}  = require('electron');   
 var selToID = '';
 var user = JSON.parse(db.get('user.info').value());
 var rtc = user.rtc;
@@ -8,10 +7,14 @@ var RTC;
 ipcRenderer.on('synchronous-voice',(event,webims,selToIDs)=>{
     webim.SetCTX(webims);
     selToID = selToIDs;
+    $('.app-vocie-body-img').append(`<img src="../../assets/images/head.jpg" class="layui-circle" width="95" />`);
+    $('#colse-voice').append(`<img  src="../../assets/images/gd.png" alt="">`);
     login();
 });
 
 ipcRenderer.on('synchronous-voice-join',(event,RoomID)=>{
+    $('.app-vocie-body-img').append(`<img src="../../assets/images/head.jpg" class="layui-circle" width="95" />`);
+    $('#colse-voice').append(`<img  src="../../assets/images/gd.png" alt="">`);
     join(RoomID);
 });
 

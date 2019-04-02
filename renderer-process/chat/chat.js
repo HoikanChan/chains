@@ -202,6 +202,15 @@ chat.event = ()=>{
           ipcRenderer.send('show-context-menu');
       }
     })
+
+    $(document).on('click','.app-msg-image',function(){
+      var imgUrls = $(this).attr('src');
+      var imgUrlArr = imgUrls.split("#"); //字符分割
+      var smallImgUrl = imgUrlArr[0]; //小图
+      var bigImgUrl = imgUrlArr[1]; //大图
+      var oriImgUrl = imgUrlArr[2]; //原图
+      ipcRenderer.send('inmage-show',bigImgUrl);
+    });
     
     $('body').on('click','#app-chat-meeting-check-users .app-meeting-personnel-item',function(){//视频会议邀请
       var status = $(this).attr('data-status');
@@ -248,7 +257,8 @@ chat.sendMsg = ()=>{//聊天消息发送
 
         msg = msg.replace(reger,code);
       });
-      console.log(msg);
+      imgReg = /<img.*?(?:>|\/>)/gi;
+      msg = msg.replace(imgReg,'');
        var files = [];
        $('#send_msg_text').find('img').not(".emoji_icon,.file_image").each(function(i){
           files.push(dataURLtoFile($(this).attr('src')));
@@ -267,14 +277,15 @@ chat.sendMsg = ()=>{//聊天消息发送
       }
       if(formData.formData){//拖拽文件
         $.each(formData.formData,(i,item)=>{
+          console.log(i,item);
             var filesize = item[0].size;
             if(checkPic(item[0],filesize,'1')){
                 uploadPic(item[0],1);
             }else{
                 uploadFile(item[0],1);
             }
-        });
-        formData.formData = [];
+          });
+          formData.formData.splice(0,formData.formData.length);
       }
 }
 
