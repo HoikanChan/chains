@@ -26,7 +26,10 @@
   <link rel="import" href="../sections/chat/chat.html">
   <link rel="import" href="../sections/hailfellow/hailfellow.html">
   <link rel="import" href="../sections/interview/interview.html">
-  <link rel="import" href="../sections/setting/setting.html">
+  <!-- <link rel="import" href="../sections/setting/setting.html"> -->
+  <link rel="import" href="../sections/setting/userInfo.html">
+  <link rel="import" href="../sections/setting/resetPsw.html">
+
 
 </head>
 <body style="-webkit-app-region: drag;">
@@ -84,7 +87,7 @@
   <main class="content js-content"></main>
 
   <div class="app-index-shade"></div>
-
+  <div class="app-modal" style="display:none;"></div>
   <!-- js start -->
   <script src="../lib/utility/db.js"></script>
   <script src="../lib/utility/utility.js"></script>
@@ -93,6 +96,8 @@
   <script src="../lib/lib/jquery.emoji.js"></script>
   <script src="../lib/utility/canvas_2d.js"></script>
   <script src="../assets/js/index.js"></script>
+
+
   <script>
         require('../assets/js/imports');
         require('../assets/js/nav');

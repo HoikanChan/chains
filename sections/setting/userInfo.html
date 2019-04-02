@@ -1,38 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/css/setting.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/icons/iconfont.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/icons/iconfont1.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../../assets/layui/css/layui.css"
-    />
-
-    <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
-    <script>
-      if (typeof module === 'object') {
-        window.jQuery = window.$ = module.exports;
-      }
-    </script>
-    <script src="../../assets/layui/layui.all.js"></script>
-  </head>
-  <body>
-    <div class="app-setting-box">
+<template class="modal-template">
+  <div id="app-setting-userInfo-box">
+    <div class="app-setting-box" >
       <div class="app-setting-body">
         <div class="app-setting-head">
           <div class="app-setting-head-title">
@@ -69,84 +37,14 @@
                 <input type="radio" name="sex" value="女" title="女" class="app-setting-sex"/>女
               </div>
             </div>
-            <!-- <div class="blank" style="margin-top: 64px;"></div>
-            <div class="app-setting-form-item">
-              <label class="app-setting-form-label">公司</label>
-              <div class="app-setting-input-block">
-                <input
-                  type="text"
-                  name="title"
-                  id="app-setting-company"
-                  placeholder="请输入联系电话"
-                  autocomplete="off"
-                  disabled="disabled"
-                  class="app-setting-from-input"
-                />
-              </div>
-            </div>
-            <div class="app-setting-form-item">
-              <label class="app-setting-form-label">部门</label>
-              <div class="app-setting-input-block">
-                <input
-                  type="text"
-                  name="title"
-                  id="app-setting-dept"
-                  placeholder="请输入联系电话"
-                  autocomplete="off"
-                  disabled="disabled"
-                  class="app-setting-from-input"
-                />
-              </div>
-            </div>
-            <div class="app-setting-form-item">
-              <label class="app-setting-form-label">职位</label>
-              <div class="app-setting-input-block">
-                <input
-                  type="text"
-                  name="title"
-                  id="app-setting-position"
-                  readonly="readonly"
-                  disabled="disabled"
-                  value="市场部经理"
-                  autocomplete="off"
-                  class="app-setting-from-input"
-                />
-              </div>
-            </div>
 
-            <div class="app-setting-form-item">
-              <label class="app-setting-form-label">电话</label>
-              <div class="app-setting-input-block">
-                <input
-                  type="text"
-                  name="title"
-                  id="app-setting-phone"
-                  placeholder="请输入联系电话"
-                  autocomplete="off"
-                  disabled="disabled"
-                  class="app-setting-from-input"
-                />
-              </div> -->
-            <!-- </div> -->
-            <!-- <div class="app-setting-form-item app-setting-form-text">
-              <label class="app-setting-form-label">职责简介</label>
-              <div class="app-setting-input-block">
-                <textarea
-                  name="desc"
-                  placeholder="请输入职责简介"
-                  id="app-setting-introduce"
-                  class="app-setting-from-textarea"
-                  rows="5"
-                ></textarea>
-              </div>
-            </div> -->
           </form>
           <div
             id="app-setting-header"
             class="app-setting-head-portrait layui-col-xs5"
           >
             <img
-              src="../../assets/images/head.jpg"
+              src="../assets/images/head.jpg"
               class="layui-circle"
               ondragstart="return false;"
             />
@@ -191,15 +89,6 @@
         </div>
       </div>
     </div>
-    <script src="../../lib/utility/db.js"></script>
-    <script src="../../lib/sdk/webim.js"></script>
-    <script src="../../lib/IM/group/group_manager.js"></script>
-    <script type="text/javascript">
-      const user = JSON.parse(db.get('user.info').value());
-      const Token = user.token;
-      const fileDomain = user.fileDomain;
-    </script>
-    <script src="../../lib/utility/utility.js"></script>
-    <script src="../../renderer-process/setting/setting.js"></script>
-  </body>
-</html>
+  </div>
+  <script src="../renderer-process/setting/setting.js"></script>
+</template>

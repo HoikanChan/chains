@@ -8,7 +8,14 @@ Array.prototype.forEach.call(links, (link) => {
     document.querySelector('.content').appendChild(clone)
   }else{
     template = link.import.querySelector('.menu-template')
-    let clone = document.importNode(template.content, true)
-    document.querySelector('.app-menu-content').appendChild(clone)
+    if(template){
+      let clone = document.importNode(template.content, true)
+      document.querySelector('.app-menu-content').appendChild(clone)
+    }else{
+      template = link.import.querySelector('.modal-template')
+
+      let clone = document.importNode(template.content, true)
+      document.querySelector('.app-modal').appendChild(clone)
+    }
   }
 })
