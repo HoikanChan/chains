@@ -12,6 +12,12 @@ interview.event = ()=>{
     });
 
     $('.app-interview-list-title').click(function(){
+        let icon_length = $(this).find('.transform-90').length;
+        if(icon_length){
+            $(this).find('i').removeClass('transform-90');
+        }else{
+            $(this).find('i').addClass('transform-90');
+        }
         $(this).parent().next().slideToggle();
     });
 

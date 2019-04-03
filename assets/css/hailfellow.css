@@ -57,14 +57,24 @@
 .app-hailfellow-child-department{
     padding:  0 5px 0 10px;
     height: 32px;
-    line-height: 31px;
+    line-height: 32px;
+    font-size: 13px;
+    color: #282828;
 }
 .app-hailfellow-child-department>span{
-    float: right;
+    color: #C5C5C5;
+    padding-right: 10px;
     display: inline-block;
 }
-.app-hailfellow-user-list{
-
+.app-hailfellow-child-department>span>i{
+    transition: transform 0.4s ease-out;
+    font-size: 12px;
+    display: block;
+}
+.app-hailfellow-child-customer-childlist .app-hailfellow-child-department{
+    padding:  0 5px 0 20px;
+    height: 32px;
+    line-height: 32px;
 }
 .app-hailfellow-user-item{
     position: relative;
@@ -81,15 +91,15 @@
     border-radius: 100%;
 }
 .app-hailfellow-child-customer-name{
-    height: 25px;
-    line-height: 25px;
+    height: 30px;
+    line-height: 30px;
     padding: 0 5px 0 6px;
     font-size: 14px;
     border-bottom: 1px solid #f4f4f4;
 }
 .app-hailfellow-child-customer-name>span{
-    float: right;
     display: inline-block;
+    padding-right: 20px;
 }
 
 .app-hailfellow-box{

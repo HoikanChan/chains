@@ -139,6 +139,7 @@ function chatsList(idNmae,callback){
     callback(idNmae);
 }
 function hailfellowList(idNmae,callback){
+    hailfellow.hailfellow.Menuload();
     callback(idNmae);
 }
 function interviewList(idNmae,callback){
