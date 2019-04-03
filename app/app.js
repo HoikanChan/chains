@@ -1,4 +1,4 @@
-const {ipcRenderer:ipc} = require('electron');
+const {ipcRenderer} = require('electron');
 const Mianwindow = remote.getCurrentWindow();
 
 var rememberMe = false;
@@ -11,6 +11,21 @@ $('#setmin_btn').click(function(){
 $('#close_btn').click(function(){
     Mianwindow.destroy();
 });
+
+const updateOnlineStatus = () => {
+  if(navigator.onLine){
+    $('.app-error-box').removeClass('slideInUp').hide();
+    $('#login-sub').removeAttr('disabled');
+  }else{
+    $('.app-error-box').addClass('slideInUp').show();
+    $('#login-sub').attr('disabled','disabled');
+  }
+}
+
+window.addEventListener('online',  updateOnlineStatus)
+window.addEventListener('offline',  updateOnlineStatus)
+
+updateOnlineStatus()
 
 layui.use(['form'], function(){
     var form = layui.form;
@@ -43,7 +58,7 @@ layui.use(['form'], function(){
               db.unset('user.auto').write();
             }
 
-            ipc.send('login');
+            ipcRenderer.send('login');
           }else{
             layer.msg(res.message, {icon: 10});
           }

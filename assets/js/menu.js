@@ -8,6 +8,8 @@ $('.app-menu-list').on('click','li',function(){
                 shell.openExternal(res.data);
             }
         });
+    }else if(listName == 'app-setting'){
+        showSetting();
     }else{
         ListShowMain(listName);
         $(this).addClass('is-selected');
@@ -29,43 +31,44 @@ function ListShowMain(idNmae){
         case 'app-logout':
             ipcRenderer.send('logout');
             break;
-        case 'app-setting':
-            layer.open({
-                type: 1,
-                title: false,
-                offset:['73%','12px'],
-                skin: 'app-setting-options-box', //样式类名
-                shade: [0.1, '#fff'],
-                closeBtn: 0, //不显示关闭按钮
-                anim: 2,
-                shadeClose: true, //开启遮罩关闭
-                content: '<ul class="app-setting-options-list"><li class="app-setting-option-item" id="userInfo">个人信息</li><li class="app-setting-option-item" id="resetPsw">设置密码</li><li class="app-setting-option-item">版本更新</li></ul>'
-            });
-            $('.app-setting-options-list').on("click",'.app-setting-option-item',function(){
-                const moduleId =  $(this).attr('id')
-                layer.closeAll()
-
-                layer.open({
-                    type: 1,
-                    title: false,
-                    offset:['10%','20%'],
-                    skin: 'app-setting-modals-box', //样式类名
-                    shade: [0.1, '#fff'],
-                    closeBtn: 0, //不显示关闭按钮
-                    anim: 2,
-                    shadeClose: true, //开启遮罩关闭
-                    content: $(`#app-setting-${moduleId}-box`).html()
-                });
-                setting.event();
-                if(moduleId == "userInfo"){
-                    initUserInfoModal();
-                }
-                // ipcRenderer.send(`${moduleId}-open`, {webimCtx: webim.ctx, userId: im.identifier,organs: organs[0]});
-            })
-            break;
     }
 
 }
+
+function showSetting()
+{
+    layer.open({
+        type: 1,
+        title: false,
+        offset:['73%','12px'],
+        skin: 'app-setting-options-box', //样式类名
+        shade: [0.1, '#fff'],
+        closeBtn: 0, //不显示关闭按钮
+        anim: 2,
+        shadeClose: true, //开启遮罩关闭
+        content: '<ul class="app-setting-options-list"><li class="app-setting-option-item" id="userInfo">个人信息</li><li class="app-setting-option-item" id="resetPsw">设置密码</li><li class="app-setting-option-item">版本更新</li></ul>'
+    });
+    $('.app-setting-options-list').on("click",'.app-setting-option-item',function(){
+        const moduleId =  $(this).attr('id')
+        layer.closeAll()
+        layer.open({
+            type: 1,
+            title: false,
+            offset:['10%','20%'],
+            skin: 'app-setting-modals-box', //样式类名
+            shade: [0.1, '#fff'],
+            closeBtn: 0, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            content: $(`#app-setting-${moduleId}-box`).html()
+        });
+        setting.event();
+        if(moduleId == "userInfo"){
+            initUserInfoModal();
+        }
+    })
+}
+
 function initUserInfoModal() {
     utility.currencyAjax('post','user/info2?userId='+im.identifier,undefined,function(res){
         if(res.code === '000'){
@@ -94,6 +97,14 @@ function showList(idNmae){
     if(idNmae == 'chats-list'){
         if(selToID != null){
             let sectionId = 'app-chat-section';
+            document.getElementById(sectionId).classList.add('is-shown');
+        }
+    }
+    if(idNmae == 'hailfellow-list'){
+        let sectionId = 'app-hailfellow-section';
+        let hai_id = $('#'+sectionId).attr('data-id');
+        console.log(hai_id);
+        if(hai_id){
             document.getElementById(sectionId).classList.add('is-shown');
         }
     }

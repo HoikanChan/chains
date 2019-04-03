@@ -93,6 +93,14 @@ hailfellow.event = ()=>{
         ipcRenderer.send('search-open',webim.ctx);
     });
 
+    $('#app-hailfellow-email-btn').click(function(){
+        utility.currencyGetAjax('email/loginToAlmailUrl',undefined,function(res){
+            if(res.code == '000'){
+                shell.openExternal(res.data);
+            }
+        });
+    })
+
 }
 
 hailfellow.loadGroup = ()=>{
@@ -133,21 +141,23 @@ hailfellow.loadUserInfo = (id,orgId,grouping)=>{
             if(data.picUrl == null || data.picUrl == ''){
                 picUrl = (data.sex == '女')?'../assets/images/6.png':'../assets/images/7.png';
             }
-            $('.app-hailfellow-friend-head').find('img').attr('src',picUrl);
+            $('.app-hailfellow-info-head').attr('src',picUrl);
             $.each(data,(i,item)=>{
                 if(item == null){
                     data[i] = '<span class="color1">未设置</span>';
                 }
             })
-            $('.app-hailfellow-friend-head').find('p').html(data.realName);
-            $('#app-hailfellow-position-text').html(data.position);
-            $('#app-hailfellow-department-text').html(grouping);
-            $('#app-hailfellow-introduce-text').html(data.introduce);
-            $('#app-hailfellow-grouping-text').html(grouping);
-            $('#app-hailfellow-nikename-text').html(data.realName);
-            $('#app-hailfellow-phone-text').html(data.phone);
-            $('#app-hailfellow-email-text').html(data.email);
+            // $('.app-hailfellow-friend-head').find('p').html(data.realName);
+            $('.app-hailfellow-info-position').html(data.position);
+            $('.app-hailfellow-info-department').html(grouping);
+            $('.app-hailfellow-info-introduce').html(data.introduce);
+            $('.app-hailfellow-info-sex').html(data.sex);
+            $('.app-hailfellow-info-grouping').html(grouping);
+            $('.app-hailfellow-info-name').html(data.realName);
+            $('.app-hailfellow-info-phone').html(data.phone);
+            $('.app-hailfellow-info-email').html(data.email);
 
+            $('#app-hailfellow-section').attr({'data-id':id});
             $('#app-hailfellow-send-btn').attr({'data-id':id,'data-name':data.realName,'data-pic':picUrl});
         }else{
             console.log(res);

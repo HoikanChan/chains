@@ -115,3 +115,15 @@ button,span,i,input,a{
     letter-spacing: 2px;
     cursor: pointer;
 }
+.app-error-box{
+    display: none;
+    background: red;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    text-align: center;
+}

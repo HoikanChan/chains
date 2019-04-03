@@ -1,3 +1,6 @@
+#app-hailfellow-section{
+    background: #F4F4F4;
+}
 .app-hailfellow-list-box{
     position: relative;
     height: 100%;
@@ -89,131 +92,79 @@
     display: inline-block;
 }
 
-
 .app-hailfellow-box{
-    height: 100%;
-    width: 100%;
-    background: #f4f4f4;
+    height: 600px;
+    width: 650px;
+    background: url('../images/hov_ban.png') no-repeat center;
+    background-size: 100%;
+    margin: auto;
 }
 .app-hailfellow-head{
-    padding: 20px;
+    width: 500px;
+    text-align: right;
+    margin: auto;
+    padding-top: 70px;
+}
+.app-hailfellow-head>span{
+    padding-right: 30px;
     font-size: 17px;
-    font-weight: normal;
-	font-stretch: normal;
 }
-.app-hailfellow-middle,.app-hailfellow-footer{
-    position: relative;
-    width: 80%;
-    margin: 5px auto 5px auto;
+.app-hailfellow-head>img{
+    width: 105px;
+    height: 105px;
+    border-radius: 100%;
+    border: 1px solid #f4f4f4; 
 }
-.app-hailfellow-footer{
-    margin: 25px auto 5px auto;
+.app-hailfellow-content{
+    width: 500px;
+    margin: auto;
 }
 .app-hailfellow-title{
-    font-size: 15px;
-    color: #08979d;
+    padding-top: 30px;
+    color: #FF5400;
+    font-size: 17px;
     font-weight: bold;
 }
-.app-hailfellow-friendInfo{
-    margin-top: 10px;
-    -webkit-app-region: no-drag;
+.app-hailfellow-info{
+    padding-top: 40px;
+    overflow: hidden;
 }
-.app-hailfellow-friendInfo li:nth-child(3) .app-hailfellow-text{
-    padding: 5px 0 3px 0;
+.app-hailfellow-info-item{
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
 }
-.app-hailfellow-text{
-    height:24px;
-    line-height:24px;
-    width:70px;
-    text-align:justify;
-    display:inline-block;
-    overflow:hidden;
-    vertical-align:middle;
-    padding: 5px 0 5px 0;
-    color: #959595;
+.app-hailfellow-info-item>div{
+    width: 60px;
+    text-align: justify; 
+    float: left;
 }
-.app-hailfellow-text>i{
-    display:inline-block;
-    width:100%;
-    height:0;
-}
-.app-hailfellow-introduce{
-    position: relative;
-    padding: 0 0 5px 10px;
-    width: 320px;
-    height: 70px;
-    overflow-x: hidden;
-}
-.app-hailfellow-friend-head{
-    position: absolute;
-    left: auto;
-    right: 0;
-    top: 20px;
-    text-align: center;
-}
-.app-hailfellow-friend-head>img{
-    width: 90px;
-    height: 90px;
-    border-radius: 100%;
-}
-.app-hailfellow-friend-head>p{
-    padding: 5px 0 5px 0;
-    font-size: 17px;
-    color: #282828;
-}
-.app-hailfellow-introduce>p{
+.app-hailfellow-info-item>div>span:after { 
+    content: ""; 
+    display: inline-block; 
+    overflow: hidden; 
     width: 100%;
-    word-wrap:break-word;
-    word-break:break-all;
 }
-.app-hailfellow-datum{
-    padding-top: 10px;
+.app-hailfellow-console-box{
+    padding-top: 25px;
+    text-align: right;
 }
-.app-hailfellow-datum .app-hailfellow-text{
-    width: auto;
-}
-#app-hailfellow-edit{
-    vertical-align: middle;
-    padding-left: 5px;
-    font-size: 18px;
-    cursor: pointer;
-}
-#app-hailfellow-edit:hover{
-    color: #08979d;
-}
-.app-hailfellow-buttons{
-    position: absolute;
-    bottom: 45px;
-    right: 0;
-}
-.app-hailfellow-buttons li{
-    margin: 15px 0 15px 0;
-}
-.app-hailfellow-buttons li>button{
-    width: 175px;
-    height: 25px;
+.app-hailfellow-console-box button{
     border: 0;
-    border-radius: 3px;
-    background: #08979d;
     color: #fff;
-    cursor: pointer;
-}
-.app-hailfellow-buttons li>button:hover,.app-hailfellow-send-box button:hover{
-    background: rgba(8,151,157,0.8);
-}
-.app-hailfellow-send-box{
-    text-align: center;
-    padding-top: 15px;
-}
-.app-hailfellow-send-box button{
-    width: 325px;
     height: 30px;
-    border: 0;
-    border-radius: 3px;
-    background: #08979d;
-    color: #fff;
+    width: 125px;
     cursor: pointer;
 }
+.app-hailfellow-console-box button:nth-child(1){
+    background: #FFB800;
+}
+.app-hailfellow-console-box button:nth-child(2){
+    background: #08979d;
+}
+
+
+/** list **/
 .app-hailfellow-child-group-list .app-hailfellow-user-item:hover{
     background: #f4f4f4;
     cursor: pointer;
