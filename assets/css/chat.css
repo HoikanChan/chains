@@ -31,10 +31,8 @@
     padding-bottom: 5px;
 }
 .app-chat-left-center::-webkit-scrollbar{
-    display: none;
-}
-.app-chat-left-center:hover::-webkit-scrollbar{
     display: block;
+    width: 5px;
 }
 .app-chat-left-center-item{
     position: relative;

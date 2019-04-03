@@ -8,6 +8,8 @@ $('.app-menu-list').on('click','li',function(){
                 shell.openExternal(res.data);
             }
         });
+    }else if(listName == 'app-setting'){
+        settingPopup();
     }else{
         ListShowMain(listName);
         $(this).addClass('is-selected');
@@ -29,12 +31,10 @@ function ListShowMain(idNmae){
         case 'app-logout':
             ipcRenderer.send('logout');
             break;
-        case 'app-setting':
-            settingPopup();
-            break;
     }
 
 }
+
 function settingPopup() {
     layer.open({
         type: 1,
@@ -75,6 +75,7 @@ function settingPopup() {
         }
     })
 }
+
 function initUserInfoModal() {
     utility.currencyAjax('post','user/info2?userId='+im.identifier,undefined,function(res){
         if(res.code === '000'){
@@ -97,12 +98,20 @@ function initUserInfoModal() {
         }
     });
 }
+
 function showList(idNmae){
     $('#'+idNmae).removeClass('is-hidden');
     $('#'+idNmae).addClass('is-show');
     if(idNmae == 'chats-list'){
         if(selToID != null){
             let sectionId = 'app-chat-section';
+            document.getElementById(sectionId).classList.add('is-shown');
+        }
+    }
+    if(idNmae == 'hailfellow-list'){
+        let sectionId = 'app-hailfellow-section';
+        let hai_id = $('#'+sectionId).attr('data-id');
+        if(hai_id){
             document.getElementById(sectionId).classList.add('is-shown');
         }
     }
