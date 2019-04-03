@@ -9,7 +9,7 @@ $('.app-menu-list').on('click','li',function(){
             }
         });
     }else if(listName == 'app-setting'){
-        showSetting();
+        settingPopup();
     }else{
         ListShowMain(listName);
         $(this).addClass('is-selected');
@@ -35,8 +35,7 @@ function ListShowMain(idNmae){
 
 }
 
-function showSetting()
-{
+function settingPopup() {
     layer.open({
         type: 1,
         title: false,
@@ -51,6 +50,12 @@ function showSetting()
     $('.app-setting-options-list').on("click",'.app-setting-option-item',function(){
         const moduleId =  $(this).attr('id')
         layer.closeAll()
+        if(moduleId == "userInfo"){
+            initUserInfoModal();
+        }
+        const link = document.querySelector(`link#${moduleId}[rel="import"]`);
+        const template = link.import.querySelector('.modal-template')
+        let clone = document.importNode(template.content, true)
         layer.open({
             type: 1,
             title: false,
@@ -60,8 +65,10 @@ function showSetting()
             closeBtn: 0, //不显示关闭按钮
             anim: 2,
             shadeClose: true, //开启遮罩关闭
-            content: $(`#app-setting-${moduleId}-box`).html()
+            content: '<div class="setting-modal"></div>'
         });
+         document.querySelector('.setting-modal').appendChild(clone)
+
         setting.event();
         if(moduleId == "userInfo"){
             initUserInfoModal();
