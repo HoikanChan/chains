@@ -89,11 +89,11 @@ function initUserInfoModal() {
 
             $('.app-setting-modals-box .app-index-user-portrait img').attr('src',picUrl);
             $('.app-setting-modals-box #app-setting-nickname').val(userInfo.realName);
+            $('.app-setting-modals-box #app-setting-phone').val(userInfo.contactPhone);
             
             $('.app-setting-modals-box #app-setting-position').text(userInfo.position);
             $('.app-setting-modals-box #app-setting-company').text(organs[0].organName);
             $('.app-setting-modals-box #app-setting-dept').text(userInfo.depts[0].deptName);
-            $('.app-setting-modals-box #app-setting-phone').text(userInfo.phone);
             $('.app-setting-modals-box #app-setting-header').find('img').attr('src',picUrl);
         }
     });
