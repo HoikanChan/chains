@@ -77,7 +77,7 @@ index.load = ()=>{
             $('.app-index-user-portrait img').attr('src',picUrl);
             $('#app-setting-position').val(userInfo.position);
             $('#app-setting-nickname').val(userInfo.realName);
-            $('#app-setting-phone').val(userInfo.phone);
+            $('#app-setting-phone').val(userInfo.contactPhone);
             $('#app-setting-introduce').val(introduce);
             $('#app-setting-header').find('img').attr('src',picUrl);
             db.set('user.details',res.data).write();

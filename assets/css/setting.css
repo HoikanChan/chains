@@ -72,7 +72,7 @@ body {
   padding: 9px 2px;
   font-weight: 400;
   line-height: 20px;
-  width: 55px;
+  width: 60px;
   text-align: left;
 }
 .app-setting-input-block {
@@ -121,11 +121,11 @@ body {
   background: rgba(8, 151, 157, 0.8);
 }
 /* 个人信息模块 */
-#app-setting-nickname {
-  width: 40%;
+#app-setting-nickname,#app-setting-phone {
+  width: 65%;
   background-color: #fff !important;
 }
-#enable-nickname-edit {
+#enable-nickname-edit,#enable-phone-edit  {
   cursor: pointer;
 }
 .app-setting-company-info {
@@ -165,7 +165,6 @@ body {
 .crop-modal{
   height: 100%;
   overflow-y: hidden;
-  -webkit-app-region: no-drag;
 }
 .avatar-crop-container{
   height: 100%;

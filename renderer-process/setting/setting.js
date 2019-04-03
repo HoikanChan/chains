@@ -1,4 +1,6 @@
-var setting = {};
+var setting = {
+    cropImgData: null
+};
 
 
 setting.event = ()=>{
@@ -13,6 +15,10 @@ setting.event = ()=>{
         $('#app-setting-nickname').prop('disabled',false)
         $('#app-setting-nickname').focus();
     })
+    $('#enable-phone-edit').click(function(){
+        $('#app-setting-phone').prop('disabled',false)
+        $('#app-setting-phone').focus();
+    })
     $('#app-setting-header-input').change(function(e){
         selectImg($(this)[0]);
     });
@@ -23,9 +29,15 @@ setting.event = ()=>{
 
         form['realName'] = $('#app-setting-nickname').val();
         form['sex'] = $('.app-setting-sex:checked').val();
-        // form['introduce'] = $('#app-setting-introduce').val();
+        form['contactPhone'] = $('#app-setting-phone').val();
 
-        if(File.files[0]){
+        
+        if(!form['contactPhone'].match(/^1\d{10}$/)){
+            layer.msg('请输入正确手机号');
+            return false;
+        }
+        
+        if(setting.cropImgData){
             UploadFile(File,form,Update);
         }else{
             Update(form);
@@ -101,7 +113,7 @@ function selectImg(file) {
     reader.onload = function (evt) {
         var replaceSrc = evt.target.result;
         //更换cropper的图片
-        $('#app-setting-header img').prop('src', replaceSrc);
+        // $('#app-setting-header img').prop('src', replaceSrc);
         const link = document.querySelector('link#cropAvatar[rel="import"]');
         const template = link.import.querySelector('.modal-template')
         let clone = document.importNode(template.content, true)
@@ -121,6 +133,7 @@ function selectImg(file) {
         $('#avatar-image').prop('src', replaceSrc);
         var options =
         {
+            // type: 1,
             thumbBox: '.thumbBox',
             spinner: '.spinner',
             imgSrc: replaceSrc
