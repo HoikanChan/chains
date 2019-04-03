@@ -2,28 +2,28 @@ var setting = {};
 
 
 setting.event = ()=>{
-    $('.app-setting-modals-box #se_close_btn').click(function(){
+    $('#se_close_btn').click(function(){
         // ipc.send($('.app-setting-head-title').text().trim() === '个人信息'?'userInfowin_close':'resetPswWin_close');
         layer.closeAll();
     });
-    $('.app-setting-modals-box #app-setting-header').click(function(){
-        $('.app-setting-modals-box #app-setting-header-input').click();
+    $('#app-setting-header').click(function(){
+        $('#app-setting-header-input').click();
     })
-    $('.app-setting-modals-box #enable-nickname-edit').click(function(){
-        $('.app-setting-modals-box #app-setting-nickname').prop('disabled',false)
-        $('.app-setting-modals-box #app-setting-nickname').focus();
+    $('#enable-nickname-edit').click(function(){
+        $('#app-setting-nickname').prop('disabled',false)
+        $('#app-setting-nickname').focus();
     })
-    $('.app-setting-modals-box #app-setting-header-input').change(function(e){
+    $('#app-setting-header-input').change(function(e){
         selectImg($(this)[0]);
     });
     // 提交个人信息
-    $('.app-setting-modals-box #app-setting-update-btn').click(function(){
-        var File = $('.app-setting-modals-box #app-setting-header-input')[0];
+    $('#app-setting-update-btn').click(function(){
+        var File = $('#app-setting-header-input')[0];
         var form = {};
 
-        form['realName'] = $('.app-setting-modals-box #app-setting-nickname').val();
-        form['sex'] = $('.app-setting-modals-box .app-setting-sex:checked').val() === '男' ? 1 : 0;
-        // form['introduce'] = $('.app-setting-modals-box #app-setting-introduce').val();
+        form['realName'] = $('#app-setting-nickname').val();
+        form['sex'] = $('.app-setting-sex:checked').val();
+        // form['introduce'] = $('#app-setting-introduce').val();
 
         if(File.files[0]){
             UploadFile(File,form,Update);
@@ -33,10 +33,10 @@ setting.event = ()=>{
 
     })
     // 提交修改密码
-    $('.app-setting-modals-box #app-setting-sub-password').click(function(){
-        let old_psd = $('.app-setting-modals-box #old_psd').val();
-        let new_psd = $('.app-setting-modals-box #new_psd').val();
-        let confirm_psd = $('.app-setting-modals-box #confirm_psd').val();
+    $('#app-setting-sub-password').click(function(){
+        let old_psd = $('#old_psd').val();
+        let new_psd = $('#new_psd').val();
+        let confirm_psd = $('#confirm_psd').val();
 
         let new_password = new_psd.match(/^[\S]{6,12}$/);
         let confirm_password = confirm_psd.match(/^[\S]{6,12}$/);
@@ -77,7 +77,7 @@ setting.event = ()=>{
 
 }
 
-setting.event();
+// setting.event();
 
 
 //图像上传

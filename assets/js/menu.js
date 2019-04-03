@@ -91,6 +91,7 @@ function initUserInfoModal() {
         }
     });
 }
+
 function showList(idNmae){
     $('#'+idNmae).removeClass('is-hidden');
     $('#'+idNmae).addClass('is-show');
@@ -103,7 +104,6 @@ function showList(idNmae){
     if(idNmae == 'hailfellow-list'){
         let sectionId = 'app-hailfellow-section';
         let hai_id = $('#'+sectionId).attr('data-id');
-        console.log(hai_id);
         if(hai_id){
             document.getElementById(sectionId).classList.add('is-shown');
         }
