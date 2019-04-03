@@ -9,7 +9,7 @@ $('.app-menu-list').on('click','li',function(){
             }
         });
     }else if(listName == 'app-setting'){
-        settingPopup();
+        showSetting();
     }else{
         ListShowMain(listName);
         $(this).addClass('is-selected');
@@ -35,7 +35,7 @@ function ListShowMain(idNmae){
 
 }
 
-function settingPopup() {
+function showSetting() {
     layer.open({
         type: 1,
         title: false,
