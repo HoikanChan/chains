@@ -1,152 +1,245 @@
-*{
-    font-family: "Microsoft YaHei";
-    -webkit-user-select: none; 
-    user-select: none;
+* {
+  font-family: 'Microsoft YaHei';
+  -webkit-user-select: none;
+  user-select: none;
 }
-*::-webkit-scrollbar{
-    width: 0;
-    z-index: 99;
+*::-webkit-scrollbar {
+  width: 0;
+  z-index: 99;
 }
-*::-webkit-scrollbar-thumb{
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 *::-webkit-scrollbar-track {
-    border-radius: 0;
+  border-radius: 0;
 }
-input:disabled{
-    background-color: none !important;
+input:disabled {
+  background-color: none !important;
 }
-html,body{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 }
-#app-setting{
-    background: #f4f4f4;
+#app-setting {
+  background: #f4f4f4;
 }
-.app-setting-box{
-    width: 100%;
+.app-setting-box {
+  width: 100%;
 }
-.app-setting-body,.app-setting-footer{
-    width: 90%;
-    margin: 10px auto 10px auto;
-    overflow: hidden;
+.app-setting-body,
+.app-setting-footer {
+  width: 90%;
+  margin: 10px auto 10px auto;
+  overflow: hidden;
 }
-.app-setting-head{
-    position: relative;
-    z-index: 500;
+.app-setting-head {
+  position: relative;
+  z-index: 500;
 }
-.app-setting-head-title{
-    padding: 35px 0 15px 0;
-    font-size: 20px;
-    color: #0F8F94;
+.app-setting-head-title {
+  padding: 35px 0 15px 0;
+  font-size: 20px;
+  color: #0f8f94;
 }
-.app-setting-head-icon{
-    position: absolute;
-    text-align: right;
-    right: 10px;
-    top:5px;
+.app-setting-head-icon {
+  position: absolute;
+  text-align: right;
+  right: 10px;
+  top: 5px;
 }
-.app-setting-transverse{
-    display: inline-block;
-    width: 84%;
-    height: 2px;
-    background: #08979d;
-    vertical-align: middle;
+.app-setting-transverse {
+  display: inline-block;
+  width: 84%;
+  height: 2px;
+  background: #08979d;
+  vertical-align: middle;
 }
-.app-setting-from{
-    overflow: hidden;
-    margin-top: 15px;
-    -webkit-app-region: no-drag;
+.app-setting-from {
+  overflow: hidden;
+  margin-top: 15px;
+  -webkit-app-region: no-drag;
 }
-.app-setting-form-item{
-    overflow: hidden;
+.app-setting-form-item {
+  overflow: hidden;
 }
-.app-setting-form-label{
-    float: left;
-    display: block;
-    padding: 9px 2px;
-    font-weight: 400;
-    line-height: 20px;
-    width: 55px;
-    text-align: left;
+.app-setting-form-label {
+  float: left;
+  display: block;
+  padding: 9px 2px;
+  font-weight: 400;
+  line-height: 20px;
+  width: 55px;
+  text-align: left;
 }
-.app-setting-input-block{
-    position: relative;
-    float: left;
-    width: 70%;
-    padding: 2px 0;
+.app-setting-input-block {
+  position: relative;
+  float: left;
+  width: 70%;
+  padding: 2px 0;
 }
-.app-setting-from-input,.app-setting-from-textarea{
-    border: 0;
-    width: 100%;
-    height: 22px;
-    padding: 5px;
+.app-setting-from-input,
+.app-setting-from-textarea {
+  border: 0;
+  width: 100%;
+  height: 22px;
+  padding: 5px;
 }
-.app-setting-from-textarea{
-    height: 60px;
+.app-setting-from-textarea {
+  height: 60px;
 }
-.app-setting-head-portrait{
-    text-align: center;
-    padding-top: 20px;
-    cursor: pointer;
-    -webkit-app-region: no-drag;
+.app-setting-head-portrait {
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
 }
-.app-setting-head-portrait img{
-    width: 80px;
-    height: 80px;
+.app-setting-head-portrait img {
+  width: 80px;
+  height: 80px;
 }
-.app-setting-head-portrait p{
-    padding-top: 10px;
+.app-setting-head-portrait p {
+  padding-top: 10px;
 }
-.app-setting-sub-box{
-    text-align: center;
-    margin: 16px 0 16px 0;
+.app-setting-sub-box {
+  text-align: center;
+  margin: 16px 0 16px 0;
 }
-.app-setting-sub-box button{
-    width: 80%;
-    border: 0;
-    height: 28px;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    background: #08979d;
+.app-setting-sub-box button {
+  width: 80%;
+  border: 0;
+  height: 28px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #08979d;
 }
-.app-setting-sub-box button:hover{
-    background: rgba(8,151,157, 0.8);
+.app-setting-sub-box button:hover {
+  background: rgba(8, 151, 157, 0.8);
 }
 /* 个人信息模块 */
-#app-setting-nickname{
-    width: 40%;
-    background-color: #fff !important;
+#app-setting-nickname {
+  width: 40%;
+  background-color: #fff !important;
 }
-#enable-nickname-edit{
-    cursor: pointer;
+#enable-nickname-edit {
+  cursor: pointer;
 }
-.app-setting-company-info{
-    margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-}    
-.app-setting-company-info .company-info-item{
-    display: flex;
-    align-items: center;
+.app-setting-company-info {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+}
+.app-setting-company-info .company-info-item {
+  display: flex;
+  align-items: center;
 }
 /* 个人信息模块 */
 /* 修改密码模块 */
-.app-setting-psw-from input{
-    border: 1px solid #EEEEEE;
-    border-radius: 3px;
+.app-setting-psw-from input {
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
 }
-.app-setting-psw-from .app-setting-form-label{
-    width: 80px;
+.app-setting-psw-from .app-setting-form-label {
+  width: 80px;
 }
-.app-setting-psw-from .layui-word-aux{
-    margin-left: 86px;
+.app-setting-psw-from .layui-word-aux {
+  margin-left: 86px;
 }
-.app-setting-psw-from .app-setting-sub-password{
-    margin-top: 20px;
+.app-setting-psw-from .app-setting-sub-password {
+  margin-top: 20px;
 }
 /* 修改密码模块 */
+/* 头像裁剪 */
+.app-setting-avatar-modals-box
+{
+  background: #fff;
+  border-radius: 5px;
+  width: 400px  !important;
+  height: 500px;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+.crop-modal{
+  height: 100%;
+  overflow-y: hidden;
+  -webkit-app-region: no-drag;
+}
+.avatar-crop-container{
+  height: 100%;
+  padding: 8px;
+  padding-top: 36px;
+}
+.avatar-crop-action {
+  width: 380px;
+  height: 30px;
+  margin: 10px 0;
+  display: flex;
+}
+.avatar-crop-action  #btnCrop{
+  flex: 1;
+}
+.avatar-crop-box {
+  position: relative;
+  height: 380px;
+  width: 380px;
+  border: 1px solid #aaa;
+  background: #fff;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  cursor: move;
+  box-shadow: 4px 4px 12px #b0b0b0;
+}
+.avatar-crop-box .thumbBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  margin-top: -100px;
+  margin-left: -100px;
+  box-sizing: border-box;
+  border: 1px solid rgb(102, 102, 102);
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  background: none repeat scroll 0% 0% transparent;
+}
+.avatar-crop-box .spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  line-height: 400px;
+  background: rgba(0, 0, 0, 0.7);
+}
+.Btnsty_peyton {
+  width: 66px;
+  display: inline-block;
+  margin-bottom: 10px;
+  height: 57px;
+  line-height: 57px;
+  font-size: 20px;
+  color: #ffffff;
+  margin: 0px 2px;
+  background-color: #08979d;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px #b0b0b0;
+  border: 0px #fff solid;
+}
+.cropped {
+	position: absolute;
+	right: 30px;
+	top: 32px;
+	width: 200px;
+	border: 1px #ddd solid;
+	height: 410px;
+	padding: 4px;
+	box-shadow: 0px 0px 12px #ddd;
+	text-align: center;
+}
+/* 头像裁剪 */

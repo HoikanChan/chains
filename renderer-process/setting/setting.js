@@ -102,17 +102,68 @@ function selectImg(file) {
         var replaceSrc = evt.target.result;
         //更换cropper的图片
         $('#app-setting-header img').prop('src', replaceSrc);
+        const link = document.querySelector('link#cropAvatar[rel="import"]');
+        const template = link.import.querySelector('.modal-template')
+        let clone = document.importNode(template.content, true)
+        const cropLayer = layer.open({
+            type: 1,
+            title: false,
+            offset: 'auto',
+            skin: 'app-setting-avatar-modals-box', //样式类名
+            shade: [0.1, '#fff'],
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            content: '<div class="crop-modal"></div>'
+        });
+        document.querySelector('.crop-modal').appendChild(clone)
+        $('.app-setting-avatar-modals-box .layui-layer-content').css('height','100%')
+        $('#avatar-image').prop('src', replaceSrc);
+        var options =
+        {
+            thumbBox: '.thumbBox',
+            spinner: '.spinner',
+            imgSrc: replaceSrc
+        }
+        var cropper = $('.avatar-crop-box').cropbox(options);
+        $('#btnCrop').on('click', function(){
+            var img = cropper.getDataURL();
+            $('#app-setting-header img').prop('src', img);
+
+            setting.cropImgData  = Base64ToFormData(img)
+            layer.close(cropLayer);
+        })
+        $('#btnZoomIn').on('click', function(){
+            cropper.zoomIn();
+        })
+        $('#btnZoomOut').on('click', function(){
+            cropper.zoomOut();
+        })
     };
     reader.readAsDataURL(file.files[0]);
 }
-
+function Base64ToFormData(img){
+    var imgb64 = img.split(',')[1];
+    var binary = atob(imgb64);
+    var array = [];
+    for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+    }
+    var blob =  new Blob([new Uint8Array(array)], {type: 'image/jpeg'})
+    // 使用FormData()进行ajax请求，上传图片
+    var formData = new FormData()
+    // 图片名字
+    var img_name = new Date().getTime()+'.jpg';
+    formData.append('csrfmiddlewaretoken','{{ csrf_token }}')
+    formData.append('files',blob,img_name)
+    return formData
+}
 function UploadFile(file,info,callback){
 
     var formData = new FormData();
     formData.append('files',file.files[0]);
 
-    utility.currencyFileAjax('upload',formData,function(res){
-        console.log(res);
+    utility.currencyFileAjax('upload',setting.cropImgData ,function(res){
 
         if(res.code == '000'){
             info['picUrl'] = res.data.fileUrl;
@@ -125,6 +176,8 @@ function UploadFile(file,info,callback){
 function Update(info){
     utility.currencyAjax('put','user/update',JSON.stringify(info),function(res){
         if(res.code === '000'){
+            layer.msg('修改成功');
+
             var profile_item  = [
                 {
                     "Tag": "Tag_Profile_IM_Nick",
@@ -150,6 +203,8 @@ function Update(info){
                 }
             );
             index.load();
+        }else{
+            layer.msg(res.message);
         }
     });
 
