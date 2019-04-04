@@ -19,9 +19,16 @@
 .app-interview-list-title:hover{
     color: #08979d;
 }
-.app-interview-list-title>i{
+.app-interview-list-title>span{
+    display: inline-block;
     float: right;
     padding-right:15px;
+}
+.app-interview-list-title>span>i{
+    font-size: 13px;
+    color: #959595;
+    display: block;
+    transition: transform 0.4s ease-out;
 }
 .app-interview-user-item{
     position: relative;

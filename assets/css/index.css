@@ -26,6 +26,9 @@ button,span,input,textarea,a,li{
 textarea{
     resize:none;
 }
+.transform-90{
+	transform: rotate(90deg);
+}
 .app-index-shade{
     position: absolute;
     top: 0;

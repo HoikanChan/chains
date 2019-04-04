@@ -36,14 +36,33 @@ hailfellow.event = ()=>{
     })
 
     $('.app-hailfellow-child-user-list').on('click','.app-hailfellow-child-department',function(){
+        let icon_length = $(this).find('.transform-90').length;
+        if(icon_length){
+            $(this).find('i').removeClass('transform-90');
+        }else{
+            $(this).find('i').addClass('transform-90');
+        }
         $(this).next('.app-hailfellow-user-list').slideToggle();
     });
 
     $('.app-hailfellow-child-customer-list').on('click','.app-hailfellow-child-customer-name',function(){
+        let f_leng = $(this).find('.icon-fangkuai').length;
+        if(f_leng){
+            $(this).find('i').removeClass('icon-fangkuai').addClass('icon-fangkuai-');
+        }else{
+            $(this).find('i').removeClass('icon-fangkuai-').addClass('icon-fangkuai');
+        }
+
         $(this).next('.app-hailfellow-child-customer-childlist').slideToggle();
     });
 
     $('.app-hailfellow-child-customer-list').on('click','.app-hailfellow-child-department',function(){
+        let icon_length = $(this).find('.transform-90').length;
+        if(icon_length){
+            $(this).find('i').removeClass('transform-90');
+        }else{
+            $(this).find('i').addClass('transform-90');
+        }
         $(this).next('.app-hailfellow-user-list').slideToggle();
     });
 
@@ -175,7 +194,7 @@ hailfellow.load = ()=>{
             var data = res.data.deptAndUsers;
             var $ul = $('<ul>'),$li = $('<li>'),$img = $('<img>'),$span = $('<span>');
             $.each(data,(i,item)=>{
-                var $li1 = $li.clone().addClass('app-hailfellow-child-department').append(item.deptName + '<span><i class="icon iconfont icon-xiangxiazhanhang"></i></span>');
+                var $li1 = $li.clone().addClass('app-hailfellow-child-department').append('<span><i class="icon iconfont icon-xiaochengxuzititubiao-"></i></span>' + item.deptName);
                 var $ul1 = $ul.clone().addClass('app-hailfellow-user-list').attr('data-name',item.deptName).css('display','none');
                 $.each(item.users,(k,user)=>{
                     var $li2 = $li.clone().addClass('app-hailfellow-user-item').attr('data-id',user.userId);
@@ -208,11 +227,11 @@ hailfellow.loadCust = (type = 1)=>{
             var data = res.data;
 			var $ul = $('<ul>'),$li = $('<li>'),$span = $('<span>'),$img = $('<img>'),$span = $('<span>');
             $.each(data,(i,item)=>{
-                var orgName = (item.orgName.length>10)?utility.subString(item.orgName,8) + '…' :item.orgName;
-                var $li1 = $li.clone().addClass('app-hailfellow-child-customer-name').attr('title',item.orgName).append(orgName + '<span><i class="icon iconfont icon-fangkuai"></i></span>');
+                var orgName = (item.orgName.length>10)?utility.subString(item.orgName,9) + '…' :item.orgName;
+                var $li1 = $li.clone().addClass('app-hailfellow-child-customer-name').attr('title',item.orgName).append('<span><i class="icon iconfont icon-fangkuai"></i></span>' + orgName);
                 var $ul1 = $ul.clone().addClass('app-hailfellow-child-customer-childlist').css('display','none');
                 $.each(item.deptBos,(k,bos)=>{
-                    var $li2 = $li.clone().addClass('app-hailfellow-child-department').append(bos.deptName + '<span><i class="icon iconfont icon-xiangxiazhanhang"></i></span>');
+                    var $li2 = $li.clone().addClass('app-hailfellow-child-department').append('<span><i class="icon iconfont icon-xiaochengxuzititubiao-"></i></span>' + bos.deptName);
                     var $ul2 = $ul.clone().addClass('app-hailfellow-user-list').attr('data-name',bos.deptName).css('display','none');
                     $.each(bos.userBos,(key,user)=>{
                         var $li3 = $li.clone().addClass('app-hailfellow-user-item').attr({'data-id':user.identifier,'data-org':item.id});;
@@ -234,6 +253,26 @@ hailfellow.loadCust = (type = 1)=>{
 
 }
 
+hailfellow.Menuload = ()=>{
+
+    let menu_id =  $('.app-hailfellow-menu-list').find('.active').attr('data-id');
+
+    switch (menu_id) {
+        case '1':
+            hailfellow.load();
+            break;
+        case '2':
+            let cust_id =  $('.app-hailfellow-child-customer-console').find('active').attr('data-id');
+            hailfellow.loadCust(cust_id);
+            break;
+        case '3':
+            hailfellow.loadGroup();
+            break;
+    }
+
+}
 
 hailfellow.load();
 hailfellow.event();
+
+module.exports.hailfellow = hailfellow;
