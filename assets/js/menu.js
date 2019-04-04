@@ -39,7 +39,7 @@ function showSetting() {
     layer.open({
         type: 1,
         title: false,
-        offset:['73%','12px'],
+        offset:['calc(100% - 200px)','12px'],
         skin: 'app-setting-options-box', //样式类名
         shade: [0.1, '#fff'],
         closeBtn: 0, //不显示关闭按钮
