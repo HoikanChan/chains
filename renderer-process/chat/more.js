@@ -62,6 +62,9 @@ more.groupChatMemberDeatail = {
             let sectionId = 'app-chat-section';
             document.getElementById(sectionId).classList.add('is-shown');
         })
+        $('.layui-layer-shade').click(function(event){
+            event.stopPropagation();
+        });
         $('.groupchat-member-card-modal').on('click', '.groupchat-member-card-close', function(e){
             layer.close(more.groupChatMemberDeatail.layer)
             e.stopPropagation();
@@ -254,10 +257,7 @@ more.loadGroup = ()=>{//获取群组信息
                         closeBtn: 0, //不显示关闭按钮
                         shade: [0.1, '#fff'],
                         shadeClose: true, //开启遮罩关闭
-                        content: more.groupChatMemberDeatail.getTemplate(data),
-                        end: function() {
-                            $('.app-chat-right-group-body').show();
-                        }
+                        content: more.groupChatMemberDeatail.getTemplate(data)
                     });
                     more.groupChatMemberDeatail.event()
                 }
