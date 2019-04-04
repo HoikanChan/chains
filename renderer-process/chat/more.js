@@ -1,6 +1,73 @@
 
 more = {};
+more.groupChatMemberDeatail = {
+    layer: {},
+    getTemplate : data => {
+        return `
+            <div class="groupchat-member-card-modal">
+                <div class="groupchat-member-card-header">
+                    <h2>${data.realName}</h2>
+                    <img src=${fileDomain + data.picUrl}/>
+                    <span class="groupchat-member-card-close">
+                        <i class="icon iconfont icon-guanbi1"></i>
+                    </span>
+                </div>
+                <div class="groupchat-member-card-body">
+                    <h5>${organs[0].organName}</h5>
+                    <div class="groupchat-member-card-body-item">
+                        <label>姓名</label>
+                        <span>${data.realName}</span>
+                    </div>
+                    <div class="groupchat-member-card-body-item">
+                        <label>性别</label>
+                        <span>${data.sex}</span>
+                    </div>
+                    <div class="groupchat-member-card-body-item">
+                        <label>电话</label>
+                        <span>${data.phone}</span>
+                    </div>
+                    <div class="groupchat-member-card-body-item">
+                        <label>部门</label>
+                        <span>${data.depts[0].deptName}</span>
+                    </div>
+                    <div class="groupchat-member-card-body-item">
+                        <label>职位</label>
+                        <span>${data.position}</span>
+                    </div>
+                    <button 
+                        class="groupchat-member-card-sendMsg" 
+                        data-name="${data.realName}"
+                        data-pic="${fileDomain + data.picUrl}"
+                        data-id="${data.userId}"
+                    > 
+                        发消息
+                    </button>
+                </div>
+            </div>
+        `
+    },
+    event: ()=> {
+        $('.groupchat-member-card-modal').on('click', '.groupchat-member-card-sendMsg', function(){
+            layer.closeAll()
+            hideAllSectionsAndDeselectButtons();
 
+            let id = $(this).attr('data-id');
+            let name = $(this).attr('data-name');
+            let picUrl = $(this).attr('data-pic');
+
+            addSess(webim.SESSION_TYPE.C2C,id,name,picUrl,'','HEAD');
+            onSelSess(webim.SESSION_TYPE.C2C,id,name);
+
+            $('#chat-button').click();
+            let sectionId = 'app-chat-section';
+            document.getElementById(sectionId).classList.add('is-shown');
+        })
+        $('.groupchat-member-card-modal').on('click', '.groupchat-member-card-close', function(e){
+            layer.close(more.groupChatMemberDeatail.layer)
+            e.stopPropagation();
+        })
+    }
+}
 more.event = ()=>{
 
     $('.app-chat-more').click(function(event){//更多信息
@@ -123,8 +190,6 @@ more.event = ()=>{
         });
   
       });
-
-
 }
 
 more.loadFriend = ()=>{//获取好友信息
@@ -143,7 +208,6 @@ more.loadFriend = ()=>{//获取好友信息
 
 more.loadGroup = ()=>{//获取群组信息
     $('.app-chat-right-group-body').show();
-
     getGroupInfo(selToID,function(res){
         let info = res.GroupInfo[0];
         
@@ -171,14 +235,36 @@ more.loadGroup = ()=>{//获取群组信息
                 picUrl = (item.userSex == '女')?'../assets/images/6.png':'../assets/images/7.png';
             }
             var li = `
-            <li class="app-chat-groupList-item layui-col-xs3">
+            <li class="app-chat-groupList-item layui-col-xs3" data-userid="${item.userId}">
             <img src="`+picUrl+`" />
             <p>`+item.realName+`</p>
             </li>
             `;
             $('.app-chat-groupList-list').append(li);
         });
-
+        $('.app-chat-groupList-item').click(function() {
+            const userId = $(this).attr('data-userid')
+            utility.currencyAjax('post','user/info2?userId='+ userId,undefined,function(res){
+                if(res.code === '000'){
+                    var data = res.data;
+                    more.groupChatMemberDeatail.layer = layer.open({
+                        type: 1,
+                        title: false,
+                        offset: 'auto',
+                        closeBtn: 0, //不显示关闭按钮
+                        shade: [0.1, '#fff'],
+                        shadeClose: true, //开启遮罩关闭
+                        content: more.groupChatMemberDeatail.getTemplate(data),
+                        end: function() {
+                            $('.app-chat-right-group-body').show();
+                        }
+                    });
+                    more.groupChatMemberDeatail.event()
+                }
+            })
+            
+        })
+      
     });
 
 }
