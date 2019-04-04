@@ -5,12 +5,26 @@ const path = require('path');
 const url = require('url');
 const ShortcutCapture =  require('shortcut-capture');
 const request = require('request');
+const sqlite = require('sqlite3');
 
 const appVersion = require('../../package.json').version;
 
+const { sequelize } = require('../../models')
+const Sequelize = require('sequelize');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow,downloadWin;
+
+sequelize.sync({force: true})
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 function createWindow (status = false) {
   

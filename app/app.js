@@ -50,6 +50,7 @@ layui.use(['form'], function(){
         utility.ajax('post','oauth/token',data.field,function(res){
           
           if(res.code == '000'){
+            debugger
             db.set('user.info',JSON.stringify(res.data)).write();
 
             if(rememberMe){

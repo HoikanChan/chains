@@ -106,6 +106,16 @@
         require('../assets/js/imports');
         require('../assets/js/nav');
         require('../assets/js/menu');
+        const dbSqlite = require('../models/index');
+        dbSqlite.User.create({
+            email: "1234",
+            pic: "123"
+        }).then(
+            result => dbSqlite.User.findOne({email: '123'})
+        ).then(user => {
+            console.log(user)
+        })
+        
   </script>
   
   <!-- js end -->
