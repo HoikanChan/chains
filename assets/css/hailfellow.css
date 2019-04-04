@@ -104,13 +104,13 @@
 
 .app-hailfellow-box{
     height: 600px;
-    width: 650px;
+    width: 590px;
     background: url('../images/hov_ban.png') no-repeat center;
     background-size: 100%;
     margin: auto;
 }
 .app-hailfellow-head{
-    width: 500px;
+    width: 475px;
     text-align: right;
     margin: auto;
     padding-top: 70px;
@@ -154,6 +154,9 @@
     display: inline-block; 
     overflow: hidden; 
     width: 100%;
+}
+.app-hailfellow-info-item span{
+    user-select: text!important;
 }
 .app-hailfellow-console-box{
     padding-top: 25px;

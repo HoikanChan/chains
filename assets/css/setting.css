@@ -48,7 +48,7 @@ body {
 .app-setting-head-icon {
   position: absolute;
   text-align: right;
-  right: 10px;
+  right: 0;
   top: 5px;
 }
 .app-setting-transverse {

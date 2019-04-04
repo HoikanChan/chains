@@ -277,7 +277,6 @@ chat.sendMsg = ()=>{//聊天消息发送
       }
       if(formData.formData){//拖拽文件
         $.each(formData.formData,(i,item)=>{
-          console.log(i,item);
             var filesize = item[0].size;
             if(checkPic(item[0],filesize,'1')){
                 uploadPic(item[0],1);

@@ -166,7 +166,8 @@ hailfellow.loadUserInfo = (id,orgId,grouping)=>{
                     data[i] = '<span class="color1">未设置</span>';
                 }
             })
-            // $('.app-hailfellow-friend-head').find('p').html(data.realName);
+            let imOnlineState = (data.imOnlineState == 'Online')?`<span class="color2">在线<span>`:`<span class="color1">离线<span>`;
+            $('.app-hailfellow-info-status').html(imOnlineState);
             $('.app-hailfellow-info-position').html(data.position);
             $('.app-hailfellow-info-department').html(grouping);
             $('.app-hailfellow-info-introduce').html(data.introduce);

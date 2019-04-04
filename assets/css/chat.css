@@ -532,3 +532,33 @@
         cursor: pointer;
     }
 /* 群聊个人资料 */
+
+.app-chat-file-box{
+    width: 200px;
+    height: 90px;
+    padding: 5px;
+    background: #EDEDED;
+    color: #333;
+    border-radius: 5px;
+}
+.app-chat-file-box>img{
+    position: absolute;
+    width: 50px;
+    height: 63px;
+    border-radius: 0;
+    padding-right: 10px;
+    left: 15px;
+    top: 15px;
+}
+.app-chat-file-text-box{
+    padding: 15px 5px 5px 68px;
+    height: 45px;
+}
+.app-chat-file-download-box{
+    height: 25px;
+    line-height: 25px;
+    border-top: 1px solid #FAFAFA;
+    margin-top: 5px;
+    text-align: right;
+    padding-right: 10px;
+}
