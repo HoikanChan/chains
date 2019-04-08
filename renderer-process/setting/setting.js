@@ -2,28 +2,27 @@ var setting = {
     cropImgData: null
 };
 
-
 setting.event = ()=>{
-    $('#se_close_btn').click(function(){
+    $('body').on('click','#se_close_btn',function(){
         // ipc.send($('.app-setting-head-title').text().trim() === '个人信息'?'userInfowin_close':'resetPswWin_close');
         layer.closeAll();
     });
-    $('#app-setting-header').click(function(){
+    $('body').on('click','#app-setting-header',function(){
         $('#app-setting-header-input').click();
     })
-    $('#enable-nickname-edit').click(function(){
+    $('body').on('click','#enable-nickname-edit',function(){
         $('#app-setting-nickname').prop('disabled',false)
         $('#app-setting-nickname').focus();
     })
-    $('#enable-phone-edit').click(function(){
+    $('body').on('click','#enable-phone-edit',function(){
         $('#app-setting-phone').prop('disabled',false)
         $('#app-setting-phone').focus();
     })
-    $('#app-setting-header-input').change(function(e){
+    $('body').on('change','#app-setting-header-input',function(e){
         selectImg($(this)[0]);
     });
     // 提交个人信息
-    $('#app-setting-update-btn').click(function(){
+    $('body').on('click','#app-setting-update-btn',function(){
         var File = $('#app-setting-header-input')[0];
         var form = {};
 
@@ -45,7 +44,7 @@ setting.event = ()=>{
 
     })
     // 提交修改密码
-    $('#app-setting-sub-password').click(function(){
+    $('body').on('click','#app-setting-sub-password',function(){
         let old_psd = $('#old_psd').val();
         let new_psd = $('#new_psd').val();
         let confirm_psd = $('#confirm_psd').val();
@@ -87,9 +86,17 @@ setting.event = ()=>{
 
     });
 
+    $('body').on('click','#app-logout',function(){
+        ipcRenderer.send('logout');
+    });
+    
+    $('body').on('click','#app-testing',function(){
+        Testing();
+    });
+
 }
 
-// setting.event();
+setting.event();
 
 
 //图像上传

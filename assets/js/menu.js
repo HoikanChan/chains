@@ -1,5 +1,3 @@
-const settings = require('electron-settings');
-
 $('.app-menu-list').on('click','li',function(){
     let listName = $(this).attr('data-section');
     if(listName == 'open-Mail'){
@@ -32,7 +30,6 @@ function ListShowMain(idNmae){
             ipcRenderer.send('logout');
             break;
     }
-
 }
 
 function showSetting() {
@@ -45,11 +42,14 @@ function showSetting() {
         closeBtn: 0, //不显示关闭按钮
         anim: 2,
         shadeClose: true, //开启遮罩关闭
-        content: '<ul class="app-setting-options-list"><li class="app-setting-option-item" id="userInfo">个人信息</li><li class="app-setting-option-item" id="resetPsw">设置密码</li><li class="app-setting-option-item">版本检测</li><li class="app-setting-option-item" id="app-logout">退出登录</li></ul>'
+        content: '<ul class="app-setting-options-list"><li class="app-setting-option-item" id="userInfo">个人信息</li><li class="app-setting-option-item" id="resetPsw">设置密码</li><li class="app-setting-option-item" id="app-testing">版本检测</li><li class="app-setting-option-item" id="app-logout">退出登录</li></ul>'
     });
     $('.app-setting-options-list').on("click",'.app-setting-option-item',function(){
         const moduleId =  $(this).attr('id')
         layer.closeAll()
+        if(moduleId == 'app-logout' || moduleId == 'app-testing'){
+            return;
+        }
         if(moduleId == "userInfo"){
             initUserInfoModal();
         }
@@ -69,7 +69,6 @@ function showSetting() {
         });
          document.querySelector('.setting-modal').appendChild(clone)
 
-        setting.event();
         if(moduleId == "userInfo"){
             initUserInfoModal();
         }

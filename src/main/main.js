@@ -3,19 +3,16 @@ const {app, BrowserWindow, globalShortcut,ipcMain:ipc} = require('electron');
 const glob = require("glob");
 const path = require('path');
 const url = require('url');
-const ShortcutCapture =  require('shortcut-capture');
-const request = require('request');
-
-const appVersion = require('../../package.json').version;
+const indexWin = require('./indexWin.js');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow,downloadWin;
+let mainWindow;
 
 function createWindow (status = false) {
   
   mainWindow = new BrowserWindow({
-    width: 550, 
+    width: 550,
     height: 400,
     minWidth: 550,
     minHeight: 400,
@@ -36,6 +33,9 @@ function createWindow (status = false) {
   })
 
   mainWindow.once('ready-to-show', () => {
+    if(status){
+      indexWin.indexWin.close();
+    }
     mainWindow.show();
     module.exports.mainWindow = mainWindow;
   });
@@ -69,28 +69,9 @@ if(gotTheLock){
       if(mainWindow.isMinimized())mainWindow.restore();
       mainWindow.focus();
     }
-
-    if(downloadWin){//更新窗口打开判断
-      if(downloadWin.isMinimized())downloadWin.restore();
-      downloadWin.focus();
-    }
   })
   app.on('ready', ()=>{
-    // request.get({
-    //     url:'http://company.zqyzk.com/api/v1/versions/getLastVersion?type=0',
-    //     json: true
-    // },function(error, response, body){
-    //   if(body && body.code === "000"){
-    //     let data = body.data;
-    //     let version = appVersion.split('.');
-    //     let new_version = data.version.split('.');
-    //     if (version[0] < new_version[0] || version[1] < new_version[1] || version[2] < new_version[2]) {
-    //       downloadWindow(data);
-    //     }else{
-          createWindow();
-    //     }
-    //   }
-    // });
+      createWindow();
   })
 }else{
   app.quit();
@@ -106,10 +87,6 @@ function loadModule () {
   const files = glob.sync(path.join(__dirname, '../renderer/*.js'));
   files.forEach((file) => { require(file) })
 }
-
-ipc.on('download-quit',function(){
-  app.quit();
-});
 
 let sil = app.requestSingleInstanceLock();
 if (!sil) {

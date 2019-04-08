@@ -2,13 +2,7 @@ var index = {};
 const {ipcRenderer:ipc} = require('electron');
 const Mianwindow = remote.getCurrentWindow();
 
-// $('#ne_setmin_btn').click(function(){
-//     ipc.send('ne_min');
-// });
-// $('#ne_close_btn').click(function(){
-//     ipc.send('ne_close');
-//     ipc.send('nw_close');
-// });
+Testing();
 
 $(document).ready(function(){
     $(document).bind("contextmenu",function(e){

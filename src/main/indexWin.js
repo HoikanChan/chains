@@ -2,7 +2,7 @@ const { app, BrowserWindow,globalShortcut,ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
 const ShortcutCapture =  require('shortcut-capture');
-const mainWindow = require('../main/main.js');
+const mainWindow = require('./main.js');
 
 let $indexWin;
 let downloadpath;//下载路径
@@ -32,6 +32,7 @@ ipcMain.on('login',()=>{
       mainWindow.mainWindow.close();
       $indexWin.show();
       $indexWin.focus();
+      module.exports.indexWin = $indexWin;
     });
   
     // and load the index.html of the app.
@@ -57,7 +58,7 @@ ipcMain.on('download', (event, args) => {
   $indexWin.webContents.downloadURL(downloadpath);
 });
 
-ipcMain.on('screenshot',(event, msg)=>{
+ipcMain.on('screenshot',(event)=>{
   const shortcutCapture = new ShortcutCapture({
     isUseClipboard:true
   });
