@@ -2,7 +2,8 @@ const electron = require('electron');
 const {ipcRenderer} = electron;
 var selToID = '';
 var user = JSON.parse(db.get('user.info').value());
-var RTC = user.rtc;
+var rtc = user.rtc;
+var RTC;
 
 ipcRenderer.on('synchronous-webim',(event,webims,selToIDs)=>{
     webim.SetCTX(webims);
@@ -15,7 +16,7 @@ ipcRenderer.on('synchronous-join',(event,RoomID)=>{
 });
 
 var FetchSigCgi = 'https://www.qcloudtrtc.com/sxb_dev/?svc=account&cmd=authPrivMap';
-var sdkAppID = RTC.sdkAppId,
+var sdkAppID = rtc.sdkAppId,
     accountType = 36862, // accounttype 还是在文档中会找到
     userSig,
     username,
@@ -33,7 +34,9 @@ $('#nw_setmin_btn').click(function(){
     ipcRenderer.send('nw_min');
 });
 $('#nw_close_btn').click(function(){
-    onWebSocketClose();
+    if(RTC){
+        onWebSocketClose();
+    }
     ipcRenderer.send('nw_close');
 });
 
@@ -178,7 +181,7 @@ Bom = {
 
 function login(){
     sdkappid = sdkAppID;
-    userId = RTC.identifier;
+    userId = rtc.identifier;
     //请使用英文半角/数字作为用户名
     $.ajax({
         type: "put",
@@ -200,10 +203,10 @@ function login(){
                  $(".open-chat").hide();
                  initRTC({
                      "userId": userId,
-                     "userSig": RTC.userSig,
+                     "userSig": rtc.userSig,
                      "privateMapKey": privateMapKey,
-                     "sdkappid": RTC.sdkAppId,
-                     "accountType": RTC.accountType,
+                     "sdkappid": rtc.sdkAppId,
+                     "accountType": rtc.accountType,
                      "roomid": json.data.roomId
                  });
             }else{
@@ -218,7 +221,7 @@ function login(){
 
 function join(roomId){
     sdkappid = sdkAppID;
-    userId = RTC.identifier;
+    userId = rtc.identifier;
     $.ajax({
         type: "get",
         url: "http://company.zqyzk.com/api/v1/rtc/joinRoom/"+roomId,
@@ -239,10 +242,10 @@ function join(roomId){
                 $(".open-chat").hide();
                 initRTC({
                     "userId": userId,
-                    "userSig": RTC.userSig,
+                    "userSig": rtc.userSig,
                     "privateMapKey": privateMapKey,
-                    "sdkappid": RTC.sdkAppId,
-                    "accountType": RTC.accountType,
+                    "sdkappid": rtc.sdkAppId,
+                    "accountType": rtc.accountType,
                     "roomid": json.data.roomId
                 });
             }else{

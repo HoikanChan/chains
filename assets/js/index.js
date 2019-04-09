@@ -37,6 +37,10 @@ index.load = ()=>{
         $('#send_msg_text').focus();
     });
 
+    $('#send_msg_text').click(function(){
+        ipcRenderer.send('tray-canceltwinkle');
+    });
+
     $(document).on('click','.layui-layer-close,input,.app-chat-float p,.app-chat-console-communication',function(event){
         event.stopPropagation();
     });
@@ -46,7 +50,8 @@ index.load = ()=>{
     });
     
     $(document).on('click','#ne_close_btn',function(){
-        Mianwindow.destroy();
+        ipc.send('tray-status');
+        Mianwindow.hide();
     });
 
     $('.app-index-company-list').on('click','li',function(){
