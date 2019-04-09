@@ -1,2 +1,7 @@
 node_modules/
+dist/
 .project
+*.sqlite
+*.sqlite3
+*.db
+

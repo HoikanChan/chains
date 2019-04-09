@@ -44,3 +44,5 @@
 
 注： 若npm install windows-build-tools --global失败
 个人解决方法：npm install windows-build-tools@2.2.1 --global 并下载 windows 8.1 sdk
+
+打包配置方法: [https://busymind101.wordpress.com/2018/11/24/make-electronjs-work-with-sqlite3/]

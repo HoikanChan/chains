@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "rebuild": "electron-rebuild -f -w sqlite3",
-    "package": "electron-packager . myClient --win --out ../myClient --arch=ia32 --app-version=0.0.1 --electron-version=4.1.3 --icon=./icon.ico"
+    "package": "electron-packager . myClient --win --out ./dist --arch=ia32 --app-version=0.0.1 --electron-version=3.0.6 --icon=./icon.ico",
+    "package-rebuild": "node build.js"
   },
   "repository": "",
   "keywords": [
@@ -29,7 +30,8 @@
   "devDependencies": {
     "check-for-leaks": "^1.2.0",
     "devtron": "^1.4.0",
-    "electron": "^4.1.3",
+    "electron": "^3.0.6",
+    "electron-builder": "^20.39.0",
     "electron-log": "^2.2.17",
     "electron-rebuild": "^1.8.4"
   },
@@ -47,6 +49,7 @@
     "electron-winstaller": "^2.7.0",
     "glob": "^7.1.3",
     "highlight.js": "^9.14.1",
+    "knex": "^0.16.3",
     "lowdb": "^1.0.0",
     "mocha": "^5.2.0",
     "mousetrap": "1.6.2",
