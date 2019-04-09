@@ -75,6 +75,10 @@ layui.use(['form'], function(){
         if($('#app-resetPsw-wrap').css('display') === 'none'){
           loginWinMethods.login(data)
         }else{
+          if(!window.Token){
+            layer.msg("请先获取验证码" ,{icon: 10});
+            return false;
+          }
           loginWinMethods.resetPsw(data)
         }
         return false;
