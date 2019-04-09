@@ -12,12 +12,6 @@
 </head>
 <body style="-webkit-app-region: drag;">
     <div class="app-whole-box" id="container">
-        <div class="app-head-box" id="output">
-            <div class="app-head">
-                <span id="setmin_btn" class="app-head-console-item" title="最小化"><i class="icon iconfont icon-zuixiaohua"></i></span>
-                <span id="close_btn" class="app-head-console-item" title="关闭"><i class="icon iconfont icon-guanbi1"></i></span>
-            </div>
-        </div>
         <div id="app-login-wrap">
             <div class="app-login-wrap-head">
             </div>
@@ -39,7 +33,7 @@
                             <input type="checkbox" name="automatic" lay-filter="automatic" title="自动登录" lay-skin="primary" value="1"> 
                         </div>
                         <div class="layui-col-xs4" style="line-height: 25px;">
-                            <a href="#">忘记密码?</a>
+                            <a id="goToResetPsw" href="#">忘记密码?</a>
                         </div>
                     </div>
                     <div class="app-login-wrap-btn">
@@ -47,6 +41,42 @@
                      </div>
                 </div>
             </form>
+        </div>
+        <div id="app-resetPsw-wrap" style="display:none">
+            <div class="app-resetpsw-wrap-head">
+                <div class="resetpsw-return-btn">
+                    <i class="icon iconfont icon-fanhui"></i>
+                    <span>忘记密码</span>
+                </div>
+            </div>
+            <form class="layui-form layui-form-pane" lay-filter="login-form">
+                <div class="app-login-wrap-content">
+                    <div class="app-login-wrap-content-user same">
+                        <i class="icon iconfont icon-zhanghao"></i>
+                        <input type="text" name="userPhone" required="" lay-verify="required|username" placeholder="请输用户名" autocomplete="off" />
+                    </div>
+                    <div class="app-login-wrap-content-code same">
+                        <div class="border-input">
+                            <i class="icon iconfont icon-yanzheng"></i>
+                            <input  name="code" required="" lay-verify="required" lay-verType="alert" placeholder="请输入验证码" autocomplete="off" />
+                        </div>
+                        <button id="get-code-btn" class="border-input">获取验证码</button>
+                    </div>
+                    <div class="app-login-wrap-content-psd same">
+                        <i class="icon iconfont icon-suo"></i>
+                        <input type="password" name="newPwd" required="" lay-verify="required|pass" lay-verType="alert" placeholder="请输入密码" autocomplete="off" />
+                    </div>
+                    <div class="app-login-wrap-btn">
+                        <button id="login-sub" type="form" lay-submit lay-filter="*">登录</button>
+                     </div>
+                </div>
+            </form>
+        </div>
+        <div class="app-head-box" id="output">
+            <div class="app-head">
+                <span id="setmin_btn" class="app-head-console-item" title="最小化"><i class="icon iconfont icon-zuixiaohua"></i></span>
+                <span id="close_btn" class="app-head-console-item" title="关闭"><i class="icon iconfont icon-guanbi1"></i></span>
+            </div>
         </div>
     </div>
 

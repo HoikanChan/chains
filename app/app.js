@@ -11,7 +11,17 @@ $('#setmin_btn').click(function(){
 $('#close_btn').click(function(){
     Mianwindow.destroy();
 });
-
+$('#goToResetPsw').click(function(){
+  $('#app-resetPsw-wrap').show();
+  $('#app-login-wrap').hide();
+  $('#app-resetPsw-wrap input').each(function(){
+    $(this).val("");
+  });
+})
+$('.resetpsw-return-btn').click(function(){
+  $('#app-resetPsw-wrap').hide();
+  $('#app-login-wrap').show();
+})
 const updateOnlineStatus = () => {
   if(navigator.onLine){
     $('.app-error-box').removeClass('slideInUp').hide();
@@ -26,6 +36,22 @@ window.addEventListener('online',  updateOnlineStatus)
 window.addEventListener('offline',  updateOnlineStatus)
 
 updateOnlineStatus()
+
+// 获取验证码点击事件
+$('#get-code-btn').click(function(e){
+  e.stopPropagation();
+  const userName = $('#app-resetPsw-wrap input[name="userPhone"]').val();
+  if(!userName){
+    layer.msg('请先输入用户名', {icon: 10});
+    return false
+  }
+  if(!/^1[34578]\d{9}$/.test(userName)){
+    layer.msg('请输入有效用户名', {icon: 10});
+    return false
+  }
+  loginWinMethods.getMobileCaptcha(userName)
+  return false
+})
 
 layui.use(['form'], function(){
     var form = layui.form;
@@ -46,26 +72,11 @@ layui.use(['form'], function(){
       });
 
       form.on('submit(*)', function(data){
-
-        utility.ajax('post','oauth/token',data.field,function(res){
-          
-          if(res.code == '000'){
-            db.set('user.info',JSON.stringify(res.data)).write();
-
-            if(rememberMe){
-              db.set('user.auto',JSON.stringify(data.field)).write();
-            }else{
-              db.unset('user.auto').write();
-            }
-
-            ipcRenderer.send('login');
-          }else{
-            layer.msg(res.message, {icon: 10});
-          }
-        },(err)=>{
-          layer.msg('网络错误', {icon: 10});
-        })
-
+        if($('#app-resetPsw-wrap').css('display') === 'none'){
+          loginWinMethods.login(data)
+        }else{
+          loginWinMethods.resetPsw(data)
+        }
         return false;
       });
 
@@ -105,3 +116,69 @@ layui.use(['form'], function(){
 
       }
 })
+
+
+const loginWinMethods = {
+  getMobileCaptcha: function (userPhone){
+    utility.ajax('post','resetpwd/getMobileCaptcha',{userPhone},function(res){
+      if(res.code == '000'){
+        window.Token = res.data.token;
+        loginWinMethods.countDown(60);
+      }else{
+        layer.msg(res.message, {icon: 10});
+      }
+    },(err)=>{
+      layer.msg('网络错误', {icon: 10});
+    })
+  },
+  countDown: function(start) {
+    const $btn = $('#get-code-btn')
+    $btn.prop('disabled',true)
+    $btn
+      .html(start + '秒')
+      .addClass('stopBtn')
+      .removeClass('get-code')
+    let t = setInterval(function() {
+      if (start < 1) {
+        clearInterval(t)
+        $btn.prop('disabled',false)
+        $btn.html('获取验证码')
+      } else {
+        $btn.html(start + '秒')
+        start--
+      }
+    }, 1000)
+  },
+  login: function(data){
+    utility.ajax('post','oauth/token',data.field,function(res){
+          
+      if(res.code == '000'){
+        db.set('user.info',JSON.stringify(res.data)).write();
+
+        if(rememberMe){
+          db.set('user.auto',JSON.stringify(data.field)).write();
+        }else{
+          db.unset('user.auto').write();
+        }
+
+        ipcRenderer.send('login');
+      }else{
+        layer.msg(res.message, {icon: 10});
+      }
+    },(err)=>{
+      layer.msg('网络错误', {icon: 10});
+    })
+  },
+  resetPsw: function(data){
+    utility.currencyAjax('post','resetpwd/reset',JSON.stringify(data.field),function(res){
+      if(res.code == '000'){
+        layer.msg("修改成功", {icon: 1, time:1000});
+        $('.resetpsw-return-btn').click()
+      }else{
+        layer.msg(res.message, {icon: 10});
+      }
+    },(err)=>{
+      layer.msg('网络错误', {icon: 10});
+    })
+  }
+}

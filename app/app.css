@@ -127,3 +127,73 @@ button,span,i,input,a{
     font-size: 13px;
     text-align: center;
 }
+/* 忘记密码 */
+.app-resetpsw-wrap-head{
+    width: 100%;
+    position: relative;
+    height: 134px;
+    background: url(../assets/images/resetpsw_top.png);
+    background-size: 100% 100%;
+}
+.resetpsw-return-btn{
+    color: #08979D;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+.resetpsw-return-btn i{
+    font-size: 26px;
+    height: 36px;
+}
+#app-resetPsw-wrap .app-login-wrap-content-psd,#app-resetPsw-wrap .app-login-wrap-content-code {
+    margin-top: 12px;
+}
+.border-input{
+    height: 45px;
+    border: 1px solid #E8E8E8;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+#get-code-btn{
+    width: 100px;
+    background: #fff;
+    padding: 0 16px;
+    margin-left: 12px;
+    cursor: pointer;
+}
+#get-code-btn:hover{
+    color: #fff;
+    background: #14a5ad;
+}
+#get-code-btn:disabled{
+    cursor: default;
+    color: #777;
+    padding: 0 37px;
+    background: #fff;
+}
+#get-code-btn:disabled:hover{
+    color: #777;
+    background: #fff;
+}
+.app-login-wrap-content-code{
+    display: flex;
+}
+.app-login-wrap-content-code .border-input{
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+}
+.app-login-wrap-content-code i{
+    height: 24px;
+}
+.app-login-wrap-content-code input{
+    width: auto;
+}
+/* 忘记密码 */
