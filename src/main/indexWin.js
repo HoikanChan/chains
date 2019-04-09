@@ -130,21 +130,23 @@ ipcMain.on('tray-status',()=>{
 
 var count=0,timer = null;
 ipcMain.on('tray-twinkle',()=>{
-  
-  timer = setInterval(function() {
-      count++;
-      if (count%2 == 0) {
-        apptray.setImage(path.join(__dirname, '../../assets/images/tray/tray.png'));
-      } else {
-        apptray.setImage(path.join(__dirname, '../../assets/images/tray/tray1.png'));
-      }
-  }, 600);
+  if(!timer){
+    timer = setInterval(function() {
+        count++;
+        if (count%2 == 0) {
+          apptray.setImage(path.join(__dirname, '../../assets/images/tray/tray.png'));
+        } else {
+          apptray.setImage(path.join(__dirname, '../../assets/images/tray/tray1.png'));
+        }
+    }, 600);
+  }
 
 });
 
 function openWin(){
   if(!!timer){
     clearInterval(timer)
+    timer = null;
     apptray.setImage(path.join(__dirname, '../../assets/images/tray/tray.png'));
   }
   //主窗口显示隐藏切换
@@ -154,6 +156,7 @@ function openWin(){
 ipcMain.on('tray-canceltwinkle',()=>{
   if(!!timer){
     clearInterval(timer)
+    timer = null;
     apptray.setImage(path.join(__dirname, '../../assets/images/tray/tray.png'));
   }
 });

@@ -54,6 +54,47 @@ index.load = ()=>{
         Mianwindow.hide();
     });
 
+    $('.app-index-user-portrait').click(function(){
+        let moduleId = 'userInfo';
+        const link = document.querySelector(`link#${moduleId}[rel="import"]`);
+        const template = link.import.querySelector('.modal-template')
+        let clone = document.importNode(template.content, true)
+        layer.open({
+            type: 1,
+            title: false,
+            offset:['10%','20%'],
+            skin: 'app-setting-modals-box', //样式类名
+            shade: [0.1, '#fff'],
+            closeBtn: 0, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            content: '<div class="setting-modal"></div>'
+        });
+        document.querySelector('.setting-modal').appendChild(clone)
+
+        utility.currencyAjax('post','user/info2?userId='+im.identifier,undefined,function(res){
+            if(res.code === '000'){
+                var userInfo = res.data;
+                var  picUrl = fileDomain + userInfo.picUrl;
+                if(userInfo.picUrl == null || userInfo.picUrl == ''){
+                    picUrl = (userInfo.sex == '女')?'../../assets/images/6.png':'../../assets/images/7.png';
+                }
+                userInfo.picUrl = picUrl;
+                $(`.app-setting-modals-box .app-setting-sex[title="${userInfo.sex}"]`).prop("checked","checked")
+    
+                $('.app-setting-modals-box .app-index-user-portrait img').attr('src',picUrl);
+                $('.app-setting-modals-box #app-setting-nickname').val(userInfo.realName);
+                $('.app-setting-modals-box #app-setting-phone').val(userInfo.contactPhone);
+                
+                $('.app-setting-modals-box #app-setting-position').text(userInfo.position);
+                $('.app-setting-modals-box #app-setting-company').text(organs[0].organName);
+                $('.app-setting-modals-box #app-setting-dept').text(userInfo.depts[0].deptName);
+                $('.app-setting-modals-box #app-setting-header').find('img').attr('src',picUrl);
+            }
+        });
+
+    })
+
     $('.app-index-company-list').on('click','li',function(){
         let company_text = $(this).text();
         $('.app-index-company-box').text(company_text);
