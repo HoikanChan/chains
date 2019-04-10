@@ -141,7 +141,8 @@ function openWin(){
     apptray.setImage(path.join(__dirname, '../../assets/images/tray/tray.png'));
   }
   //主窗口显示隐藏切换
-  $indexWin.isVisible() ? $indexWin.hide() : $indexWin.show();
+  $indexWin.show();
+  $indexWin.focus();
 }
 
 ipcMain.on('tray-canceltwinkle',()=>{
