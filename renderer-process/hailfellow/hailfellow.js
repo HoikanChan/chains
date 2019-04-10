@@ -9,17 +9,17 @@ hailfellow.event = ()=>{
 
         switch(id){
             case '1':
-                $('.app-hailfellow-child-customer-list').addClass('is-hidden');
-                $('.app-hailfellow-child-group-list').addClass('is-hidden');
+                $('.app-hailfellow-child-customer-box').addClass('is-hidden');
+                $('.app-hailfellow-child-group-box').addClass('is-hidden');
                 hailfellow.load();
                 break;
                 case '2':
-                $('.app-hailfellow-child-group-list').addClass('is-hidden');
+                $('.app-hailfellow-child-group-box').addClass('is-hidden');
                 $('.app-hailfellow-child-user-list').addClass('is-hidden');
                 hailfellow.loadCust();
                 break;
                 case '3':
-                $('.app-hailfellow-child-customer-list').addClass('is-hidden');
+                $('.app-hailfellow-child-customer-box').addClass('is-hidden');
                 $('.app-hailfellow-child-user-list').addClass('is-hidden');
                 hailfellow.loadGroup();
                 break;
@@ -123,7 +123,7 @@ hailfellow.event = ()=>{
 }
 
 hailfellow.loadGroup = ()=>{
-    $('.app-hailfellow-child-group-list').removeClass('is-hidden');
+    $('.app-hailfellow-child-group-box').removeClass('is-hidden');
     $('.app-hailfellow-child-group-list .app-hailfellow-user-item').remove();
     getMyGroup(function(res){
         var $li = $('<li>'),$img = $('<img>'),$span = $('<span>');
@@ -220,7 +220,7 @@ hailfellow.load = ()=>{
 
 
 hailfellow.loadCust = (type = 1)=>{
-	$('.app-hailfellow-child-customer-list').removeClass('is-hidden');
+	$('.app-hailfellow-child-customer-box').removeClass('is-hidden');
     $('.app-hailfellow-child-customer-list').find('.app-hailfellow-child-customer-name,.app-hailfellow-child-customer-childlist').remove('');
 	utility.currencyGetAjax('user/custs/'+type,undefined,function(res){
 

@@ -21,7 +21,7 @@ ipcMain.on('login',()=>{
       frame: false
     });
   
-    globalShortcut.register('ctrl+shift+z', () => shortcutCapture(1));
+    globalShortcut.register('ctrl+shift+z', () => shortcutCapture(true));
     globalShortcut.register('f12', () =>  $indexWin.openDevTools());
 
     $indexWin.once('ready-to-show', () => {
@@ -59,12 +59,12 @@ ipcMain.on('screenshot',(event)=>{//截屏
   shortcutCapture();
 });
 
-function shortcutCapture(status){
+function shortcutCapture(status = false){
 
   var screenShotExePath = path.join(__dirname, "../../assets/screenshot/NiuniuCapture.exe");
        
   child.execFile(screenShotExePath, function (err, data) {
-      if (err == null && !status) {  //完成截图
+      if (err.code == 1 && status == false) {  //完成截图
           finishShot(err.code);
       }
   });
@@ -72,7 +72,6 @@ function shortcutCapture(status){
 }
 
 function finishShot(code){
-  if (code == 1) {
     let nativeImage = clipboard.readImage('selection');
     if (nativeImage.getSize().width > 0) //粘贴图片
     {
@@ -80,15 +79,7 @@ function finishShot(code){
         let nativeImageSrc = image.toDataURL();
         $indexWin.webContents.send('shortcut',nativeImageSrc);
     }
-  }
-  else if (code == 2) {//取消截图
-  }
-  else if (code == 3) {//保存截图
-  }
-
 }
-
-
 
 ipcMain.on('Frame_status',()=>{//窗口闪烁
   $indexWin.showInactive();

@@ -32,7 +32,7 @@ search.load = ()=>{
             $('#customer-list').hide();
             $('#search-input').css('width','400px');
             $('.app-search-result-box').css('height','205px');
-            $('#search-input').attr('placeholder','请输入群名');
+            $('#search-input').attr({'placeholder':'请输入群名',"data-type":"1"});
         }else{
             search.status = 2;
             $('.app-search-addbox').hide();
@@ -40,7 +40,7 @@ search.load = ()=>{
             $('#customer-list').show();
             $('#search-input').css('width','290px');
             $('.app-search-result-box').css('height','341px');
-            $('#search-input').attr('placeholder','请输入手机号/昵称');
+            $('#search-input').attr({'placeholder':'请输入手机号/昵称'});
             search.loadRelationOrgs();
         }
     })
@@ -52,6 +52,10 @@ search.load = ()=>{
     });
 
     $('#add-customer').click(function(){
+        if(!search.orgId){
+            layer.msg('请选择需要添加的公司');
+            return;
+        }
         utility.currencyGetAjax('cust/getDeptByRelationOrgId/'+search.orgId,undefined,function(res){
             if(res.code === '000'){
                 var options = '';
@@ -69,18 +73,6 @@ search.load = ()=>{
         search.orgId = $(this).val();
     })
 
-    $('body').on('change','#inputuserName',function(){
-		var userName = $(this).val().trim();
-
-		utility.currencyGetAjax('cust/user/checkUserName',{userName:userName},(res)=>{
-            console.log(res);
-			if(res.code === '000'){
-				layer.msg('用户名已存在', {icon: 10});
-			}else{
-			}
-		})
-    });
-    
     $('#add-group').click(function(){
         search.loadFriends();
     });
@@ -188,6 +180,11 @@ search.findCustomer = ()=>{
     var orgId = $('#customer-list').val();
     var searchStr = $('#search-input').val();
 
+    if(!orgId){
+        layer.msg('请选择需要搜索的公司');
+        return;
+    }
+
     $('.app-search-result-box').empty();
     utility.currencyGetAjax('cust/searchCust',{orgId:orgId,searchStr:searchStr,page:1,rows:10},function(res){
 
@@ -202,6 +199,8 @@ search.findCustomer = ()=>{
                     var $p1 = $p.clone().addClass('app-search-user-position').text(item.dept_name);
                     var $p2 = $p.clone().append(`<button data-userId="`+item.user_id+`" data-dept="`+item.dept_id+`">添加</button>`);
                 });
+            }else{
+                layer.msg('未搜索到相关人员');
             }
 
         }
@@ -275,6 +274,7 @@ search.addCustomer = (options)=>{
         form.on('submit(*)', function(data){
 
             utility.currencyAjax('post', 'user/saveRelationUser', JSON.stringify(data.field), function(res){
+                console.log(res);
                 if(res.code === '000'){
                     layer.msg('添加成功', {icon: 1});
                 }else{

@@ -19,10 +19,16 @@
     font-size: 15px;
     font-weight: normal;
 }
-.app-hailfellow-child-user-list,.app-hailfellow-child-customer-list{
+.app-hailfellow-child-user-list{
     position: relative;
     overflow-x: hidden;
     max-height: 98%;
+}
+.app-hailfellow-child-customer-list{
+    position: relative;
+    overflow-x: hidden;
+    height: calc(100% - 75px);
+    width: 100%;
 }
 .app-hailfellow-list-item:hover,.app-hailfellow-child-user-list li:hover,
 .app-hailfellow-child-customer-list li:hover{
@@ -178,13 +184,17 @@
 
 
 /** list **/
+.app-hailfellow-child-group-box,.app-hailfellow-child-customer-box{
+    height: 100%;
+}
 .app-hailfellow-child-group-list .app-hailfellow-user-item:hover{
     background: #f4f4f4;
     cursor: pointer;
 }
 .app-hailfellow-child-group-list{
     position: relative;
-    height: 346px;
+    height: calc(100% - 75px);
+    width: 100%;
     overflow-x: hidden;
 }
 .app-hailfellow-contextMenu{
