@@ -67,7 +67,13 @@ if(gotTheLock){
   app.on('second-instance',(e,commandLine)=>{
     if(mainWindow){//登录窗口打开判断
       if(mainWindow.isMinimized())mainWindow.restore();
+      mainWindow.show();
       mainWindow.focus();
+    }
+    if(indexWin.indexWin){//聊天窗口打开判断
+      if(indexWin.indexWin.isMinimized())indexWin.indexWin.restore();
+      indexWin.indexWin.show();
+      indexWin.indexWin.focus();
     }
   })
   app.on('ready', ()=>{
