@@ -261,7 +261,7 @@ function login(){
                 roomId = json.data.roomId;
                 sendCustomMsg(ext);
                 //一会儿进入房间要用到
-                 var privateMapKey = json.data.privMapEncrypt;
+                 var privateMapKey = json.data.privateMapKey;
                  // 页面处理，显示音频流页面
                  initRTC({
                      "userId": userId,

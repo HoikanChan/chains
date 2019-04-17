@@ -22,6 +22,8 @@ $('.resetpsw-return-btn').click(function(){
   $('#app-resetPsw-wrap').hide();
   $('#app-login-wrap').show();
 })
+
+//网络状态监听
 const updateOnlineStatus = () => {
   if(navigator.onLine){
     $('.app-error-box').removeClass('slideInUp').hide();

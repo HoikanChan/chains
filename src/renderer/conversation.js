@@ -1,6 +1,7 @@
 const {app, ipcMain, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
+const indexWin = require('../main/indexWin.js');
 
 let option = {
     width: 350, 
@@ -187,6 +188,9 @@ ipcMain.on('meeting-join',(event,RoomID)=>
    newwin.on('closed',()=>{newwin = null});
 });
 
+ipcMain.on('conversationMsg',function(msg){
+   indexWin.indexWin.webContents.send('conversation-msg',msg);
+});
 
 //最小化
 ipcMain.on('nw_min', e=> newwin.minimize());

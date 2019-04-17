@@ -1,4 +1,5 @@
 const {app, BrowserWindow, Menu, ipcMain }  = require('electron');
+const indexWin = require('../main/indexWin.js');
 
 function menuList($win, params){
   // 菜单执行命令
@@ -22,21 +23,12 @@ function menuList($win, params){
   }
 
   // 生成菜单模板
-  const template = Object.keys(menuCmd)
-    .map(cmd => {
-      const { id, label } = menuCmd[cmd]
-      let enabled = true
-      let visible = true
-      return {
-        id,
-        label,
-        role: cmd,
-        enabled,
-        visible
-      }
-    })
-    .filter(item => item.visible)
-    .sort((a, b) => a.id > b.id)
+  const template = [
+    { label: "全选", accelerator: "CommandOrControl+A", role: "selectAll" },
+    { label: "复制", accelerator: "CommandOrControl+C", role: "copy" },
+    { label: "剪切", accelerator: "CommandOrControl+X", role: "cut" },
+    { label: "粘贴", accelerator: "CommandOrControl+V", click: ()=> indexWin.indexWin.webContents.send('paste-other') }
+  ]
 
   // 用模板生成菜单
   if (template.length && !$win.isDestroyed()) {

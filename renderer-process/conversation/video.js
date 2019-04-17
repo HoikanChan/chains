@@ -3,7 +3,6 @@ const {ipcRenderer} = electron;
 var selToID = '';
 var user = JSON.parse(db.get('user.info').value());
 var rtc = user.rtc;
-var RTC;
 
 ipcRenderer.on('synchronous-webim',(event,webims,selToIDs)=>{
     webim.SetCTX(webims);
@@ -117,6 +116,7 @@ function onWebSocketClose() {
 }
 
 function initRTC(opts){
+
     // 初始化
     window.RTC = new WebRTCAPI({
         "useCloud": Bom.query("useCloud") || 0 ,
@@ -133,6 +133,9 @@ function initRTC(opts){
             pstnPhoneNumber:  $("#pstnPhoneNumber").val()
         });
     },function( error ){
+        if(error.errorCode == '11000'){
+            alert('该功能暂时无法使用');
+        }
         console.log("init error", error)
     });
 
@@ -197,7 +200,7 @@ function login(){
                 roomId = json.data.roomId;
                 sendCustomMsg(ext);
                 //一会儿进入房间要用到
-                 var privateMapKey = json.data.privMapEncrypt;
+                 var privateMapKey = json.data.privateMapKey;
                  // 页面处理，显示视频流页面
                  $("#video-section").show();
                  $(".open-chat").hide();
@@ -370,16 +373,18 @@ function sendCustomMsg(ext) {
     var custom_obj = new webim.Msg.Elem.Custom(roomId + '', desc, ext); //消息元素对象(自定义)
     msg.addCustom(custom_obj);
 
-    webim.sendMsg(msg, function (resp) {
-        if(!window.RTC){
-            console.log('sendCustomMsgSuccess!');
-        } else{
-            console.log('sendCustomMsgSuccessAlreadInitRTC!');
-        }
-    },
-    function (err) {
-        console.error(err);
-        return false;
-    });
+    // webim.sendMsg(msg, function (resp) {
+    //     if(!window.RTC){
+    //         console.log('sendCustomMsgSuccess!');
+    //     } else{
+    //         console.log('sendCustomMsgSuccessAlreadInitRTC!');
+    //     }
+    // },
+    // function (err) {
+    //     console.error(err);
+    //     return false;
+    // });
+
+    //ipcRenderer.send('conversationMsg',msg);
 }
 

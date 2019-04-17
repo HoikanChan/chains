@@ -200,9 +200,12 @@ more.loadFriend = ()=>{//获取好友信息
 
     let info = db.get('chats.list').find({userId:parseInt(selToID)}).value();
 
-    var  picUrl = fileDomain + info.picUrl;
-    if(info.picUrl == null || info.picUrl == ''){
-        picUrl = (info.sex == '女')?'../assets/images/6.png':'../assets/images/7.png';
+    var picUrl = '../assets/images/7.png';
+    if(info){
+        picUrl = fileDomain + info.picUrl;
+        if(info.picUrl == null || info.picUrl == ''){
+            picUrl = (info.sex == '女')?'../assets/images/6.png':'../assets/images/7.png';
+        }
     }
     $('.app-chat-right-setting-userInfo').find('img').attr('src',picUrl);
     $('.app-chat-right-setting-userInfo').find('.app-chat-right-setting-userInfo-name').text(info.realName);

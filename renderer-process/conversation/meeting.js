@@ -78,7 +78,6 @@ function onLocalStreamAdd(info) {
 }
 
 function onRemoteStreamUpdate( info ) {
-    console.log( info )
     if (info.stream && info.stream.active === true)
     {
         var id = info.videoId;

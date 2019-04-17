@@ -1,0 +1,27 @@
+.invitation-modal{
+    height: 100%;
+}
+.app-invitation-box{
+    height:100%;
+    background:#c4c4c4;
+}
+.app-invitation-head{
+    padding-top: 100px;
+    text-align: center;
+    line-height: 80px;
+    z-index: 10;
+}
+.app-invitation-bottom{
+    text-align: center;
+    line-height: 150px;
+}
+#answer{
+    font-size: 40px;
+    color: forestgreen;
+    cursor: pointer;
+}
+#hangup{
+    font-size: 40px;
+    color: crimson;
+    cursor: pointer;
+}

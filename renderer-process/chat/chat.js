@@ -46,7 +46,7 @@ chat.event = ()=>{
         }
       }
 
-      if(event.ctrlKey && event.keyCode  == 86) {   
+      if(event.ctrlKey && event.keyCode  == 86) {  
         let base64_image = clipboard.readImage().toDataURL();
         let copy_text = clipboard.readText();
         if(!clipboard.readImage().isEmpty()){
@@ -151,6 +151,23 @@ chat.event = ()=>{
         }
       });
     });
+
+    // $('#app-record').click(function(){
+    //   moduleId = 'invitation';
+    //   const link = document.querySelector(`link#${moduleId}[rel="import"]`);
+    //   const template = link.import.querySelector('.modal-template')
+    //   let clone = document.importNode(template.content, true);
+    //   layer.open({
+    //     type: 1,
+    //     title: false,
+    //     skin: false, //加上边框
+    //     area: ['340px', '420px'], //宽高
+    //     closeBtn: 0, //不显示关闭按钮
+    //     shadeClose: true, //开启遮罩关闭
+    //     content: '<div class="invitation-modal"></div>'
+    //   });
+    //   document.querySelector('.invitation-modal').appendChild(clone)
+    // });
 
     $('#app-chat-search-group-user-input').bind('input propertychange', function(){
         // let name = $(this).val();
@@ -341,6 +358,17 @@ chat.Choicepersonnel = ()=>{
   });
 }
 
+ipcRenderer.on('paste-other',function(){//复制按钮
+  let base64_image = clipboard.readImage().toDataURL();
+  let copy_text = clipboard.readText();
+  if(!clipboard.readImage().isEmpty()){
+    $("#send_msg_text").append($('<img>').css({"width":130,"height":60}).attr('src',base64_image));
+    $('#send-message').attr("disabled",false);
+  }else{
+    $("#send_msg_text").append(copy_text);
+    $('#send-message').attr("disabled",false);
+  }
+});
 
 
 function dataURLtoFile(dataurl, filename) {//base64转换file对象

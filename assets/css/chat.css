@@ -61,6 +61,8 @@
     text-align: left;
     max-width: 240px;
     user-select: text;
+    min-height: 19px;
+    min-width: 20px;
 }
 .app-chat-left-center-item p>img{
     position: relative;
