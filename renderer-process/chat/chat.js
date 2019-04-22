@@ -1,4 +1,5 @@
 var chat = {};
+const fs  = require('fs');
 
 chat.index = '';
 chat.shortcutImage = '';
@@ -45,10 +46,23 @@ chat.event = ()=>{
             },10);
         }
       }
-
+      
       if(event.ctrlKey && event.keyCode  == 86) {  
         let base64_image = clipboard.readImage().toDataURL();
         let copy_text = clipboard.readText();
+        
+        
+        const filePath = clipboard.readBuffer('FileNameW').toString('ucs2').slice(0, -1)
+        if(filePath){
+          const fileName = filePath.split('\\').pop().trim();
+          const readPath = filePath.replace(/\\/g, '/')
+
+          fs.readFile(filePath, function(err,data){
+            const file = new File(data, fileName)
+            window.renderFile(file)
+          })
+        }
+        // let copy_text = clipboard.readBUffer();
         if(!clipboard.readImage().isEmpty()){
           $(this).append($('<img>').css({"width":130,"height":60}).attr('src',base64_image));
           $('#send-message').attr("disabled",false);
@@ -292,6 +306,7 @@ chat.sendMsg = ()=>{//聊天消息发送
         });
         files = [];
       }
+      
       if(formData.formData){//拖拽文件
         $.each(formData.formData,(i,item)=>{
             var filesize = item[0].size;

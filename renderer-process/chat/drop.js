@@ -93,7 +93,7 @@ function renderFile(file) {
     }
     encapsulation(fileName, showFileIcon); // 处理图片及文字  展示
 }
-
+window.renderFile = renderFile
 /**
  * 获取文件图标 
  * 常用的文件类型
@@ -253,4 +253,4 @@ function getFormData(files) {
     return formData;
 }
 
-exports.formData = formData;
+exports. renderFile = formData;
