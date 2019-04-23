@@ -23,6 +23,7 @@ ipcMain.on('login',()=>{
   
     globalShortcut.register('ctrl+shift+z', () => shortcutCapture(true));
     globalShortcut.register('f12', () =>  $indexWin.openDevTools());
+    globalShortcut.register('esc', () =>  $indexWin.hide());
 
     $indexWin.once('ready-to-show', () => {
       mainWindow.mainWindow.close();
@@ -82,7 +83,7 @@ function finishShot(code){
 }
 
 ipcMain.on('Frame_status',()=>{//窗口闪烁
-  $indexWin.showInactive();
+  // $indexWin.showInactive();
   $indexWin.flashFrame(true);
 });
 

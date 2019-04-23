@@ -39,6 +39,7 @@ index.load = ()=>{
 
     $('#send_msg_text').click(function(){
         ipcRenderer.send('tray-canceltwinkle');
+        $("#sessDiv_" + escapeJquery(selToID)).find('.app-chats-Tips').remove();
     });
 
     $(document).on('click','.layui-layer-close,input,.app-chat-float p,.app-chat-console-communication',function(event){
