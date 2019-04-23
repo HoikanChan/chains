@@ -42,6 +42,7 @@ areas.addEventListener('drop', function(e) {
         })(i, files)
     }
     formData.push(files);
+    $('#send-message').attr("disabled",false);
 }, false);
 
 areas.addEventListener('keydown', function(e) {
@@ -253,4 +254,7 @@ function getFormData(files) {
     return formData;
 }
 
-exports. renderFile = formData;
+exports. exportThings = {
+    formData,
+    renderFile
+};

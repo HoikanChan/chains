@@ -120,7 +120,8 @@
         </div>
 
         <script type="text/javascript">
-             var formData = require('../renderer-process/chat/drop');
+             var exportThings = require('../renderer-process/chat/drop');
+             var formData = exportThings.exportThings
              require('../renderer-process/chat/chat');
              require('../renderer-process/chat/more');
              require('../renderer-process/chat/sendMsg');

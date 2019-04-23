@@ -47,22 +47,24 @@ chat.event = ()=>{
         }
       }
       
-      if(event.ctrlKey && event.keyCode  == 86) {  
-        let base64_image = clipboard.readImage().toDataURL();
-        let copy_text = clipboard.readText();
-        
-        
+      if(event.ctrlKey && event.keyCode  == 86) { 
+        // 复制文件 
+        // 读取文件路径并转字符集 
+        // ！！ 此api为实验性api注意electron版本支持问题
         const filePath = clipboard.readBuffer('FileNameW').toString('ucs2').slice(0, -1)
         if(filePath){
           const fileName = filePath.split('\\').pop().trim();
-          const readPath = filePath.replace(/\\/g, '/')
-
           fs.readFile(filePath, function(err,data){
             const file = new File(data, fileName)
             window.renderFile(file)
+            formData.formData.push(file)
           })
         }
-        // let copy_text = clipboard.readBUffer();
+        // 复制图片
+        let base64_image = clipboard.readImage().toDataURL();
+        // 复制文字
+        let copy_text = clipboard.readText();
+
         if(!clipboard.readImage().isEmpty()){
           $(this).append($('<img>').css({"width":130,"height":60}).attr('src',base64_image));
           $('#send-message').attr("disabled",false);
@@ -296,13 +298,18 @@ chat.sendMsg = ()=>{//聊天消息发送
       
       if(formData.formData){//拖拽文件
         $.each(formData.formData,(i,item)=>{
-            var filesize = item[0].size;
-            if(checkPic(item[0],filesize,'1')){
-                uploadPic(item[0],1);
-            }else{
-                uploadFile(item[0],1);
-            }
-          });
+          let file = item
+          // 拖拽文件是FileList，复制粘贴文件数据是File
+          if(item.length){
+            file = item[0]
+          }
+          var filesize = file.size;
+          if(checkPic(file, filesize,'1')){
+              uploadPic(file, 1);
+          }else{
+              uploadFile(file, 1);
+          }
+        });
           formData.formData.splice(0,formData.formData.length);
       }
 }
