@@ -119,7 +119,7 @@ function initRTC(opts){
 
     // 初始化
     window.RTC = new WebRTCAPI({
-        "useCloud": Bom.query("useCloud") || 0 ,
+        "useCloud": 1,
         "userId": opts.userId,
         "userSig": opts.userSig,
         "sdkAppId": opts.sdkappid,
@@ -373,17 +373,17 @@ function sendCustomMsg(ext) {
     var custom_obj = new webim.Msg.Elem.Custom(roomId + '', desc, ext); //消息元素对象(自定义)
     msg.addCustom(custom_obj);
 
-    // webim.sendMsg(msg, function (resp) {
-    //     if(!window.RTC){
-    //         console.log('sendCustomMsgSuccess!');
-    //     } else{
-    //         console.log('sendCustomMsgSuccessAlreadInitRTC!');
-    //     }
-    // },
-    // function (err) {
-    //     console.error(err);
-    //     return false;
-    // });
+    webim.sendMsg(msg, function (resp) {
+        if(!window.RTC){
+            console.log('sendCustomMsgSuccess!');
+        } else{
+            console.log('sendCustomMsgSuccessAlreadInitRTC!');
+        }
+    },
+    function (err) {
+        console.error(err);
+        return false;
+    });
 
     //ipcRenderer.send('conversationMsg',msg);
 }

@@ -109,7 +109,7 @@ function onWebSocketClose() {
 function initRTC(opts){
     // 初始化
     window.RTC = new WebRTCAPI({
-        "useCloud": Bom.query("useCloud") || 0 ,
+        "useCloud": 1,
         "userId": opts.userId,
         "userSig": opts.userSig,
         "sdkAppId": opts.sdkappid,
