@@ -108,7 +108,7 @@ layui.use(['form'], function(){
         form.val("login-form", obj);
 
         if(obj.hasOwnProperty('automatic')){
-          ipc.on('synchronous-msg',(event,msg)=>{
+          ipcRenderer.on('synchronous-msg',(event,msg)=>{
             if(msg == 'auto'){
               $('#login-sub').click();
             }

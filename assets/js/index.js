@@ -60,6 +60,9 @@ index.load = ()=>{
         const link = document.querySelector(`link#${moduleId}[rel="import"]`);
         const template = link.import.querySelector('.modal-template')
         let clone = document.importNode(template.content, true)
+        if(document.querySelector('.app-setting-modals-box')){
+            return
+        }
         layer.open({
             type: 1,
             title: false,
