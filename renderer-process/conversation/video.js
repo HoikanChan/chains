@@ -4,15 +4,19 @@ var selToID = '';
 var user = JSON.parse(db.get('user.info').value());
 var rtc = user.rtc;
 
+
 ipcRenderer.on('synchronous-webim',(event,webims,selToIDs)=>{
     webim.SetCTX(webims);
     selToID = selToIDs;
     login();
 });
 
+
 ipcRenderer.on('synchronous-join',(event,RoomID)=>{
     join(RoomID);
 });
+
+
 
 var FetchSigCgi = 'https://www.qcloudtrtc.com/sxb_dev/?svc=account&cmd=authPrivMap';
 var sdkAppID = rtc.sdkAppId,
@@ -115,11 +119,30 @@ function onWebSocketClose() {
     RTC.quit();
 }
 
+function gotStream( opt ,succ){
+    RTC.getLocalStream({
+        video:true,
+        audio:true,
+        videoDevice:opt.videoDevice,
+        // 如需指定分辨率，可以在attributes中增加对width和height的约束
+        // 否则将获取摄像头的默认分辨率
+        // 更多配置项 请参考 接口API
+        // https://cloud.tencent.com/document/product/647/17251#webrtcapi.getlocalstream
+        // attributes:{
+        //     width:640,
+        //     height:320
+        // }
+    },function(info){
+        var stream = info.stream;
+        succ ( stream )
+    });
+}
+
 function initRTC(opts){
 
     // 初始化
     window.RTC = new WebRTCAPI({
-        "useCloud": 1,
+        // "useCloud": 1,
         "userId": opts.userId,
         "userSig": opts.userSig,
         "sdkAppId": opts.sdkappid,
@@ -127,16 +150,26 @@ function initRTC(opts){
     },function(){
         RTC.createRoom({
             roomid : opts.roomid * 1,
-            privateMapKey: opts.privateMapKey,
+            // privateMapKey: opts.privateMapKey,
             role : "user",
-            pureAudioPush: parseInt($("#pstnBizType").val() || 0),
-            pstnPhoneNumber:  $("#pstnPhoneNumber").val()
+            // pureAudioPush: parseInt($("#pstnBizType").val() || 0),
+            // pstnPhoneNumber:  $("#pstnPhoneNumber").val()
+        },function (info) {
+            console.warn("init succ", info)
+            gotStream({
+                audio:true,
+                video:true
+            },function(stream){
+                RTC.startRTC({
+                    stream: stream,
+                    role: 'user'
+                });
+            })
+        }, function (error) {
+            console.error("init error", error)
         });
-    },function( error ){
-        if(error.errorCode == '11000'){
-            alert('该功能暂时无法使用');
-        }
-        console.log("init error", error)
+    }, function (error) {
+        console.warn("init error", error)
     });
 
     // 远端流新增/更新
@@ -153,6 +186,15 @@ function initRTC(opts){
     // RTC.on("*",function(e){
     //     console.debug(e)
     // });
+    
+    RTC.on( 'onStreamNotify' , function( info ){ 
+        console.log(info)
+        if( info.isLocal === false && info.event === "inactive" ) {
+            console.log(info.userId+" 已挂断");
+            onWebSocketClose();
+            ipcRenderer.send('nw_close')
+        }    
+    })
 
     RTC.on("onErrorNotify", function( info ){
         console.error( info )

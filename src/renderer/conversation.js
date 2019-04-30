@@ -193,6 +193,6 @@ ipcMain.on('conversationMsg',function(msg){
 });
 
 //最小化
-ipcMain.on('nw_min', e=> newwin.minimize());
+ipcMain.on('nw_min', e => newwin.minimize());
 //关闭
-ipcMain.on('nw_close', e=> newwin.close());
+ipcMain.on('nw_close', e => newwin.close());
