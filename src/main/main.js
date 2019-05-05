@@ -112,3 +112,5 @@ app.on('activate', function () {
     createWindow()
   }
 })
+//audio自动播放
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
