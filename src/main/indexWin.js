@@ -87,6 +87,10 @@ ipcMain.on('Frame_status',()=>{//窗口闪烁
   $indexWin.flashFrame(true);
 });
 
+ipcMain.on('pasted-other', (event,params) => {
+  $('#send-message').attr("disabled",false);
+})
+
 function creatTray(){
 
   let icon_file = path.join(__dirname, '../../assets/images/tray/tray.png');

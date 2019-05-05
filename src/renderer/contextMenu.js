@@ -41,3 +41,4 @@ ipcMain.on('show-context-menu', (event,params) => {
   const win = BrowserWindow.fromWebContents(event.sender);
   menuList(win)
 });
+

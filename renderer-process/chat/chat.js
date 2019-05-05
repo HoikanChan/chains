@@ -368,15 +368,31 @@ chat.Choicepersonnel = ()=>{
 }
 
 ipcRenderer.on('paste-other',function(){//复制按钮
-  let base64_image = clipboard.readImage().toDataURL();
-  let copy_text = clipboard.readText();
-  if(!clipboard.readImage().isEmpty()){
-    $("#send_msg_text").append($('<img>').css({"width":130,"height":60}).attr('src',base64_image));
-    $('#send-message').attr("disabled",false);
-  }else{
-    $("#send_msg_text").append(copy_text);
-    $('#send-message').attr("disabled",false);
+  // 复制文件 
+  // 读取文件路径并转字符集 
+  // ！！ 此api为实验性api注意electron版本支持问题
+  const filePath = clipboard.readBuffer('FileNameW').toString('ucs2').slice(0, -1)
+  if(filePath){
+    const fileName = filePath.split('\\').pop().trim();
+    fs.readFile(filePath, function(err,data){
+      const file = new File(data, fileName)
+      window.renderFile(file)
+      formData.formData.push(file)
+    })
   }
+  // 复制图片
+  let base64_image = clipboard.readImage().toDataURL();
+  // 复制文字
+  let copy_text = clipboard.readText();
+  
+  if(!clipboard.readImage().isEmpty()){
+    $(this).append($('<img>').css({"width":130,"height":60}).attr('src',base64_image));
+    ipcRenderer.send('pasted-other');
+  }else{
+    $(this).append(copy_text);
+    ipcRenderer.send('pasted-other');
+  }
+  return false;  
 });
 
 
