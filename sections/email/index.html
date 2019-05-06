@@ -27,23 +27,30 @@
       </div>
     </div>
     <contacter-list></contacter-list>
-    <div class="menu">
-      <div class="menu-item">写邮件</div>
-      <div class="menu-item">收件箱</div>
-      <div class="menu-item">通讯录</div>
-      <div class="menu-item">已发送</div>
+    <div class="menu lf">
+      <div class="menu-item" @click="switchOver('write')">写邮件</div>
+      <div class="menu-item" @click="switchOver('inbox')">收件箱</div>
+      <div class="menu-item" @click="switchOver('contacts')">通讯录</div>
+      <div class="menu-item" @click="switchOver('sent')">已发送</div>
     </div>
-    <el-card class="box-card">
-      <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
-        <h2>{{dept.deptName}}</h2>
-        <div v-for="user in dept.users" :key="user.id" class="user item">
-          {{user.realName}}
+    <div v-if="tabName === 'write'">write</div>
+    <div v-if="tabName === 'inbox'" >inbox</div>
+    <div v-if="tabName === 'contacts'" >
+
+      <el-card class="box-card lf">
+        <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
+          <h2>{{dept.deptName}}</h2>
+          <div v-for="user in dept.users" :key="user.id" class="user item">
+            {{user.realName}}
+          </div>
         </div>
-      </div>
-    </el-card>
+      </el-card>
+    </div>
+    <div v-if="tabName === 'sent'" >sent</div>
+   
   </main>
   <script type="text/x-template" id="contacter-list">
-    <h1>contacter-list</h1>
+    <!-- <h1>contacter-list</h1> -->
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 

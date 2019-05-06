@@ -3,6 +3,7 @@ const electron = require('electron');
 const { ipcRenderer } = electron;
 const host = "http://company.zqyzk.com/api/v1/";
 const emailWindow = remote.getCurrentWindow();
+
 initPage = function () {
   Vue.component('contacter-list', {
     template: '#contacter-list',
@@ -14,6 +15,7 @@ initPage = function () {
     el: 'main',
     data: {
       a: 'hi vue',
+      tabName: 'inbox',
       deptAndUsers: []
     },
     methods: {
@@ -22,6 +24,9 @@ initPage = function () {
       },
       closeWin() {
         emailWindow.close();
+      },
+      switchOver: function (tabName) {
+        this.tabName = tabName
       }
     },
     mounted(){

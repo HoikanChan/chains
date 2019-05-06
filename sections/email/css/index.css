@@ -1,9 +1,15 @@
 
+.lf{
+    float: left;
+}
+.rf{
+    float: right;
+}
 .app-head{
-    /* position: absolute; */
+    position: absolute;
     text-align: right;
     right: 2px;
-    top:0;
+    top: 20px;
 }
 .app-head>.app-head-console-item{
     text-align: center;
@@ -18,5 +24,22 @@
 .app-head-box{
     position: relative;
     z-index: 500;
+    height: 60px;
+    background-color:#16898e ;
     -webkit-app-region: drag;
+}
+.menu{
+    width: 180px;
+    height: 532px;
+    padding:10px ;
+    background-color: #13283b;
+}
+.menu-item{
+    cursor: pointer;
+    color: #ffffff;
+}
+.box-card{
+    width: 640px;
+    height: 532px;
+    background-color: #ffffff;
 }
