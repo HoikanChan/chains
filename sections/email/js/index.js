@@ -2,12 +2,17 @@ const { app, remote } = require('electron');
 const electron = require('electron');
 const { ipcRenderer } = electron;
 const host = "http://company.zqyzk.com/api/v1/";
+const emailHost = "http://192.168.1.134:3000/api/v1/email/";
 const emailWindow = remote.getCurrentWindow();
 
 initPage = function () {
-  Vue.component('contacter-list', {
-    template: '#contacter-list',
+  Vue.component('mail-item', {
+    template: '#mail-item',
+    props:{
+      'mail': Object
+    },
     mounted: function () {
+      console.log(mail);
     }
   });
 
@@ -16,6 +21,7 @@ initPage = function () {
     data: {
       a: 'hi vue',
       tabName: 'inbox',
+      inboxList: [],
       deptAndUsers: []
     },
     methods: {
@@ -29,12 +35,20 @@ initPage = function () {
         this.tabName = tabName
       }
     },
-    mounted(){
+    mounted() {
       window.$http.get('user/contacts').then(res => {
         console.log(res);
-        if(res.code === '000'){
+        if (res.code === '000') {
           this.deptAndUsers = res.data.deptAndUsers
         }
+      })
+      $email.get('get', {
+        params: {
+          type: 'Inbox'
+        }
+      }).then(res => {
+        console.log(res);
+        this.inboxList = res.result
       })
     }
   })
@@ -42,21 +56,24 @@ initPage = function () {
 
 ipcRenderer.on('synchronous-data', (event, data) => {
   console.log(data);
-  const api = () => {
+  const api = _host => {
     let axiosInstance = axios.create({
-      baseURL: host,
+      baseURL: _host,
       headers: {
         Authorization: data.token
       }
     });
     axiosInstance.interceptors.response.use(function (response) {
+      console.log('res',response);
       return response.data;
     }, function (error) {
+      console.error(error);
       return Promise.reject(error);
     });
     return axiosInstance
   }
-  window.$http = api();
+  window.$http = api(host);
+  window.$email = api(emailHost);
   initPage();
 
 });
