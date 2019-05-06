@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/icons/iconfont.css">
+
+</head>
+
+<body>
+  <!-- dev -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <!-- prod
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> -->
+  <main>
+    <div class="app-head-box">
+      <div class="app-head">
+        <span @click="minimizeWin" class="app-head-console-item icon iconfont" title="最小化">&#xe603;</span>
+        <span @click="closeWin" class="app-head-console-item icon iconfont" title="关闭">&#xeca0;</span>
+      </div>
+    </div>
+    <contacter-list></contacter-list>
+    <div class="menu">
+      <div class="menu-item">写邮件</div>
+      <div class="menu-item">收件箱</div>
+      <div class="menu-item">通讯录</div>
+      <div class="menu-item">已发送</div>
+    </div>
+    <el-card class="box-card">
+      <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
+        <h2>{{dept.deptName}}</h2>
+        <div v-for="user in dept.users" :key="user.id" class="user item">
+          {{user.realName}}
+        </div>
+      </div>
+    </el-card>
+  </main>
+  <script type="text/x-template" id="contacter-list">
+    <h1>contacter-list</h1>
+  </script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

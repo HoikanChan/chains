@@ -1,0 +1,22 @@
+
+.app-head{
+    /* position: absolute; */
+    text-align: right;
+    right: 2px;
+    top:0;
+}
+.app-head>.app-head-console-item{
+    text-align: center;
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    line-height: 20px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+}
+.app-head-box{
+    position: relative;
+    z-index: 500;
+    -webkit-app-region: drag;
+}

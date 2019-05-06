@@ -4,6 +4,7 @@ const glob = require("glob");
 const path = require('path');
 const url = require('url');
 const indexWin = require('./indexWin.js');
+require('./emailWin.js');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -88,6 +89,8 @@ loadModule();
 ipc.on('logout',(event, msg)=>{
   createWindow(true);
 });
+
+
 
 function loadModule () {
   const files = glob.sync(path.join(__dirname, '../renderer/*.js'));

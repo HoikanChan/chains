@@ -1,11 +1,15 @@
 $('.app-menu-list').on('click','li',function(){
     let listName = $(this).attr('data-section');
     if(listName == 'open-Mail'){
-        utility.currencyGetAjax('email/loginToAlmailUrl',undefined,function(res){
-            if(res.code == '000'){
-                shell.openExternal(res.data);
-            }
+        // utility.currencyGetAjax('email/loginToAlmailUrl',undefined,function(res){
+        //     if(res.code == '000'){
+        //         shell.openExternal(res.data);
+        //     }
+        // });
+        ipcRenderer.send('emailWin-show',{
+            token: Token
         });
+
     }else if(listName == 'app-setting'){
         showSetting();
     }else{
