@@ -29,7 +29,6 @@ initPage = function () {
         console.log(res);
         if(res.code === '000'){
           this.deptAndUsers = res.data.deptAndUsers
-          console.log(this);
         }
       })
     }
