@@ -8,11 +8,29 @@
 .rf{
     float: right;
 }
+.app-head-left{
+    position: absolute;
+    height: 19px;
+    left: 15px;
+    top:10px;
+}
+.logo-title{
+    font-size:14px;
+    font-family:MicrosoftYaHei;
+    font-weight:600;
+    color:rgba(255,255,255,1);
+}
+.app-head-center{
+    position: absolute;
+    height: 19px;
+    right: 100px;
+    top:10px;
+}
 .app-head{
     position: absolute;
     text-align: right;
-    right: 2px;
-    top: 20px;
+    right: 10px;
+    top: 8px;
 }
 .app-head>.app-head-console-item{
     text-align: center;
@@ -27,22 +45,37 @@
 .app-head-box{
     position: relative;
     z-index: 500;
-    height: 60px;
-    background-color:#16898e ;
+    height: 39px;
+    background-color:#0F8F94 ;
     -webkit-app-region: drag;
-}
-.menu{
-    width: 180px;
-    height: 532px;
-    padding:10px ;
-    background-color: #13283b;
-}
-.menu-item{
-    cursor: pointer;
-    color: #ffffff;
 }
 .box-card{
     width: 640px;
     height: 532px;
     background-color: #ffffff;
 }
+
+.main{
+    height: calc(100vh - 60px);
+    display: flex;
+}
+    .main-menu{
+        width: 80px;
+        height: 100%;
+        padding:10px ;
+        background-color: #13283b;
+    }
+        .menu-item{
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+    .main-list{
+        width: 260px;
+        height: 100%;
+
+    }
+    .main-detail{
+        flex: 1;
+        height: 100%;
+    }

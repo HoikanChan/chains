@@ -9,12 +9,10 @@
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" type="text/css" href="../../assets/icons/iconfont.css">
-  <link rel="stylesheet" href="./themes/notadd/css/neditor.css">
-  <link rel="stylesheet" href="./themes/iframe.css">
 
-  <script type="text/javascript" charset="utf-8" src="./js/neditor.config.js"></script>
-  <script type="text/javascript" charset="utf-8" src="./js/neditor.all.min.js"> </script>
-  <script type="text/javascript" charset="utf-8" src="./js/neditor.service.js"></script>
+  <script type="text/javascript" charset="utf-8" src="neditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="neditor.all.min.js"> </script>
+  <script type="text/javascript" charset="utf-8" src="neditor.service.js"></script>
   <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
   <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
   <script type="text/javascript" charset="utf-8" src="./i18n/zh-cn/zh-cn.js"></script>
@@ -33,49 +31,94 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> -->
   <main>
     <div class="app-head-box">
+      <div class="app-head-left">
+        <span class="logo-title">企才邮箱</span>
+        <span class="refresh-icon"></span>
+        <span class="search">
+          <label></label>
+          <input type="text" class="search-key" placeholder="搜索">
+        </span>
+      </div>
+      <div class="app-head-center">
+        <span class="head-icon"></span>
+        <el-dropdown>
+          <span class="el-dropdown-link">
+              15622532145_10@zcyzk.com<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu solt="dropdown">
+            <el-dropdown-item>个人信息</el-dropdown-item>
+            <el-dropdown-item>邮箱设置</el-dropdown-item>
+            <el-dropdown-item>帮助</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <div class="app-head">
         <span @click="minimizeWin" class="app-head-console-item icon iconfont" title="最小化">&#xe603;</span>
         <span @click="closeWin" class="app-head-console-item icon iconfont" title="关闭">&#xeca0;</span>
       </div>
     </div>
-    <div class="menu lf">
-      <div class="menu-item" @click="switchOver('write')">写邮件</div>
-      <div class="menu-item" @click="switchOver('inbox')">收件箱</div>
-      <div class="menu-item" @click="switchOver('contacts')">通讯录</div>
-      <div class="menu-item" @click="switchOver('sent')">已发送</div>
-    </div>
-    <div class="lf" v-if="tabName === 'write'">
-       
-       <textarea id="editor" style="width:666px;height:500px;"></textarea>
-       <script>
-          UE.getEditor('editor');
-       </script>
-    </div>
-    <div v-if="tabName === 'inbox'">
+    <div class="main">
 
-      <div v-for="mail in inboxList" :mail="mail" @click="readMail(mail.uid)">
-        <div>{{/"(.*)"/.exec(mail.from[0])[1]}}</div>
-        <div>{{mail.date}}</div>
-        <!-- <div>{{mail.from}}</div> -->
-        <div>{{mail.subject[0]||'无主题'}}</div>
+      <div class="main-menu lf">
+        <div class="menu-item" @click="switchOver('write')">写邮件</div>
+        <div class="menu-item" @click="switchOver('inbox')">收件箱</div>
+        <div class="menu-item" @click="switchOver('contacts')">通讯录</div>
+        <div class="menu-item" @click="switchOver('sent')">已发送</div>
+        <div class="menu-item" @click="switchOver('trash')">垃圾箱</div>
       </div>
-      <div v-html="mailDetail">
-      </div>
-      <!-- <mail-item v-for="mail in inboxList" :mail="mail"></mail-item> -->
-    </div>
-    <div v-if="tabName === 'contacts'">
-
-      <el-card class="box-card lf">
-        <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
-          <h2>{{dept.deptName}}</h2>
-          <div v-for="user in dept.users" :key="user.id" class="user item">
-            {{user.realName}}
+      <div class="main-list" v-loading="listLoading">
+        <div v-if="tabName === 'write'">
+          <div class="addressee">
+            <label>收件人</label>
+            <input type="text" class="addres-man" v-model='addresMan'>
+          </div>
+          <div class="copy-to">
+            <label>抄送</label>
+            <input type="text" class="copyto-man" v-model='copyToMan'>
+          </div>
+          <div class="email-title">
+            <label>主题</label>
+            <input type="text" class="title" v-model='emailTitle'>
+          </div>
+          <div class="accessory">
+            <label>附件</label>
+            <input type="file" class="attachment" v-model='attachments'>
+          </div>
+          <textarea id="editor" style="width:666px;height:500px;"></textarea>
+          <script>
+             UE.getEditor('editor');
+          </script>
+          <el-button @click="sendMail">发送</el-button>
+        </div>
+        <div v-else-if="tabName === 'contacts'">write</div>
+        <div v-else>
+          <div>
+            <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
+              <div>{{mail.date}}</div>
+              <div>{{mail.from}}</div>
+              <div>{{mail.subject}}</div>
+            </div>
           </div>
         </div>
-      </el-card>
-    </div>
-    <div v-if="tabName === 'sent'">sent</div>
+        <div v-if="tabName === 'contacts'">
 
+          <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
+            <h2>{{dept.deptName}}</h2>
+            <div v-for="user in dept.users" :key="user.id" class="user item">
+              {{user.realName}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-detail" v-loading="detailLoading">
+          <div>{{mailDetail.date}}</div>
+          <div>{{mailDetail.from}}</div>
+          <div>{{mailDetail.to}}</div>
+          <div>{{mailDetail.subject}}</div>
+          <div v-html="mailDetail.content">
+            </div>
+      </div>
+    </div>
   </main>
   <!-- <script type="text/x-template" id="mail-item">
  
