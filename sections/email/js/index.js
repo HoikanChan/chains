@@ -6,20 +6,22 @@ const emailHost = "http://localhost:3000/api/v1/email/";
 const emailWindow = remote.getCurrentWindow();
 
 initPage = function () {
-  Vue.component('mail-item', {
-    template: '#mail-item',
-    props: {
-      'mail': Object
-    },
+  const deptListComponet = Vue.component('dept-list', {
+    template: '#dept-list',
+    props: ['dataList'],
     mounted: function () {
-      console.log(mail);
+      console.log(this);
+      console.log(this.dataList);
     }
   });
 
   new Vue({
     el: 'main',
+    components: {
+      'dept-list': deptListComponet
+    },
     data: {
-      a: 'hi vue',
+      imgHost: 'http://company.zqyzk.com/',
       tabName: 'inbox',
       emailList: [],
       deptAndUsers: [],
@@ -38,6 +40,12 @@ initPage = function () {
       closeWin() {
         emailWindow.close();
       },
+      formatImgUrl: function (value) {
+        return value ? this.imgHost + value : '../../assets/images/6.png'
+      },
+      hasStar(flags) {
+        return flags.some(i => i.includes('Flag'))
+      },
       switchOver: function (tabName) {
         this.tabName = tabName
       },
@@ -54,6 +62,24 @@ initPage = function () {
           this.detailLoading = false
         })
       },
+      starMail(uid, flags) {
+        debugger
+        if (flags.length && this.hasStar(flags)) {
+          $email.put(`del/${uid}`, {
+            type: "Inbox",
+            flags: "Flagged"
+          }).then(res => {
+            this.getMailList()
+          })
+        }else{
+          $email.put(uid.toString(), {
+            type: "Inbox",
+            flags: "Flagged"
+          }).then(res => {
+            this.getMailList()
+          })
+        }
+      },
       getMailList() {
         this.listLoading = true
         $email.get('get', {
@@ -66,16 +92,17 @@ initPage = function () {
           this.emailList = res.result.emailList
           if (this.emailList.length) {
             const fromReg = /"(.*)"/
-            console.log('1',this.emailList);
+            console.log('1', this.emailList);
             this.emailList = this.emailList.map(mail => {
               return {
                 uid: mail.uid,
                 from: fromReg.test(mail.from[0]) ? fromReg.exec(mail.from[0])[1] : mail.from[0],
                 date: mail.date,
+                flags: mail.flags,
                 subject: mail.subject[0] || '无主题'
               }
             })
-            console.log('2',this.emailList);
+            console.log('2', this.emailList);
           }
         })
       },
@@ -96,8 +123,14 @@ initPage = function () {
       }
     },
     watch: {
-      tabName: function () {
-        this.getMailList()
+      tabName: function (val) {
+        if (val === 'write') {
+
+        } else if (val === 'contacts') {
+
+        } else {
+          this.getMailList()
+        }
       }
     },
 
