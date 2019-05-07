@@ -35,11 +35,13 @@
     <div v-if="tabName === 'write'">write</div>
     <div v-if="tabName === 'inbox'">
 
-      <div v-for="mail in inboxList" :mail="mail">
-          <div>{{mail.date}}</div>
-          <div>{{mail.to}}</div>
-          <div>{{mail.from}}</div>
-          <div>{{mail.subject}}</div>
+      <div v-for="mail in inboxList" :mail="mail" @click="readMail(mail.uid)">
+        <div>{{/"(.*)"/.exec(mail.from[0])[1]}}</div>
+        <div>{{mail.date}}</div>
+        <!-- <div>{{mail.from}}</div> -->
+        <div>{{mail.subject[0]||'无主题'}}</div>
+      </div>
+      <div v-html="mailDetail">
       </div>
       <!-- <mail-item v-for="mail in inboxList" :mail="mail"></mail-item> -->
     </div>

@@ -22,7 +22,8 @@ initPage = function () {
       a: 'hi vue',
       tabName: 'inbox',
       inboxList: [],
-      deptAndUsers: []
+      deptAndUsers: [],
+      mailDetail: ''
     },
     methods: {
       minimizeWin: function () {
@@ -33,6 +34,17 @@ initPage = function () {
       },
       switchOver: function (tabName) {
         this.tabName = tabName
+      },
+      readMail(uid){
+        console.log(uid);
+        $email.get('emailDetail',{
+          params: {
+            uid,
+            type: 'Inbox'
+          }
+        }).then(res => {
+          this.mailDetail = res.result.content
+        })
       }
     },
     mounted() {
