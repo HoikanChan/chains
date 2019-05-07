@@ -32,44 +32,48 @@
         <div class="menu-item" @click="switchOver('write')">写邮件</div>
         <div class="menu-item" @click="switchOver('inbox')">收件箱</div>
         <div class="menu-item" @click="switchOver('contacts')">通讯录</div>
+        <div class="menu-item" @click="switchOver('draft')">草稿箱</div>
         <div class="menu-item" @click="switchOver('sent')">已发送</div>
         <div class="menu-item" @click="switchOver('trash')">垃圾箱</div>
       </div>
       <div class="main-list" v-loading="listLoading">
         <div v-if="tabName === 'write'">write</div>
-        <div v-else-if="tabName === 'contacts'">write</div>
-        <div v-else>
-          <div>
-            <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
-              <div>{{mail.date}}</div>
-              <div>{{mail.from}}</div>
-              <div>{{mail.subject}}</div>
-            </div>
-          </div>
+        <div v-else-if="tabName === 'contacts'">
+          <dept-list :dataList="deptAndUsers"></dept-list>
+          <el-collapse>
+            <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
+              <div v-for="user in dept.users" :key="user.id" class="user item">
+                <div class="app-hailfellow-user-item" data-id="2127">
+                  <img class="layui-circle"
+                    :src="formatImgUrl(user.picUrl)">
+                    <span>{{user.realName}}</span>
+                  </div>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
-        <div v-if="tabName === 'contacts'">
-
-          <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
-            <h2>{{dept.deptName}}</h2>
-            <div v-for="user in dept.users" :key="user.id" class="user item">
-              {{user.realName}}
-            </div>
+        <div v-else>
+          <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
+            <div>{{mail.date}}</div>
+            <div>{{mail.from}}</div>
+            <div>{{mail.subject}}</div>
+            <div class="icon-star" :class="{active: hasStar(mail.flags)}" @click.stop="starMail(mail.uid, mail.flags)"></div>
           </div>
         </div>
       </div>
       <div class="main-detail" v-loading="detailLoading">
-          <div>{{mailDetail.date}}</div>
-          <div>{{mailDetail.from}}</div>
-          <div>{{mailDetail.to}}</div>
-          <div>{{mailDetail.subject}}</div>
-          <div v-html="mailDetail.content">
-            </div>
+        <div>{{mailDetail.date}}</div>
+        <div>{{mailDetail.from}}</div>
+        <div>{{mailDetail.to}}</div>
+        <div>{{mailDetail.subject}}</div>
+        <div v-html="mailDetail.content">
+        </div>
       </div>
     </div>
   </main>
-  <!-- <script type="text/x-template" id="mail-item">
- 
-  </script> -->
+  <script type="text/x-template" id="dept-list">
+
+  </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script src="./js/index.js"></script>

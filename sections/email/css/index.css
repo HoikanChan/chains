@@ -2,6 +2,20 @@
 *{
     margin: 0;
 }
+body{
+    overflow: hidden;
+}
+*::-webkit-scrollbar{
+    width: 3px;
+}
+*::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #C1C1C1;
+}
+*::-webkit-scrollbar-track {
+    border-radius: 5px;
+}
 .lf{
     float: left;
 }
@@ -55,9 +69,35 @@
     .main-list{
         width: 260px;
         height: 100%;
-
+        overflow-y: auto;
     }
     .main-detail{
         flex: 1;
         height: 100%;
+        overflow-y: auto;
     }
+.app-hailfellow-user-item{
+    position: relative;
+    height: 32px;
+    line-height: 32px;
+    padding: 8px 10px 5px 60px;
+}
+.app-hailfellow-user-item>img{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 20px;
+    top: 8px;
+    border-radius: 100%;
+}
+.icon-star {
+    width: 70px;
+    height: 50px;
+    background: url("../../../assets/images/star.png") no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+}
+.icon-star.active{
+    background-position: -3519px 0;
+    transition: background 1s steps(55);
+}
