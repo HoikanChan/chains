@@ -38,7 +38,6 @@
         <span @click="closeWin" class="app-head-console-item icon iconfont" title="关闭">&#xeca0;</span>
       </div>
     </div>
-    <contacter-list></contacter-list>
     <div class="menu lf">
       <div class="menu-item" @click="switchOver('write')">写邮件</div>
       <div class="menu-item" @click="switchOver('inbox')">收件箱</div>
@@ -52,8 +51,19 @@
           UE.getEditor('editor');
        </script>
     </div>
-    <div v-if="tabName === 'inbox'" >inbox</div>
-    <div v-if="tabName === 'contacts'" >
+    <div v-if="tabName === 'inbox'">
+
+      <div v-for="mail in inboxList" :mail="mail" @click="readMail(mail.uid)">
+        <div>{{/"(.*)"/.exec(mail.from[0])[1]}}</div>
+        <div>{{mail.date}}</div>
+        <!-- <div>{{mail.from}}</div> -->
+        <div>{{mail.subject[0]||'无主题'}}</div>
+      </div>
+      <div v-html="mailDetail">
+      </div>
+      <!-- <mail-item v-for="mail in inboxList" :mail="mail"></mail-item> -->
+    </div>
+    <div v-if="tabName === 'contacts'">
 
       <el-card class="box-card lf">
         <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
@@ -64,12 +74,12 @@
         </div>
       </el-card>
     </div>
-    <div v-if="tabName === 'sent'" >sent</div>
-   
+    <div v-if="tabName === 'sent'">sent</div>
+
   </main>
-  <script type="text/x-template" id="contacter-list">
-    <!-- <h1>contacter-list</h1> -->
-  </script>
+  <!-- <script type="text/x-template" id="mail-item">
+ 
+  </script> -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script src="./js/index.js"></script>

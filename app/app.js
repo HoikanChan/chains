@@ -166,8 +166,23 @@ const loginWinMethods = {
         }else{
           db.unset('user.auto').write();
         }
-
-        ipcRenderer.send('login');
+        $.ajax({
+          url: 'http://192.168.1.134:3000/api/v1/email/login',
+          type: "post",
+          dataType: 'json',
+          data: {
+            token: res.data.token, 
+            user: res.data.info.email, 
+            pass: data.field.password
+          },
+          success: function(){
+            ipcRenderer.send('login');
+          },
+          error:function(err){
+            alert("登录邮件服务失败")
+            ipcRenderer.send('login');
+          }
+        })
       }else{
         layer.msg(res.message, {icon: 10});
       }
