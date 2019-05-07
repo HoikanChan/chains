@@ -31,18 +31,33 @@
     background-color:#16898e ;
     -webkit-app-region: drag;
 }
-.menu{
-    width: 180px;
-    height: 532px;
-    padding:10px ;
-    background-color: #13283b;
-}
-.menu-item{
-    cursor: pointer;
-    color: #ffffff;
-}
 .box-card{
     width: 640px;
     height: 532px;
     background-color: #ffffff;
 }
+
+.main{
+    height: calc(100vh - 60px);
+    display: flex;
+}
+    .main-menu{
+        width: 80px;
+        height: 100%;
+        padding:10px ;
+        background-color: #13283b;
+    }
+        .menu-item{
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+    .main-list{
+        width: 260px;
+        height: 100%;
+
+    }
+    .main-detail{
+        flex: 1;
+        height: 100%;
+    }

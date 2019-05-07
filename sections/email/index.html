@@ -26,38 +26,46 @@
         <span @click="closeWin" class="app-head-console-item icon iconfont" title="关闭">&#xeca0;</span>
       </div>
     </div>
-    <div class="menu lf">
-      <div class="menu-item" @click="switchOver('write')">写邮件</div>
-      <div class="menu-item" @click="switchOver('inbox')">收件箱</div>
-      <div class="menu-item" @click="switchOver('contacts')">通讯录</div>
-      <div class="menu-item" @click="switchOver('sent')">已发送</div>
-    </div>
-    <div v-if="tabName === 'write'">write</div>
-    <div v-if="tabName === 'inbox'">
+    <div class="main">
 
-      <div v-for="mail in inboxList" :mail="mail" @click="readMail(mail.uid)">
-        <div>{{/"(.*)"/.exec(mail.from[0])[1]}}</div>
-        <div>{{mail.date}}</div>
-        <!-- <div>{{mail.from}}</div> -->
-        <div>{{mail.subject[0]||'无主题'}}</div>
+      <div class="main-menu lf">
+        <div class="menu-item" @click="switchOver('write')">写邮件</div>
+        <div class="menu-item" @click="switchOver('inbox')">收件箱</div>
+        <div class="menu-item" @click="switchOver('contacts')">通讯录</div>
+        <div class="menu-item" @click="switchOver('sent')">已发送</div>
+        <div class="menu-item" @click="switchOver('trash')">垃圾箱</div>
       </div>
-      <div v-html="mailDetail">
-      </div>
-      <!-- <mail-item v-for="mail in inboxList" :mail="mail"></mail-item> -->
-    </div>
-    <div v-if="tabName === 'contacts'">
-
-      <el-card class="box-card lf">
-        <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
-          <h2>{{dept.deptName}}</h2>
-          <div v-for="user in dept.users" :key="user.id" class="user item">
-            {{user.realName}}
+      <div class="main-list" v-loading="listLoading">
+        <div v-if="tabName === 'write'">write</div>
+        <div v-else-if="tabName === 'contacts'">write</div>
+        <div v-else>
+          <div>
+            <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
+              <div>{{mail.date}}</div>
+              <div>{{mail.from}}</div>
+              <div>{{mail.subject}}</div>
+            </div>
           </div>
         </div>
-      </el-card>
-    </div>
-    <div v-if="tabName === 'sent'">sent</div>
+        <div v-if="tabName === 'contacts'">
 
+          <div v-for="dept in deptAndUsers" :key="dept.deptId" class="text item">
+            <h2>{{dept.deptName}}</h2>
+            <div v-for="user in dept.users" :key="user.id" class="user item">
+              {{user.realName}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-detail" v-loading="detailLoading">
+          <div>{{mailDetail.date}}</div>
+          <div>{{mailDetail.from}}</div>
+          <div>{{mailDetail.to}}</div>
+          <div>{{mailDetail.subject}}</div>
+          <div v-html="mailDetail.content">
+            </div>
+      </div>
+    </div>
   </main>
   <!-- <script type="text/x-template" id="mail-item">
  

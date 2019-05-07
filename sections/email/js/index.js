@@ -8,7 +8,7 @@ const emailWindow = remote.getCurrentWindow();
 initPage = function () {
   Vue.component('mail-item', {
     template: '#mail-item',
-    props:{
+    props: {
       'mail': Object
     },
     mounted: function () {
@@ -21,9 +21,11 @@ initPage = function () {
     data: {
       a: 'hi vue',
       tabName: 'inbox',
-      inboxList: [],
+      emailList: [],
       deptAndUsers: [],
-      mailDetail: ''
+      mailDetail: '',
+      listLoading: false,
+      detailLoading: false
     },
     methods: {
       minimizeWin: function () {
@@ -35,18 +37,51 @@ initPage = function () {
       switchOver: function (tabName) {
         this.tabName = tabName
       },
-      readMail(uid){
+      readMail(uid) {
         console.log(uid);
-        $email.get('emailDetail',{
+        this.detailLoading = true
+        $email.get('emailDetail', {
           params: {
             uid,
             type: 'Inbox'
           }
         }).then(res => {
-          this.mailDetail = res.result.content
+          this.mailDetail = res.result
+          this.detailLoading = false
+        })
+      },
+      getMailList() {
+        this.listLoading = true
+        $email.get('get', {
+          params: {
+            type: this.tabName
+          }
+        }).then(res => {
+          console.log(res);
+          this.listLoading = false
+          this.emailList = res.result.emailList
+          if (this.emailList.length) {
+            const fromReg = /"(.*)"/
+            console.log('1',this.emailList);
+            this.emailList = this.emailList.map(mail => {
+              return {
+                uid: mail.uid,
+                from: fromReg.test(mail.from[0]) ? fromReg.exec(mail.from[0])[1] : mail.from[0],
+                date: mail.date,
+                subject: mail.subject[0] || '无主题'
+              }
+            })
+            console.log('2',this.emailList);
+          }
         })
       }
     },
+    watch: {
+      tabName: function () {
+        this.getMailList()
+      }
+    },
+
     mounted() {
       window.$http.get('user/contacts').then(res => {
         console.log(res);
@@ -54,14 +89,7 @@ initPage = function () {
           this.deptAndUsers = res.data.deptAndUsers
         }
       })
-      $email.get('get', {
-        params: {
-          type: 'Inbox'
-        }
-      }).then(res => {
-        console.log(res);
-        this.inboxList = res.result
-      })
+      this.getMailList()
     }
   })
 };
@@ -76,7 +104,7 @@ ipcRenderer.on('synchronous-data', (event, data) => {
       }
     });
     axiosInstance.interceptors.response.use(function (response) {
-      console.log('res',response);
+      console.log('res', response);
       return response.data;
     }, function (error) {
       console.error(error);
