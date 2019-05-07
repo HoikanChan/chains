@@ -43,7 +43,7 @@
         <span class="head-icon"></span>
         <el-dropdown>
           <span class="el-dropdown-link">
-              15622532145_10@zcyzk.com<i class="el-icon-arrow-down el-icon--right"></i>
+            15622532145_10@zcyzk.com<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu solt="dropdown">
             <el-dropdown-item>个人信息</el-dropdown-item>
@@ -67,61 +67,60 @@
         <div class="menu-item" @click="switchOver('sent')">已发送</div>
         <div class="menu-item" @click="switchOver('trash')">垃圾箱</div>
       </div>
-      <div class="main-list" v-loading="listLoading">
-        <div v-if="tabName === 'write'">
-          <div class="addressee">
-            <label>收件人</label>
-            <input type="text" class="addres-man" v-model='addresMan'>
-          </div>
-          <div class="copy-to">
-            <label>抄送</label>
-            <input type="text" class="copyto-man" v-model='copyToMan'>
-          </div>
-          <div class="email-title">
-            <label>主题</label>
-            <input type="text" class="title" v-model='emailTitle'>
-          </div>
-          <div class="accessory">
-            <label>附件</label>
-            <input type="file" class="attachment" v-model='attachments'>
-          </div>
-          <textarea id="editor" style="width:666px;height:500px;"></textarea>
-          <script>
-             UE.getEditor('editor');
-          </script>
-          <el-button @click="sendMail">发送</el-button>
+
+      <div class="main-detail" v-if="tabName === 'write'">
+        <div class="addressee">
+          <label>收件人</label>
+          <input type="text" class="addres-man" v-model='addresMan'>
         </div>
-        <div v-else-if="tabName === 'contacts'">
-          <dept-list :dataList="deptAndUsers"></dept-list>
-          <el-collapse>
-            <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
-              <div v-for="user in dept.users" :key="user.id" class="user item">
-                <div class="app-hailfellow-user-item" data-id="2127">
-                  <img class="layui-circle"
-                    :src="formatImgUrl(user.picUrl)">
-                    <span>{{user.realName}}</span>
-                  </div>
+        <div class="copy-to">
+          <label>抄送</label>
+          <input type="text" class="copyto-man" v-model='copyToMan'>
+        </div>
+        <div class="email-title">
+          <label>主题</label>
+          <input type="text" class="title" v-model='emailTitle'>
+        </div>
+        <div class="accessory">
+          <label>附件</label>
+          <input type="file" class="attachment" v-model='attachments'>
+        </div>
+        <textarea id="editor" style="width:666px;height:500px;"></textarea>
+        <script>
+          UE.getEditor('editor');
+        </script>
+        <el-button @click="sendMail">发送</el-button>
+      </div>
+      <div class="main-detail" v-else-if="tabName === 'contacts'">
+        <dept-list :dataList="deptAndUsers"></dept-list>
+        <el-collapse>
+          <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
+            <div v-for="user in dept.users" :key="user.id" class="user item">
+              <div class="app-hailfellow-user-item" data-id="2127">
+                <img class="layui-circle" :src="formatImgUrl(user.picUrl)">
+                <span>{{user.realName}}</span>
               </div>
-            </el-collapse-item>
-          </el-collapse>
-        </div>
-        <div v-else>
-          <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
-            <div>{{mail.date}}</div>
-            <div>{{mail.from}}</div>
-            <div>{{mail.subject}}</div>
-            <div class="icon-star" :class="{active: hasStar(mail.flags)}" @click.stop="starMail(mail.uid, mail.flags)"></div>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
+      <div class="main-detail" v-else>
+        <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
+          <div>{{mail.date}}</div>
+          <div>{{mail.from}}</div>
+          <div>{{mail.subject}}</div>
+          <div class="icon-star" :class="{active: hasStar(mail.flags)}" @click.stop="starMail(mail.uid, mail.flags)">
           </div>
         </div>
       </div>
-      <div class="main-detail" v-loading="detailLoading">
-        <div>{{mailDetail.date}}</div>
-        <div>{{mailDetail.from}}</div>
-        <div>{{mailDetail.to}}</div>
-        <div>{{mailDetail.subject}}</div>
-        <div v-html="mailDetail.content">
-        </div>
-      </div>
+      <!-- <div v-else>
+            <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
+              <div>{{mail.date}}</div>
+              <div>{{mail.from}}</div>
+              <div>{{mail.subject}}</div>
+              <div class="icon-star" :class="{active: hasStar(mail.flags)}" @click.stop="starMail(mail.uid, mail.flags)"></div>
+            </div>
+          </div> -->
     </div>
   </main>
   <script type="text/x-template" id="dept-list">
