@@ -110,7 +110,9 @@ initPage = function () {
       sendMail(){
         console.log(this.addresMan,this.copyToMan,this.emailTitle,this.attachments)
         console.log((UE.getEditor('editor').getContent()))
-        
+        ipcRenderer.on('synchronous-data', (event, data) => { 
+           console.log(data.token) 
+        })
           $email.post('send',{
             to : this.addresMan,
             title : this.emailTitle,
