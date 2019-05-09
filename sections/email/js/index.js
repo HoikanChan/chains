@@ -41,6 +41,8 @@ initPage = function () {
         title: '',
         to: ''
       },
+      sendEmailUsers:[],
+      chooseReMan:false
 
     },
     methods: {
@@ -221,7 +223,27 @@ initPage = function () {
         } 
         
 
+      },
+      chooseReMan(chooseReMan) {
+        this.chooseReMan = !chooseReMan
+      } ,
+      setUserEmail(user,index) {
+        //??????????????
+        console.log(user);
+        console.log(index);
+        let len = this.sendEmailUsers.length;
+        
+        if( this.sendEmailUsers.indexOf(user) == -1 ){
+          if ( len == 0 ) {
+            this.sendEmailUsers[0] = user;
+          } else {
+            this.sendEmailUsers[ len ] =user;
+          }
+        }
+       
+        this.$forceUpdate()
       }
+      
     },
     watch: {
       tabName: function (val) {

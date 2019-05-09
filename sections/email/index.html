@@ -83,15 +83,17 @@
         </div> -->
         <div class="accessory">
           <el-form label-width="80px" :model="emailData">
-            <el-form-item label="收件人">
+            <el-form-item label="收件人" class="aaa">
+              <span class="addman-icon">+</span>
               <el-input size="small" v-model="emailData.to"></el-input>
             </el-form-item>
-            <el-form-item label="抄送">
+            <el-form-item label="抄&emsp;送">
+              <span class="addman-icon">+</span>
               <el-input size="small" ></el-input>
             </el-form-item>
-            <el-form-item label="主题">
-                <el-input size="small" v-model="emailData.title"></el-input>
-              </el-form-item>
+            <el-form-item label="主&emsp;题">
+              <el-input size="small" v-model="emailData.title"></el-input>
+            </el-form-item>
             <el-form-item label="添加附件">
               <el-upload
               class="upload-demo"
@@ -148,6 +150,49 @@
           <div>{{mailDetail.subject}}</div>
           <div v-html="mailDetail.content">
           </div>
+        </div>
+      </div>
+
+      <!-- 收件人选择 -->
+      <div class="choose-reman" v-if=" chooseReMan === true ">
+        <div class="popup-box">
+
+            <div class="popup-box-title lf">
+              <div class="title lf">添加成员</div> 
+              <div class="popup-box-close rf">关闭</div>
+            </div>
+
+            <div class="popup-box-choose lf">
+              <div class="will-choose lf">
+                <div class="search">
+                  <label></label>
+                  <input type="text" id="choose-reman-search" placeholder="搜索">
+                </div>
+                <div class="choose-group">
+                    <dept-list :dataList="deptAndUsers"></dept-list>
+                    <el-collapse>
+                      <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
+                        <div v-for="(user,index) in dept.users" :key="user.id" class="user item" @click="setUserEmail(user,index)">
+                          <div class="app-hailfellow-user-item" data-id="2127" :data-email="user.userEmail" >
+                            <img class="layui-circle" :src="formatImgUrl(user.picUrl)" >
+                            <span>{{user.realName}}</span>
+                          </div>
+                        </div>
+                      </el-collapse-item>
+                    </el-collapse>
+                </div>
+              </div>
+              <div class="has-choosed rf">
+                <div class="tit">已选择：{{sendEmailUsers.length}}人</div>
+                <div class="has-choosed-list">
+                  <div class="choosed-list-item" v-for=" user in sendEmailUsers " >
+                    <img :src="formatImgUrl(user.picUrl)" alt="" style="width: 30px ; height: 30px;">
+                    <span>{{user.realName}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         </div>
       </div>
     </div>
