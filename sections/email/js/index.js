@@ -1,6 +1,10 @@
-const { app, remote } = require('electron');
+
 const electron = require('electron');
-const { ipcRenderer } = electron;
+const {
+  ipcRenderer
+} = electron;
+const user = JSON.parse(db.get('user.info').value());
+const Token = user.token;
 const host = "http://company.zqyzk.com/api/v1/";
 const emailHost = "http://localhost:3000/api/v1/email/";
 const emailWindow = remote.getCurrentWindow();
@@ -28,10 +32,15 @@ initPage = function () {
       mailDetail: '',
       listLoading: false,
       detailLoading: false,
-      addresMan: '',
-      copyToMan: '',
-      emailTitle: '',
-      attachments: ''
+      attachments: [],
+      fileList: [],
+      emailData: {
+        html: '',
+        subject: '',
+        to: '',
+        copyto:[]
+      },
+
     },
     methods: {
       minimizeWin: function () {
@@ -71,7 +80,7 @@ initPage = function () {
           }).then(res => {
             this.getMailList()
           })
-        }else{
+        } else {
           $email.put(uid.toString(), {
             type: "Inbox",
             flags: "Flagged"
@@ -106,22 +115,51 @@ initPage = function () {
           }
         })
       },
-      
-      sendMail(){
-        console.log(this.addresMan,this.copyToMan,this.emailTitle,this.attachments)
+
+      handleChange (file, fileList) {
+
+        this.fileList = fileList
+        console.log(file)
+        console.log(this.fileList);
+        if(this.fileList){
+          let formdata = new FormData();
+          for(let i=0;i<this.fileList.length;i++){
+            let fileData = this.fileList[i].raw;
+            console.log(Token)
+            formdata.append('files',this.fileList[i].raw)
+
+            utility.currencyFileAjax('upload', formdata , function( res ) {
+              console.log(res);
+            })
+          
+            
+          }
+        }
+
+      },
+      handleRemove (file, fileList) {
+        this.fileList = fileList
+        console.log(this.fileList);
+      },
+      handlePreview (file) {
+        console.log('file:',file)
+      },
+
+      sendMail() {
+        console.log(this.addresMan, this.copyToMan, this.emailTitle, this.attachments)
         console.log((UE.getEditor('editor').getContent()))
-        ipcRenderer.on('synchronous-data', (event, data) => { 
-           console.log(data.token) 
-        })
-          $email.post('send',{
-            to : this.addresMan,
-            title : this.emailTitle,
-            content : UE.getEditor('editor').getContent(),
-            attachments : ''
-          }).then(res => {
-            console.log('send',res)
-          })
-        
+        // ipcRenderer.on('synchronous-data', (event, data) => { 
+        //    console.log(data.token) 
+        // })
+        //   $email.post('send',{
+        //     to : this.addresMan,
+        //     title : this.emailTitle,
+        //     content : UE.getEditor('editor').getContent(),
+        //     attachments : ''
+        //   }).then(res => {
+        //     console.log('send',res)
+        //   })
+
       }
     },
     watch: {
@@ -144,24 +182,24 @@ initPage = function () {
         }
       })
 
-      $email.post('login',{
-        user : '18273177931',
-        pass : '123456789Ww'
+      $email.post('login', {
+        user: '18273177931',
+        pass: '123456789Ww'
       }).then(res => {
-        console.log( 'login',res)
+        console.log('login', res)
         console.log()
       })
-      
-     
+
+
 
       this.getMailList()
-      
-     
+
+
     }
   })
 };
 
-ipcRenderer.on('synchronous-data', (event, data) => { 
+ipcRenderer.on('synchronous-data', (event, data) => {
   console.log(data);
   const api = _host => {
     let axiosInstance = axios.create({
@@ -183,7 +221,6 @@ ipcRenderer.on('synchronous-data', (event, data) => {
   window.$email = api(emailHost);
   initPage();
 
-  
+
 
 });
-

@@ -182,7 +182,7 @@ function UploadFile(file,info,callback){
 
     var formData = new FormData();
     formData.append('files',file.files[0]);
-
+   
     utility.currencyFileAjax('upload',setting.cropImgData ,function(res){
 
         if(res.code == '000'){

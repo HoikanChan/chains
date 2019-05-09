@@ -69,7 +69,7 @@
       </div>
 
       <div class="main-detail" v-if="tabName === 'write'">
-        <div class="addressee">
+        <!-- <div class="addressee">
           <label>收件人</label>
           <input type="text" class="addres-man" v-model='addresMan'>
         </div>
@@ -80,10 +80,29 @@
         <div class="email-title">
           <label>主题</label>
           <input type="text" class="title" v-model='emailTitle'>
-        </div>
+        </div> -->
         <div class="accessory">
-          <label>附件</label>
-          <input type="file" class="attachment" v-model='attachments'>
+          <el-form label-width="80px" :model="emailData">
+            <el-form-item label="收件人">
+              <el-input size="small" v-model="emailData.to"></el-input>
+            </el-form-item>
+            <el-form-item label="主题">
+              <el-input size="small" v-model="emailData.subject"></el-input>
+            </el-form-item>
+            <el-form-item label="添加附件">
+              <el-upload
+              class="upload-demo"
+              ref="upload"
+              action="http://company.zqyzk.com/api/v1/upload"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              :file-list="fileList"
+              :on-change="handleChange"
+              :auto-upload="false">
+              <el-button slot="trigger" size="small" type="primary">选择文件</el-button>
+            </el-upload>
+            </el-form-item>
+          </el-form>
         </div>
         <textarea id="editor" style="width:666px;height:500px;"></textarea>
         <script>
@@ -126,8 +145,10 @@
   <script type="text/x-template" id="dept-list">
 
   </script>
+  <script src="../../lib/utility/db.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../lib/utility/utility.js"></script>
   <script src="./js/index.js"></script>
 </body>
 
