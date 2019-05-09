@@ -105,29 +105,37 @@
         </el-collapse>
       </div>
       <div class="main-detail" v-else>
-        <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
-          <div>{{mail.date}}</div>
-          <div>{{mail.from}}</div>
-          <div>{{mail.subject}}</div>
-          <div class="icon-star" :class="{active: hasStar(mail.flags)}" @click.stop="starMail(mail.uid, mail.flags)">
+        <div class="mail-list" v-loading="listLoading" v-show="!showDetail">
+          <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)" >
+            <div>{{mail.date}}</div>
+            <div>{{mail.from}}</div>
+            <div>{{mail.subject}}</div>
+            <i class="icon iconfont icon-star icon-shoucang" :class="{active: hasStar(mail.flags)}" @click.stop="starMail(mail.uid, mail.flags)">
+            </i>
+            <i class="icon iconfont icon-trash icon-shanchu11" @click.stop="deleteMail(mail.uid)"></i>
+          </div>
+        </div>
+        <div v-if="showDetail" class="mail-detail" v-loading="detailLoading">
+          <button @click="backToList()">返回</button>
+          <i class="icon iconfont icon-star icon-shoucang" :class="{active: hasStar(mailDetail.flags)}" @click.stop="starMail(mailDetail.uid, mailDetail.flags)">
+          </i>
+          <i class="icon iconfont icon-trash icon-shanchu11" @click.stop="deleteMail(mailDetail.uid)"></i>
+          <div>{{mailDetail.date}}</div>
+          <div>{{mailDetail.from}}</div>
+          <div>{{mailDetail.to}}</div>
+          <div>{{mailDetail.subject}}</div>
+          <div v-html="mailDetail.content">
           </div>
         </div>
       </div>
-      <!-- <div v-else>
-            <div v-for="mail in emailList" :mail="mail" @click="readMail(mail.uid)">
-              <div>{{mail.date}}</div>
-              <div>{{mail.from}}</div>
-              <div>{{mail.subject}}</div>
-              <div class="icon-star" :class="{active: hasStar(mail.flags)}" @click.stop="starMail(mail.uid, mail.flags)"></div>
-            </div>
-          </div> -->
     </div>
   </main>
   <script type="text/x-template" id="dept-list">
 
   </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+  <script src="../../lib/utility/db.js"></script>
+  <script src="./js/email.js"></script>
   <script src="./js/index.js"></script>
 </body>
 

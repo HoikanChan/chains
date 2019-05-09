@@ -94,6 +94,19 @@ body{
         height: 100%;
         overflow-y: auto;
     }
+        .mail-list,.mail-detail{
+            height: 100%;
+        }
+        .icon-star,.icon-trash{
+            color: #BDBDBD;
+            cursor: pointer;
+        }
+        .icon-star:hover,.icon-trash:hover{
+            color: #00575A;
+        }
+        .icon-star.active{
+            color: #F86624;
+        }
 .app-hailfellow-user-item{
     position: relative;
     height: 32px;
@@ -107,15 +120,4 @@ body{
     left: 20px;
     top: 8px;
     border-radius: 100%;
-}
-.icon-star {
-    width: 70px;
-    height: 50px;
-    background: url("../../../assets/images/star.png") no-repeat;
-    background-position: 0 0;
-    cursor: pointer;
-}
-.icon-star.active{
-    background-position: -3519px 0;
-    transition: background 1s steps(55);
 }

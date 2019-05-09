@@ -1,4 +1,4 @@
-const { app, remote } = require('electron');
+// const { remote } = require('electron');
 const electron = require('electron');
 const { ipcRenderer } = electron;
 const host = "http://company.zqyzk.com/api/v1/";
@@ -26,6 +26,7 @@ initPage = function () {
       emailList: [],
       deptAndUsers: [],
       mailDetail: '',
+      showDetail: false,
       listLoading: false,
       detailLoading: false,
       addresMan: '',
@@ -44,92 +45,123 @@ initPage = function () {
         return value ? this.imgHost + value : '../../assets/images/6.png'
       },
       hasStar(flags) {
-        return flags.some(i => i.includes('Flag'))
+        return flags ? flags.some(i => i.includes('Flag')) : false
       },
       switchOver: function (tabName) {
         this.tabName = tabName
       },
       readMail(uid) {
         console.log(uid);
+        console.log('object');
+        emailHelper().getEmailList().then(res => {
+          console.log(res);
+        })
+
+        this.mailDetail = ''
         this.detailLoading = true
-        $email.get('emailDetail', {
-          params: {
-            uid,
-            type: 'Inbox'
-          }
-        }).then(res => {
-          this.mailDetail = res.result
+        this.showDetail = true
+        emailHelper().getEmailDetail(uid, 'Inbox').then(res => {
+          console.log(res);
+          this.mailDetail = res
           this.detailLoading = false
         })
       },
+      backToList() {
+        this.showDetail = false
+      },
+      setFlag(uid, toAddFlag) {
+        let pos;
+        this.emailList.forEach((item, index) => {
+          if (item.uid === uid) {
+            pos = index
+          }
+        })
+        if (pos !== undefined) {
+          if (toAddFlag) {
+            const copyList = this.emailList.slice()
+            copyList[pos].flags.push('/Flagged')
+            this.emailList = copyList
+          } else {
+            this.emailList = this.emailList.map((email, index) => {
+              if (index === pos) {
+                const flags = email.flags.filter(i => !i.includes('Flagged'))
+                return {
+                  ...email,
+                  flags
+                }
+              } else {
+                return email
+              }
+            })
+          }
+        } else {
+          console.error('标准失败', uid);
+        }
+      },
       starMail(uid, flags) {
-        debugger
         if (flags.length && this.hasStar(flags)) {
-          $email.put(`del/${uid}`, {
-            type: "Inbox",
-            flags: "Flagged"
-          }).then(res => {
-            this.getMailList()
+          emailHelper().delEmailFlag(uid,"Inbox","Flagged").then(res => {
+            this.setFlag(uid, false)
           })
-        }else{
-          $email.put(uid.toString(), {
-            type: "Inbox",
-            flags: "Flagged"
-          }).then(res => {
-            this.getMailList()
+        } else {
+          emailHelper().setEmail(uid,"Inbox","Flagged").then(res => {
+            this.setFlag(uid, false)
           })
         }
       },
+      deleteMail(uid) {
+        this.listLoading = true
+        debugger
+        emailHelper().delEmailFlag(uid,"Inbox","DELETED").then(res => {
+          this.emailList = this.emailList.filter(email => email.uid !== uid)
+          this.listLoading = false
+        })
+      },
       getMailList() {
         this.listLoading = true
-        $email.get('get', {
-          params: {
-            type: this.tabName
-          }
-        }).then(res => {
-          console.log(res);
-          this.listLoading = false
-          this.emailList = res.result.emailList
-          if (this.emailList.length) {
+        emailHelper().getEmailList(this.tabName).then(mailList => {
+          console.log(mailList);
+          if (mailList.length) {
             const fromReg = /"(.*)"/
-            console.log('1', this.emailList);
-            this.emailList = this.emailList.map(mail => {
+            this.emailList = mailList.map(mail => {
               return {
                 uid: mail.uid,
                 from: fromReg.test(mail.from[0]) ? fromReg.exec(mail.from[0])[1] : mail.from[0],
                 date: mail.date,
                 flags: mail.flags,
-                subject: mail.subject[0] || '无主题'
+                subject: mail.subject? mail.subject[0] : '无主题'
               }
             })
-            console.log('2', this.emailList);
           }
+          this.listLoading = false
         })
       },
-      
-      sendMail(){
-        console.log(this.addresMan,this.copyToMan,this.emailTitle,this.attachments)
+
+      sendMail() {
+        console.log(this.addresMan, this.copyToMan, this.emailTitle, this.attachments)
         console.log((UE.getEditor('editor').getContent()))
-        
-          $email.post('send',{
-            to : this.addresMan,
-            title : this.emailTitle,
-            content : UE.getEditor('editor').getContent(),
-            attachments : ''
-          }).then(res => {
-            console.log('send',res)
-          })
-        
+
+        $email.post('send', {
+          to: this.addresMan,
+          title: this.emailTitle,
+          content: UE.getEditor('editor').getContent(),
+          attachments: ''
+        }).then(res => {
+          console.log('send', res)
+        })
+
       }
     },
     watch: {
       tabName: function (val) {
+        this.backToList()
         if (val === 'write') {
 
         } else if (val === 'contacts') {
 
         } else {
-          this.getMailList()
+          this.emailList = [],
+            this.getMailList()
         }
       }
     },
@@ -141,26 +173,19 @@ initPage = function () {
           this.deptAndUsers = res.data.deptAndUsers
         }
       })
-
-      $email.post('login',{
-        user : '18273177931',
-        pass : '123456789Ww'
+      $email.post('login', {
+        user: '18273177931',
+        pass: '123456789Ww'
       }).then(res => {
-        console.log( 'login',res)
+        console.log('login', res)
         console.log()
       })
-      
-     
-
       this.getMailList()
-      
-     
     }
   })
 };
 
-ipcRenderer.on('synchronous-data', (event, data) => { 
-  console.log(data);
+ipcRenderer.on('synchronous-data', (event, data) => {
   const api = _host => {
     let axiosInstance = axios.create({
       baseURL: _host,
@@ -180,8 +205,5 @@ ipcRenderer.on('synchronous-data', (event, data) => {
   window.$http = api(host);
   window.$email = api(emailHost);
   initPage();
-
-  
-
 });
 
