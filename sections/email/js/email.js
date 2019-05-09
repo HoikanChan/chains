@@ -4,8 +4,8 @@ const MailParser = require('mailparser').MailParser;
 const iconv = require('iconv-lite')
 function emailHelper() {
   const user = {
-    email: "15622532145_10@zcyzk.com",
-    password: "123456"
+    email: "18273177931_10@zcyzk.com",
+    password: "123456789Ww"
   }
   function sendEmail({ to, title, content, attachments }) {
     return new Promise((resolve, reject) => {

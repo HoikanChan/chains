@@ -86,9 +86,12 @@
             <el-form-item label="收件人">
               <el-input size="small" v-model="emailData.to"></el-input>
             </el-form-item>
-            <el-form-item label="主题">
-              <el-input size="small" v-model="emailData.subject"></el-input>
+            <el-form-item label="抄送">
+              <el-input size="small" ></el-input>
             </el-form-item>
+            <el-form-item label="主题">
+                <el-input size="small" v-model="emailData.title"></el-input>
+              </el-form-item>
             <el-form-item label="添加附件">
               <el-upload
               class="upload-demo"
@@ -155,7 +158,7 @@
   <script src="../../lib/utility/db.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../../assets/js/jquery.min.js"></script>
-  <script src="../../lib/utility/db.js"></script>
+  <script src="../../lib/utility/utility.js"></script>
   <script src="./js/email.js"></script>
   <script src="./js/index.js"></script>
 </body>

@@ -37,10 +37,9 @@ initPage = function () {
       attachments: [],
       fileList: [],
       emailData: {
-        html: '',
-        subject: '',
-        to: '',
-        copyto:[]
+        content: '',
+        title: '',
+        to: ''
       },
 
     },
@@ -152,21 +151,43 @@ initPage = function () {
         this.fileList = fileList
         console.log(file)
         console.log(this.fileList);
+        
+        let that = this;
         if(this.fileList){
-          let formdata = new FormData();
-          for(let i=0;i<this.fileList.length;i++){
-            let fileData = this.fileList[i].raw;
-            console.log(Token)
-            formdata.append('files',this.fileList[i].raw)
-
-            utility.currencyFileAjax('upload', formdata , function( res ) {
-              console.log(res);
-            })
           
-            
+          for(let i=0;i<this.fileList.length;i++){
+            let fileObj = {};
+            fileObj.fileName = this.fileList[i].name;
+            fileObj.path = this.fileList[i].raw.path
+            let formdata = new FormData();
+            formdata.append('files',this.fileList[i].raw);
+            $.ajax({
+                type: 'post',
+                url: host + 'upload',
+                data: formdata,
+                async:false,
+                contentType : false,
+                processData : false,
+                headers:{
+                    "Authorization":Token
+                },
+                dataType: "json",
+                success: function(res){
+                  if(res.code == '602'){
+                    alert(res.message);
+                  }else if(res.code == '000'){
+                    console.log('????');
+                  }
+                },
+                error: function(err){
+                  console.log(err)
+                }
+            });
+            console.log(fileObj);
+            this.attachments[i]=fileObj;
           }
         }
-
+        console.log(this.attachments)
       },
       handleRemove (file, fileList) {
         this.fileList = fileList
@@ -177,19 +198,28 @@ initPage = function () {
       },
 
       sendMail() {
-        console.log(this.addresMan, this.copyToMan, this.emailTitle, this.attachments)
-        console.log((UE.getEditor('editor').getContent()))
-        // ipcRenderer.on('synchronous-data', (event, data) => { 
-        //    console.log(data.token) 
-        // })
-        //   $email.post('send',{
-        //     to : this.addresMan,
-        //     title : this.emailTitle,
-        //     content : UE.getEditor('editor').getContent(),
-        //     attachments : ''
-        //   }).then(res => {
-        //     console.log('send',res)
-        //   })
+        this.emailData.content = UE.getEditor('editor').getContent()
+        let to = this.emailData.to;
+        let title = this.emailData.title;
+        let content = this.emailData.content;
+        let attachments = this.attachments ;
+        
+        ipcRenderer.on('synchronous-data', (event, data) => { 
+           console.log(data.token) 
+        })
+        if( to && (content || attachments) ){
+          $email.post('send',{
+            to : to,
+            title : title,
+            content : content,
+            attachments : attachments
+          }).then(res => {
+            console.log('send',res)
+          })
+        } else {
+          alert('????????')
+        } 
+        
 
       }
     },
