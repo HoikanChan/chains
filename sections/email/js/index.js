@@ -36,6 +36,8 @@ initPage = function () {
       detailLoading: false,
       attachments: [],
       fileList: [],
+      search: '',
+      employeeDetail: '',
       emailData: {
         content: '',
         title: '',
@@ -63,11 +65,9 @@ initPage = function () {
       },
       readMail(uid) {
         console.log(uid);
-        console.log('object');
         emailHelper().getEmailList().then(res => {
           console.log(res);
         })
-
         this.mailDetail = ''
         this.detailLoading = true
         this.showDetail = true
@@ -130,7 +130,7 @@ initPage = function () {
       },
       getMailList() {
         this.listLoading = true
-        emailHelper().getEmailList(this.tabName).then(mailList => {
+        emailHelper().getEmailList(this.tabName,this.search).then(mailList => {
           console.log(mailList);
           if (mailList.length) {
             const fromReg = /"(.*)"/
@@ -143,13 +143,13 @@ initPage = function () {
                 subject: mail.subject? mail.subject[0] : '无主题'
               }
             })
+            this.allEmailList = this.emailList.slice()
           }
           this.listLoading = false
         })
       },
 
       handleChange (file, fileList) {
-
         this.fileList = fileList
         console.log(file)
         console.log(this.fileList);
@@ -222,7 +222,6 @@ initPage = function () {
           alert('????????')
         } 
         
-
       },
       chooseReMan() {
         this.chooseReMan = !this.chooseReMan
@@ -256,7 +255,19 @@ initPage = function () {
           this.emailList = [],
             this.getMailList()
         }
-      }
+      },
+      search: _.debounce(function(){
+        console.log(this.emailList);
+        if(this.search){
+          this.emailList = this.allEmailList.filter(email => {
+            console.log(email.subject);
+            return (email.subject && email.subject.includes(this.search)) || email.from.includes(this.search)
+          })
+        }else{
+          this.emailList = this.allEmailList
+        }
+        console.log(1);
+      },300)
     },
 
     mounted() {
@@ -266,9 +277,6 @@ initPage = function () {
           this.deptAndUsers = res.data.deptAndUsers
         }
       })
-    
-
-
       this.getMailList()
     }
   })
@@ -292,7 +300,6 @@ ipcRenderer.on('synchronous-data', (event, data) => {
     return axiosInstance
   }
   window.$http = api(host);
-  window.$email = api(emailHost);
   initPage();
 
 });

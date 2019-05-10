@@ -36,7 +36,7 @@ function emailHelper() {
       });
     })
   }
-  function getEmailList(_box = 'inbox', start) {
+  function getEmailList(_box = 'inbox', search, start) {
     let box = _box
     return new Promise((resolve, reject) => {
       // const type = user.email.match(mailReg)[1]
@@ -63,7 +63,11 @@ function emailHelper() {
       imap.once('ready', function () {
         openInbox(function (err, box) {
           if (err) throw err
-          imap.search(['ALL'], function (err, results) {
+          let searchContent = ['ALL']
+          if (search) {
+            searchContent = [['HEADER', 'SUBJECT', search]]
+          }
+          imap.search(searchContent, function (err, results) {
             if (err) throw err
             if (!results.length) {
               imap.end()

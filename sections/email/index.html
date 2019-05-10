@@ -36,7 +36,7 @@
         <span class="refresh-icon"></span>
         <span class="search">
           <label></label>
-          <input type="text" class="search-key" placeholder="搜索">
+          <input type="text" class="search-key" placeholder="搜索" v-model="search"/>
         </span>
       </div>
       <div class="app-head-center">
@@ -52,7 +52,7 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-      <div class="app-head">
+      <div class="app-head-icon">
         <span @click="minimizeWin" class="app-head-console-item icon iconfont" title="最小化">&#xe603;</span>
         <span @click="closeWin" class="app-head-console-item icon iconfont" title="关闭">&#xeca0;</span>
       </div>
@@ -115,18 +115,26 @@
         </script>
         <el-button @click="sendMail">发送</el-button>
       </div>
-      <div class="main-detail" v-else-if="tabName === 'contacts'">
-        <dept-list :dataList="deptAndUsers"></dept-list>
-        <el-collapse>
-          <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
-            <div v-for="user in dept.users" :key="user.id" class="user item">
-              <div class="app-hailfellow-user-item" data-id="2127">
-                <img class="layui-circle" :src="formatImgUrl(user.picUrl)">
-                <span>{{user.realName}}</span>
+      <div class="main-detail main-dept" v-else-if="tabName === 'contacts'">
+        <div class="dept-list">
+          <el-collapse>
+            <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
+              <div v-for="user in dept.users" :key="user.id" class="user item">
+                <div class="app-hailfellow-user-item" data-id="2127">
+                  <img class="layui-circle" :src="formatImgUrl(user.picUrl)">
+                  <span>{{user.realName}}</span>
+                </div>
               </div>
-            </div>
-          </el-collapse-item>
-        </el-collapse>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+        <div class="employee-detail" v-if="employeeDetail">
+
+        </div>
+        <div class="employee-detail-empty" v-else>
+
+        </div>
+        <dept-list :dataList="deptAndUsers"></dept-list>
       </div>
       <div class="main-detail" v-else>
         <div class="mail-list" v-loading="listLoading" v-show="!showDetail">
@@ -204,6 +212,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../../assets/js/jquery.min.js"></script>
   <script src="../../lib/utility/utility.js"></script>
+  <script src="../../lib/lib/lodash.min.js"></script>
   <script src="./js/email.js"></script>
   <script src="./js/index.js"></script>
 </body>

@@ -38,13 +38,13 @@ body{
     position: absolute;
     height: 19px;
     right: 100px;
-    top:10px;
 }
-.app-head{
+.app-head-icon{
     position: absolute;
     text-align: right;
     right: 10px;
-    top: 8px;
+    cursor: pointer;
+    color: #ffffff;
 }
 .app-head>.app-head-console-item{
     text-align: center;
@@ -62,6 +62,9 @@ body{
     height: 39px;
     background-color:#0F8F94 ;
     -webkit-app-region: drag;
+}
+.app-head-box .app-head-icon,input,.el-dropdown-link{
+    -webkit-app-region: no-drag;
 }
 .box-card{
     width: 640px;
@@ -94,8 +97,20 @@ body{
         height: 100%;
         overflow-y: auto;
     }
+    .main-dept{
+        display: inline-flex;
+    }
+        .main-detail>*{
+            height: 100%;
+        }
         .mail-list,.mail-detail{
             height: 100%;
+        }
+        .dept-list{
+            width: 200px
+        }
+        .employee-detail-empty,.employee-detail{
+            flex: 1 1 auto;
         }
         .icon-star,.icon-trash{
             color: #BDBDBD;
@@ -107,11 +122,18 @@ body{
         .icon-star.active{
             color: #F86624;
         }
+    .employee-detail-empty{
+        background: url(../../../assets/images/ban.png) no-repeat center;
+    }
 .app-hailfellow-user-item{
     position: relative;
     height: 32px;
     line-height: 32px;
     padding: 8px 10px 5px 60px;
+    cursor: pointer;
+}
+.app-hailfellow-user-item:hover{
+    background: #f4f4f4;
 }
 .app-hailfellow-user-item>img{
     width: 30px;
