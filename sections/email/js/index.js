@@ -224,8 +224,8 @@ initPage = function () {
         
 
       },
-      chooseReMan(chooseReMan) {
-        this.chooseReMan = !chooseReMan
+      chooseReMan() {
+        this.chooseReMan = !this.chooseReMan
       } ,
       setUserEmail(user,index) {
         //??????????????

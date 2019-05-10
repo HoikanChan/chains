@@ -84,11 +84,11 @@
         <div class="accessory">
           <el-form label-width="80px" :model="emailData">
             <el-form-item label="收件人" class="aaa">
-              <span class="addman-icon">+</span>
+              <span class="addman-icon" @click="chooseReMan">+</span>
               <el-input size="small" v-model="emailData.to"></el-input>
             </el-form-item>
             <el-form-item label="抄&emsp;送">
-              <span class="addman-icon">+</span>
+              <span class="addman-icon" @click="chooseReMan">+</span>
               <el-input size="small" ></el-input>
             </el-form-item>
             <el-form-item label="主&emsp;题">
