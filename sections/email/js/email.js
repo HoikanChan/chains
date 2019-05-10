@@ -2,12 +2,18 @@ const Imap = require('imap')
 // inspect = require('util').inspect
 const MailParser = require('mailparser').MailParser;
 const iconv = require('iconv-lite')
+const nodeMailer = require('nodemailer');
+
 function emailHelper() {
   const user = {
     email: "18273177931_10@zcyzk.com",
     password: "123456789Ww"
   }
   function sendEmail({ to, title, content, attachments }) {
+    console.log(to)
+    console.log(title)
+    console.log(content)
+    console.log(attachments)
     return new Promise((resolve, reject) => {
       const transporter = nodeMailer.createTransport({
         service: 'qiye.aliyun',

@@ -83,17 +83,21 @@
         </div> -->
         <div class="accessory">
           <el-form label-width="80px" :model="emailData">
-            <el-form-item label="收件人" class="aaa">
-              <span class="addman-icon" @click="chooseReMan">+</span>
+
+            <el-form-item label="收件人">
+              <span class="addman-icon" @click="chooseGetterManWin(true)">+</span>
               <el-input size="small" v-model="emailData.to"></el-input>
             </el-form-item>
+
             <el-form-item label="抄&emsp;送">
-              <span class="addman-icon" @click="chooseReMan">+</span>
+              <span class="addman-icon" @click="chooseGetterManWin(true)">+</span>
               <el-input size="small" ></el-input>
             </el-form-item>
+
             <el-form-item label="主&emsp;题">
               <el-input size="small" v-model="emailData.title"></el-input>
             </el-form-item>
+
             <el-form-item label="添加附件">
               <el-upload
               class="upload-demo"
@@ -108,12 +112,16 @@
             </el-upload>
             </el-form-item>
           </el-form>
+
+          <textarea id="editor" style="width:797px;height:500px;"></textarea>
+          <script>
+            UE.getEditor('editor');
+          </script>
+          <el-button @click="sendMail()">发送</el-button>
+
         </div>
-        <textarea id="editor" style="width:666px;height:500px;"></textarea>
-        <script>
-          UE.getEditor('editor');
-        </script>
-        <el-button @click="sendMail">发送</el-button>
+        
+        
       </div>
       <div class="main-detail main-dept" v-else-if="tabName === 'contacts'">
         <div class="dept-list">
@@ -167,7 +175,7 @@
 
             <div class="popup-box-title lf">
               <div class="title lf">添加成员</div> 
-              <div class="popup-box-close rf">关闭</div>
+              <div class="popup-box-close rf" @click="chooseGetterManWin(false)">关闭</div>
             </div>
 
             <div class="popup-box-choose lf">
@@ -180,9 +188,9 @@
                     <dept-list :dataList="deptAndUsers"></dept-list>
                     <el-collapse>
                       <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
-                        <div v-for="(user,index) in dept.users" :key="user.id" class="user item" @click="setUserEmail(user,index)">
+                        <div v-for="(user,index) in dept.users" :key="user.id" class="user item" @click="addGetterEmail(user,index)">
                           <div class="app-hailfellow-user-item" data-id="2127" :data-email="user.userEmail" >
-                            <img class="layui-circle" :src="formatImgUrl(user.picUrl)" >
+                            <img class="layui-circle" :src="formatImgUrl(user.picUrl)">
                             <span>{{user.realName}}</span>
                           </div>
                         </div>
@@ -191,12 +199,17 @@
                 </div>
               </div>
               <div class="has-choosed rf">
-                <div class="tit">已选择：{{sendEmailUsers.length}}人</div>
+                <div class="tit">已选择：{{getterEmailUsers.length}}人</div>
                 <div class="has-choosed-list">
-                  <div class="choosed-list-item" v-for=" user in sendEmailUsers " >
+                  <div class="choosed-list-item" v-for=" (user,index) in getterEmailUsers " >
                     <img :src="formatImgUrl(user.picUrl)" alt="" style="width: 30px ; height: 30px;">
                     <span>{{user.realName}}</span>
+                    <i class="el-icon-close" @click="deleteGetterEmail(index)"></i>
                   </div>
+                </div>
+                <div class="sure-cancel">
+                  <div class="sure-btn" @click="sureGetterEmail()">确认</div>
+                  <div class="cancel-btn">取消</div>
                 </div>
               </div>
             </div>

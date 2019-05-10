@@ -136,9 +136,9 @@ div.edui-box {
 }
 /*UI工具栏、编辑区域、底部*/
 .edui-notadd .edui-editor {
-    border: 1px solid #e5e5e5;
+    /* border: 1px solid #e5e5e5; */
     background-color: white;
-    position: relative;
+    /* position: relative; */
     overflow: visible;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -156,15 +156,19 @@ div.edui-box {
     line-height: 1 !important;
 }
 .edui-notadd .edui-editor-toolbarbox {
-    position: relative;
+    /* position: relative; */
+    position: absolute;
+    top: 226px;
+    right: 150px;
+    
     zoom: 1;
     border-top-left-radius:2px;
     border-top-right-radius:2px;
 }
 
 .edui-notadd .edui-editor-toolbarboxouter {
-    border-bottom: 1px solid #e5e5e5;
-    background-color: #f3f3f3;
+    /* border-bottom: 1px solid #e5e5e5; */
+    background-color: #ffffff;
 }
 
 .edui-notadd .edui-editor-toolbarboxinner {

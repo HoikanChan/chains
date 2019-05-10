@@ -41,9 +41,9 @@ initPage = function () {
       emailData: {
         content: '',
         title: '',
-        to: ''
+        to: []
       },
-      sendEmailUsers:[],
+      getterEmailUsers:[],
       chooseReMan:false
 
     },
@@ -201,46 +201,56 @@ initPage = function () {
 
       sendMail() {
         this.emailData.content = UE.getEditor('editor').getContent()
-        let to = this.emailData.to;
+        let to = this.emailData.to.join(',');
         let title = this.emailData.title;
         let content = this.emailData.content;
         let attachments = this.attachments ;
-        
-        ipcRenderer.on('synchronous-data', (event, data) => { 
-           console.log(data.token) 
-        })
-        if( to && (content || attachments) ){
-          $email.post('send',{
-            to : to,
-            title : title,
-            content : content,
-            attachments : attachments
-          }).then(res => {
-            console.log('send',res)
+        console.log(to)
+        console.log(title)
+        console.log(content)
+        console.log(attachments)
+        if( to && ( content || attachments )){
+          emailHelper().sendEmail({to,title,content,attachments}).then( res => {
+            console.log(res)
+          }).catch( err => {
+            console.log(err)
           })
         } else {
-          alert('????????')
+          alert('???????!');
         } 
         
+        
       },
-      chooseReMan() {
-        this.chooseReMan = !this.chooseReMan
+      chooseGetterManWin(chooseReMan) {
+        this.chooseReMan = chooseReMan
       } ,
-      setUserEmail(user,index) {
+      addGetterEmail(user,index) {
         //??????????????
         console.log(user);
         console.log(index);
-        let len = this.sendEmailUsers.length;
+        let len = this.getterEmailUsers.length;
         
-        if( this.sendEmailUsers.indexOf(user) == -1 ){
+        if( this.getterEmailUsers.indexOf(user) == -1 ){
           if ( len == 0 ) {
-            this.sendEmailUsers[0] = user;
+            this.getterEmailUsers[0] = user;
           } else {
-            this.sendEmailUsers[ len ] =user;
+            this.getterEmailUsers[ len ] =user;
           }
         }
        
         this.$forceUpdate()
+      },
+      deleteGetterEmail (index){
+        this.getterEmailUsers.splice(index,1);
+      },
+      sureGetterEmail(){
+        console.log(this.emailData.to);
+        console.log(this.getterEmailUsers)
+        for(let i=0;i < this.getterEmailUsers.length ; i++ ){
+          this.emailData.to[i] = this.getterEmailUsers[i].userEmail;
+        }
+        console.log(this.emailData.to)
+        this.$forceUpdate();
       }
       
     },

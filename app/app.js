@@ -167,7 +167,7 @@ const loginWinMethods = {
           db.unset('user.auto').write();
         }
         $.ajax({
-          url: 'http://localhost:3000/api/v1/email/login',
+          url: 'http://company.zqyzk.com/api/v1/email/login',
           type: "post",
           dataType: 'json',
           data: {

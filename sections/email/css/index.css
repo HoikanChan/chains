@@ -143,6 +143,7 @@ body{
     top: 8px;
     border-radius: 100%;
 }
+
 .addman-icon{
     display: inline-block;
     width: 11px;
@@ -155,9 +156,13 @@ body{
     line-height: 11px;
     cursor: pointer;
 }
+.accessory{
+    height: 226px;
+}
 .accessory .el-input{
     width: 97%;
 }
+
 .accessory label{
     cursor: pointer;
 }
