@@ -201,7 +201,7 @@ initPage = function () {
 
       sendMail() {
         this.emailData.content = UE.getEditor('editor').getContent()
-        let to = this.emailData.to.join(',');
+        let to = this.emailData.to;
         let title = this.emailData.title;
         let content = this.emailData.content;
         let attachments = this.attachments ;
