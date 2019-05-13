@@ -157,6 +157,7 @@ body{
     cursor: pointer;
 }
 .accessory{
+    position: relative;
     height: 226px;
 }
 .accessory .el-input{
@@ -168,6 +169,25 @@ body{
 }
 .accessory .el-input__inner{
     border:none;
+}
+
+#edui1_bottombar{
+ display: none;   
+}
+.button-send-email{
+    font-size: 12px;
+	letter-spacing: 1.2px;
+    color: #ffffff;
+    padding:7px 21px;
+    background-color: #0f8f94;
+	margin-right: 10px;
+}
+.save-in-drafts{
+    font-size: 12px;
+	letter-spacing: 1.2px;
+    color: #282828;
+    padding: 7px 8px;
+    background-color: #bfbfbf;
 }
 /* 邮件发送选择联系人 */
 

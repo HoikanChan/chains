@@ -106,7 +106,7 @@ initPage = function () {
             })
           }
         } else {
-          console.error('标准失败', uid);
+          console.error('æ ‡å‡†å¤±è´¥', uid);
         }
       },
       starMail(uid, flags) {
@@ -140,7 +140,7 @@ initPage = function () {
                 from: fromReg.test(mail.from[0]) ? fromReg.exec(mail.from[0])[1] : mail.from[0],
                 date: mail.date,
                 flags: mail.flags,
-                subject: mail.subject? mail.subject[0] : '无主题'
+                subject: mail.subject? mail.subject[0] : 'æ— ä¸»é¢˜'
               }
             })
             this.allEmailList = this.emailList.slice()
@@ -228,27 +228,45 @@ initPage = function () {
         //??????????????
         console.log(user);
         console.log(index);
-        let len = this.getterEmailUsers.length;
+        let len_1 = this.getterEmailUsers.length;
+        let len_2 = this.emailData.to.length;
         
         if( this.getterEmailUsers.indexOf(user) == -1 ){
-          if ( len == 0 ) {
+          if ( len_1 == 0 ) {
             this.getterEmailUsers[0] = user;
           } else {
-            this.getterEmailUsers[ len ] =user;
+            this.getterEmailUsers[ len_1 ] = user;
           }
         }
-       
+
+        // if(this.emailData.to.indexOf(user.userEmail) == -1 ){
+        //   if( len_2 == 0 ){
+        //     this.emailData.to[0] = user.userEmail
+        //   } else {
+        //     this.emailData.to[ len_2 ] = user.userEmail
+        //   }
+        // }
+        
+        // this.emailData.to=this.emailData.to.join(',')
+        // console.log('to',this.emailData.to)
+
         this.$forceUpdate()
       },
       deleteGetterEmail (index){
         this.getterEmailUsers.splice(index,1);
       },
       sureGetterEmail(){
-        console.log(this.emailData.to);
-        console.log(this.getterEmailUsers)
+        let to='';
         for(let i=0;i < this.getterEmailUsers.length ; i++ ){
-          this.emailData.to[i] = this.getterEmailUsers[i].userEmail;
+          if( i == this.getterEmailUsers.length-1 ){
+            to+=this.getterEmailUsers[i].userEmail
+          } else {
+            to+=this.getterEmailUsers[i].userEmail+','
+          }
+          console.log(this.getterEmailUsers[i].userEmail);
+          
         }
+        this.emailData.to=to
         console.log(this.emailData.to)
         this.$forceUpdate();
       }
