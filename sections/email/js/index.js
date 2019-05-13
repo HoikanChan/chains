@@ -41,7 +41,7 @@ initPage = function () {
       emailData: {
         content: '',
         title: '',
-        to: []
+        to: '',
       },
       getterEmailUsers:[],
       chooseReMan:false
@@ -229,7 +229,6 @@ initPage = function () {
         console.log(user);
         console.log(index);
         let len_1 = this.getterEmailUsers.length;
-        let len_2 = this.emailData.to.length;
         
         if( this.getterEmailUsers.indexOf(user) == -1 ){
           if ( len_1 == 0 ) {
@@ -239,23 +238,6 @@ initPage = function () {
           }
         }
 
-        // if(this.emailData.to.indexOf(user.userEmail) == -1 ){
-        //   if( len_2 == 0 ){
-        //     this.emailData.to[0] = user.userEmail
-        //   } else {
-        //     this.emailData.to[ len_2 ] = user.userEmail
-        //   }
-        // }
-        
-        // this.emailData.to=this.emailData.to.join(',')
-        // console.log('to',this.emailData.to)
-
-        this.$forceUpdate()
-      },
-      deleteGetterEmail (index){
-        this.getterEmailUsers.splice(index,1);
-      },
-      sureGetterEmail(){
         let to='';
         for(let i=0;i < this.getterEmailUsers.length ; i++ ){
           if( i == this.getterEmailUsers.length-1 ){
@@ -263,12 +245,19 @@ initPage = function () {
           } else {
             to+=this.getterEmailUsers[i].userEmail+','
           }
-          console.log(this.getterEmailUsers[i].userEmail);
-          
         }
+        console.log(to)
         this.emailData.to=to
-        console.log(this.emailData.to)
-        this.$forceUpdate();
+        console.log(typeof(this.emailData.to))
+        this.$forceUpdate()
+      },
+      deleteGetterEmail (index){
+        this.getterEmailUsers.splice(index,1);
+      },
+      sureGetterEmail(){
+        
+        
+        
       }
       
     },

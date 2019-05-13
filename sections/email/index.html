@@ -86,7 +86,7 @@
 
             <el-form-item label="收件人">
               <span class="addman-icon" @click="chooseGetterManWin(true)">+</span>
-              <el-input size="small" :model="emailData.to"></el-input>
+              <el-input size="small" v-model="emailData.to"></el-input>
             </el-form-item>
 
             <el-form-item label="抄&emsp;送">

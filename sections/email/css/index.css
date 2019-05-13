@@ -24,7 +24,8 @@ body{
 }
 .app-head-left{
     position: absolute;
-    height: 19px;
+    height: 26px;
+    line-height: 26px;
     left: 15px;
     top:10px;
 }
@@ -59,7 +60,7 @@ body{
 .app-head-box{
     position: relative;
     z-index: 500;
-    height: 39px;
+    height: 52px;
     background-color:#0F8F94 ;
     -webkit-app-region: drag;
 }
