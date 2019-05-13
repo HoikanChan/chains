@@ -20,7 +20,7 @@ initPage = function () {
     }
   });
 
-  new Vue({
+  window.$vue = new Vue({
     el: 'main',
     components: {
       'dept-list': deptListComponet
@@ -37,14 +37,16 @@ initPage = function () {
       attachments: [],
       fileList: [],
       search: '',
-      employeeDetail: '',
+      employeeDetail: {},
       emailData: {
         content: '',
         title: '',
         to: '',
       },
       getterEmailUsers:[],
-      chooseReMan:false
+      sendEmailUsers: [],
+      employeeMails: [],
+      chooseReMan: false
 
     },
     methods: {
@@ -111,11 +113,11 @@ initPage = function () {
       },
       starMail(uid, flags) {
         if (flags.length && this.hasStar(flags)) {
-          emailHelper().delEmailFlag(uid,"Inbox","Flagged").then(res => {
+          emailHelper().delEmailFlag(uid, "Inbox", "Flagged").then(res => {
             this.setFlag(uid, false)
           })
         } else {
-          emailHelper().setEmail(uid,"Inbox","Flagged").then(res => {
+          emailHelper().setEmail(uid, "Inbox", "Flagged").then(res => {
             this.setFlag(uid, false)
           })
         }
@@ -123,14 +125,14 @@ initPage = function () {
       deleteMail(uid) {
         this.listLoading = true
         debugger
-        emailHelper().delEmailFlag(uid,"Inbox","DELETED").then(res => {
+        emailHelper().delEmailFlag(uid, "Inbox", "DELETED").then(res => {
           this.emailList = this.emailList.filter(email => email.uid !== uid)
           this.listLoading = false
         })
       },
       getMailList() {
         this.listLoading = true
-        emailHelper().getEmailList(this.tabName,this.search).then(mailList => {
+        emailHelper().getEmailList(this.tabName, this.search).then(mailList => {
           console.log(mailList);
           if (mailList.length) {
             const fromReg = /"(.*)"/
@@ -140,7 +142,7 @@ initPage = function () {
                 from: fromReg.test(mail.from[0]) ? fromReg.exec(mail.from[0])[1] : mail.from[0],
                 date: mail.date,
                 flags: mail.flags,
-                subject: mail.subject? mail.subject[0] : 'æ— ä¸»é¢˜'
+                subject: mail.subject ? mail.subject[0] : '无主题'
               }
             })
             this.allEmailList = this.emailList.slice()
@@ -148,57 +150,63 @@ initPage = function () {
           this.listLoading = false
         })
       },
-
-      handleChange (file, fileList) {
+      getEmployeeDetail(orgId, userId) {
+        $http.post(`user/info2?orgId=${orgId}&userId=${userId}`).then(res => {
+          console.log(res);
+          this.employeeDetail = res.data
+          const {email} = this.employeeDetail
+          this.employeeMails = this.allEmailList.filter(i => i.from.includes(email))
+        })
+      },
+      handleChange(file, fileList) {
         this.fileList = fileList
         console.log(file)
         console.log(this.fileList);
-        
+
         let that = this;
-        if(this.fileList){
-          
-          for(let i=0;i<this.fileList.length;i++){
+        if (this.fileList) {
+
+          for (let i = 0; i < this.fileList.length; i++) {
             let fileObj = {};
             fileObj.fileName = this.fileList[i].name;
             fileObj.path = this.fileList[i].raw.path
             let formdata = new FormData();
-            formdata.append('files',this.fileList[i].raw);
+            formdata.append('files', this.fileList[i].raw);
             $.ajax({
-                type: 'post',
-                url: host + 'upload',
-                data: formdata,
-                async:false,
-                contentType : false,
-                processData : false,
-                headers:{
-                    "Authorization":Token
-                },
-                dataType: "json",
-                success: function(res){
-                  if(res.code == '602'){
-                    alert(res.message);
-                  }else if(res.code == '000'){
-                    console.log('????');
-                  }
-                },
-                error: function(err){
-                  console.log(err)
+              type: 'post',
+              url: host + 'upload',
+              data: formdata,
+              async: false,
+              contentType: false,
+              processData: false,
+              headers: {
+                "Authorization": Token
+              },
+              dataType: "json",
+              success: function (res) {
+                if (res.code == '602') {
+                  alert(res.message);
+                } else if (res.code == '000') {
+                  console.log('????');
                 }
+              },
+              error: function (err) {
+                console.log(err)
+              }
             });
             console.log(fileObj);
-            this.attachments[i]=fileObj;
+            this.attachments[i] = fileObj;
           }
         }
         console.log(this.attachments)
       },
-      handleRemove (file, fileList) {
+      handleRemove(file, fileList) {
         this.fileList = fileList
         console.log(this.fileList);
       },
-      handlePreview (file) {
-        console.log('file:',file)
+      handlePreview(file) {
+        console.log('file:', file)
       },
-
       sendMail() {
         this.emailData.content = UE.getEditor('editor').getContent()
         let to = this.emailData.to;
@@ -218,8 +226,6 @@ initPage = function () {
         } else {
           alert('???????!');
         } 
-        
-        
       },
       chooseGetterManWin(chooseReMan) {
         this.chooseReMan = chooseReMan
@@ -259,7 +265,7 @@ initPage = function () {
         
         
       }
-      
+
     },
     watch: {
       tabName: function (val) {
@@ -267,37 +273,37 @@ initPage = function () {
         if (val === 'write') {
 
         } else if (val === 'contacts') {
-
+          window.$http.get('user/contacts').then(res => {
+            console.log(res);
+            if (res.code === '000') {
+              this.deptAndUsers = res.data.deptAndUsers
+            }
+          })
         } else {
           this.emailList = [],
             this.getMailList()
         }
       },
-      search: _.debounce(function(){
+      search: _.debounce(function () {
         console.log(this.emailList);
-        if(this.search){
+        if (this.search) {
           this.emailList = this.allEmailList.filter(email => {
             console.log(email.subject);
             return (email.subject && email.subject.includes(this.search)) || email.from.includes(this.search)
           })
-        }else{
+        } else {
           this.emailList = this.allEmailList
         }
         console.log(1);
-      },300)
+      }, 300)
     },
 
     mounted() {
-      window.$http.get('user/contacts').then(res => {
-        console.log(res);
-        if (res.code === '000') {
-          this.deptAndUsers = res.data.deptAndUsers
-        }
-      })
       this.getMailList()
     }
   })
 };
+initPage();
 
 ipcRenderer.on('synchronous-data', (event, data) => {
   const api = _host => {
@@ -317,6 +323,4 @@ ipcRenderer.on('synchronous-data', (event, data) => {
     return axiosInstance
   }
   window.$http = api(host);
-  initPage();
-
 });

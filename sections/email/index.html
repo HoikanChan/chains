@@ -129,7 +129,7 @@
           <el-collapse>
             <el-collapse-item v-for="dept in deptAndUsers" :key="dept.deptId" class="text item" :title="dept.deptName">
               <div v-for="user in dept.users" :key="user.id" class="user item">
-                <div class="app-hailfellow-user-item" data-id="2127">
+                <div class="app-hailfellow-user-item" data-id="2127" @click="getEmployeeDetail(dept.orgId, user.userId)">
                   <img class="layui-circle" :src="formatImgUrl(user.picUrl)">
                   <span>{{user.realName}}</span>
                 </div>
@@ -137,8 +137,21 @@
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="employee-detail" v-if="employeeDetail">
-
+        <div class="employee-detail" v-if="employeeDetail.id">
+          <div>{{employeeDetail.realName}}</div>
+          <div>{{employeeDetail.sex}}</div>
+          <div>{{employeeDetail.email}}</div>
+          <div>{{employeeDetail.phone}}</div>
+          <button>发邮件</button>
+          <div>{{employeeDetail.depts.map(i => i.deptName).join(' / ')}}</div>
+          <div v-for="mail in employeeMails" :mail="mail" @click="readMail(mail.uid)" >
+            <div>{{mail.date}}</div>
+            <div>{{mail.from}}</div>
+            <div>{{mail.subject}}</div>
+          </div>
+          <div v-if="!employeeMails.length">
+            暂无来往邮件
+          </div>
         </div>
         <div class="employee-detail-empty" v-else>
 

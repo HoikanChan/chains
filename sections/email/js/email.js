@@ -1,13 +1,13 @@
 const Imap = require('imap')
 // inspect = require('util').inspect
 const MailParser = require('mailparser').MailParser;
-const iconv = require('iconv-lite')
 const nodeMailer = require('nodemailer');
+const iconv = require('iconv-lite')
 
 function emailHelper() {
   const user = {
-    email: "18273177931_10@zcyzk.com",
-    password: "123456789Ww"
+    email: "15622532145_10@zcyzk.com",
+    password: "123456"
   }
   function sendEmail({ to, title, content, attachments }) {
     console.log(to)
